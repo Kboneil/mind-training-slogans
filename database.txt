@@ -1,0 +1,120 @@
+CREATE DATABASE slogans;
+
+CREATE TABLE slogans (
+	id SERIAL PRIMARY KEY,
+	point varchar(100) NOT NULL,
+	slogan varchar(300) NOT NULL,
+  extra varchar(600)
+);
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	username varchar(80) UNIQUE NOT NULL,
+	password varchar(120) NOT NULL
+);
+
+CREATE TABLE comments (
+	id SERIAL PRIMARY KEY,
+	text varchar(200) NOT NULL,
+	date date NOT NULL,
+	slogan_id int REFERENCES slogans,
+	user_id int REFERENCES users
+);
+
+CREATE TABLE questions (
+	id SERIAL PRIMARY KEY,
+	text varchar(200) NOT NULL,
+	date date NOT NULL,
+	slogan_id int REFERENCES slogans,
+	user_id int REFERENCES users
+);
+
+INSERT INTO slogans (point, slogan, extra)
+VALUES
+('Point One: The preliminaries, which are the basis for dharma practice', 'First, train in the preliminaries; The four reminders. or alternatively called the Four Thoughts.', '1. Maintain an awareness of the preciousness of human life. \n 2. Be aware of the reality that life ends; death comes for everyone: Impermanence. \n 3. Recall that whatever you do, whether virtuous or not, has a result: Karma.\n 4. Contemplate that as long as you are too focused on self-importance and too caught up in thinking about how you are good or bad, you will experience suffering. Obsessing about getting what you want and avoiding what you don''t want does not result in happiness: Ego.');
+
+INSERT INTO slogans (point, slogan)
+VALUES
+('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Regard all dharmas as dreams; although experiences may seem solid, they are passing memories.'),
+('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Examine the nature of unborn awareness.'),
+('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Self-liberate even the antidote.'),
+('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Rest in the nature of alaya, the essence, the present moment.'),
+('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'In post-meditation, be a child of illusion.'),
+('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'Sending and taking should be practiced alternately. These two should ride the breath - practice Tonglen');
+
+INSERT INTO slogans (point, slogan, extra)
+VALUES
+('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'Three objects, three poisons, three roots of virtue.', 'The three objects are friends, enemies and neutrals. The three poisons are craving, aversion and indifference. The three roots of virtue are the remedies.');
+
+
+INSERT INTO slogans (point, slogan)
+VALUES
+('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'In all activities, train with slogans.'),
+('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'Begin the sequence of sending and taking with yourself.'),
+('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'When the world is filled with evil, transform all mishaps into the path of bodhi.'),
+('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Drive all blames into one.'),
+('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Be grateful to everyone.');
+
+INSERT INTO slogans (point, slogan, extra)
+VALUES
+('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Seeing confusion as the four kayas is unsurpassable shunyata protection.', 'The kayas are Dharmakaya, Sambhogakaya, Nirmanakaya, Svabhavikakaya. Thoughts have no birthplace, thoughts are unceasing, thoughts are not solid, and these three characteristics are interconnected. Shunyata can be described as "complete openness."'),
+('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Four practices are the best of methods.', 'The four practices are: accumulating merit, laying down evil deeds, offering to the dons, and offering to the dharmapalas.');
+
+INSERT INTO slogans (point, slogan)
+VALUES
+('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Whatever you meet unexpectedly, join with meditation.');
+
+INSERT INTO slogans (point, slogan, extra)
+VALUES
+('Point Four: Showing the Utilization of Practice in One''s Whole Life', 'Practice the five strengths, the condensed heart instructions.', 'The five strengths are: strong determination, familiarization, the positive seed, reproach, and aspiration.'),
+('Point Four: Showing the Utilization of Practice in One''s Whole Life', 'The Mahayana instruction for ejection of consciousness at death is the five strengths: how you conduct yourself is important.', 'When you are dying practice the five strengths');
+
+INSERT INTO slogans (point, slogan)
+VALUES
+('Point Five: Evaluation of Mind Training', 'All dharma agrees at one point -- All Buddhist teachings are about lessening the ego, lessening one''s self-absorption.'),
+('Point Five: Evaluation of Mind Training', 'Of the two witnesses, hold the principal one -- You know yourself better than anyone else knows you'),
+('Point Five: Evaluation of Mind Training', 'Always maintain only a joyful mind.'),
+('Point Five: Evaluation of Mind Training', 'If you can practice even when distracted, you are well trained.'),
+('Point Six: Disciplines of Mind Training', 'Always abide by the three basic principles -- Dedication to your practice, refraining from outrageous conduct, developing patience.'),
+('Point Six: Disciplines of Mind Training', 'Change your attitude, but remain natural -- Reduce ego clinging, but be yourself.'),
+('Point Six: Disciplines of Mind Training', 'Don''t talk about injured limbs -- Don''t take pleasure contemplating others defects.'),
+('Point Six: Disciplines of Mind Training', 'Don''t ponder others -- Don''t take pleasure contemplating others weaknesses.'),
+('Point Six: Disciplines of Mind Training', 'Work with the greatest defilements first -- Work with your greatest obstacles first.'),
+('Point Six: Disciplines of Mind Training', 'Abandon any hope of fruition -- Don''t get caught up in how you will be in the future, stay in the present moment.'),
+('Point Six: Disciplines of Mind Training', 'Abandon poisonous food.'),
+('Point Six: Disciplines of Mind Training', 'Don''t be so predictable -- Don''t hold grudges.'),
+('Point Six: Disciplines of Mind Training', 'Don''t malign others.'),
+('Point Six: Disciplines of Mind Training', 'Don''t wait in ambush -- Don''t wait for others weaknesses to show to attack them.'),
+('Point Six: Disciplines of Mind Training', 'Don''t bring things to a painful point -- Don''t humiliate others.'),
+('Point Six: Disciplines of Mind Training', 'Don''t transfer the ox''s load to the cow -- Take responsibility for yourself.'),
+('Point Six: Disciplines of Mind Training', 'Don''t try to be the fastest -- Don''t compete with others.'),
+('Point Six: Disciplines of Mind Training', 'Don''t act with a twist -- Do good deeds without scheming about benefiting yourself.'),
+('Point Six: Disciplines of Mind Training', 'Don''t turn gods into demons -- Don''t use these slogans or your spirituality to increase your self-absorption'),
+('Point Six: Disciplines of Mind Training', 'Don''t seek others'' pain as the limbs of your own happiness.'),
+('Point Seven: Guidelines of Mind Training', 'All activities should be done with one intention.'),
+('Point Seven: Guidelines of Mind Training', 'Correct all wrongs with one intention.'),
+('Point Seven: Guidelines of Mind Training', 'Two activities: one at the beginning, one at the end.'),
+('Point Seven: Guidelines of Mind Training', 'Whichever of the two occurs, be patient.'),
+('Point Seven: Guidelines of Mind Training', 'Observe these two, even at the risk of your life.'),
+('Point Seven: Guidelines of Mind Training', 'Train in the three difficulties.'),
+('Point Seven: Guidelines of Mind Training', 'Take on the three principal causes: the teacher, the dharma, the sangha.'),
+('Point Seven: Guidelines of Mind Training', 'Pay heed that the three never wane: gratitude towards one''s teacher, appreciation of the dharma (teachings) and correct conduct.'),
+('Point Seven: Guidelines of Mind Training', 'Keep the three inseparable: body, speech, and mind.'),
+('Point Seven: Guidelines of Mind Training', 'Train without bias in all areas. It is crucial always to do this pervasively and wholeheartedly.'),
+('Point Seven: Guidelines of Mind Training', 'Always meditate on whatever provokes resentment.'),
+('Point Seven: Guidelines of Mind Training', 'Don''t be swayed by external circumstances.'),
+('Point Seven: Guidelines of Mind Training', 'This time, practice the main points: others before self, dharma, and awakening compassion.');
+
+INSERT INTO slogans (point, slogan, extra)
+VALUES
+('Point Seven: Guidelines of Mind Training', 'Don''t misinterpret.', 'The six things that may be misinterpreted are patience, yearning, excitement, compassion, priorities and joy. You''re patient when you''re getting your way, but not when it''s difficult. You yearn for worldly things, instead of an open heart and mind. You get excited about wealth and entertainment, instead of your potential for enlightenment. You have compassion for those you like, but none for those you don''t. Worldly gain is your priority rather than cultivating loving-kindness and compassion. You feel joy when you enemies suffer, and do not rejoice in others'' good fortune.');
+
+INSERT INTO slogans (point, slogan)
+VALUES
+('Point Seven: Guidelines of Mind Training', 'Don''t vacillate (in your practice of Lojong).'),
+('Point Seven: Guidelines of Mind Training', 'Train wholeheartedly.'),
+('Point Seven: Guidelines of Mind Training', 'Liberate yourself by examining and analyzing: Know your own mind with honesty and fearlessness.'),
+('Point Seven: Guidelines of Mind Training', 'Don''t wallow in self-pity.'),
+('Point Seven: Guidelines of Mind Training', 'Don''t be jealous.'),
+('Point Seven: Guidelines of Mind Training', 'Don''t be frivolous.'),
+('Point Seven: Guidelines of Mind Training', 'Don''t expect applause.');
