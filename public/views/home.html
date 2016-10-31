@@ -1,0 +1,43 @@
+<header>
+  <nav>
+    <a href="/slogans">59</a>
+    <a href="/home">Lojong Slogans</a>
+    <a href="/profile">Profile</a>
+  </nav>
+</header>
+<main ng-click="reveal = !reveal">
+  <div ng-hide="reveal">
+    <h1>Slogans</h1>
+    <h2>{{home.id}}</h2>
+    <p>{{home.point}}</p>
+    <p>{{home.slogan}}</p>
+    <p>{{home.extra}}</p>
+  </div>
+  <div ng-show="reveal">
+    <h1>Comments</h1>
+    <div ng-repeat="comment in home.comment | orderBy:'-date':reverse">
+      <div>
+        <h4>{{comment.date | date}}</h4>
+        <p>Slogan: {{comment.slogan_id}}</p>
+        <p>{{comment.slogan}}</p>
+        <p>Comment: {{comment.text}}</p>
+      </div>
+    </div>
+    <h1>Questions</h1>
+    <div ng-repeat="question in home.question | orderBy:'-date':reverse">
+      <div>
+        <h4>{{question.date | date}}</h4>
+        <p>Slogan: {{question.slogan_id}}</p>
+        <p>{{question.slogan}}</p>
+        <p>Question: {{question.text}}</p>
+      </div>
+    </div>
+  </div>
+</main>
+<footer>
+  <nav>
+    <a href="/calendar">Calendar</a>
+    <a href="/comments">Comments</a>
+    <a href="/questions">Questions</a>
+  </nav>
+</footer>

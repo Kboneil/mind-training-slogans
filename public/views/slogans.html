@@ -1,0 +1,25 @@
+<header>
+  <nav>
+    <a href="/slogans">59</a>
+    <a href="/home">Lojong Slogans</a>
+    <a href="/profile">Profile</a>
+  </nav>
+</header>
+<h1>list of slogans</h1>
+<ul>
+  <div ng-repeat="slogan in slogans.slogans track by $index">
+    <div>
+      <h2>Slogan: {{slogan.id}}</h2>
+      <p>{{slogan.point}}</p>
+      <p>{{slogan.slogan}}</p>
+      <p>{{slogan.extra}}</p>
+    </div>
+  </div>
+</ul>
+<footer>
+  <nav>
+    <a href="/calendar">Calendar</a>
+    <a href="/comments">Comments</a>
+    <a href="/questions">Questions</a>
+  </nav>
+</footer>

@@ -31,26 +31,26 @@ CREATE TABLE questions (
 
 INSERT INTO slogans (point, slogan, extra)
 VALUES
-('Point One: The preliminaries, which are the basis for dharma practice', 'First, train in the preliminaries; The four reminders. or alternatively called the Four Thoughts.', '1. Maintain an awareness of the preciousness of human life. \n 2. Be aware of the reality that life ends; death comes for everyone: Impermanence. \n 3. Recall that whatever you do, whether virtuous or not, has a result: Karma.\n 4. Contemplate that as long as you are too focused on self-importance and too caught up in thinking about how you are good or bad, you will experience suffering. Obsessing about getting what you want and avoiding what you don''t want does not result in happiness: Ego.');
+('Point One: The preliminaries, which are the basis for dharma practice', 'First, train in the preliminaries; The four reminders. or alternatively called the Four Thoughts.', '1. Maintain an awareness of the preciousness of human life. 2. Be aware of the reality that life ends; death comes for everyone: Impermanence. 3. Recall that whatever you do, whether virtuous or not, has a result: Karma. 4. Contemplate that as long as you are too focused on self-importance and too caught up in thinking about how you are good or bad, you will experience suffering. Obsessing about getting what you want and avoiding what you don''t want does not result in happiness: Ego.');
 
 INSERT INTO slogans (point, slogan)
 VALUES
-('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Regard all dharmas as dreams; although experiences may seem solid, they are passing memories.'),
-('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Examine the nature of unborn awareness.'),
-('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Self-liberate even the antidote.'),
-('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'Rest in the nature of alaya, the essence, the present moment.'),
-('Point Two: The main practice, which is training in bodhicitta \n Absolute Bodhicitta:', 'In post-meditation, be a child of illusion.'),
-('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'Sending and taking should be practiced alternately. These two should ride the breath - practice Tonglen');
+('Point Two: The main practice, which is training in bodhicitta - Absolute Bodhicitta:', 'Regard all dharmas as dreams; although experiences may seem solid, they are passing memories.'),
+('Point Two: The main practice, which is training in bodhicitta - Absolute Bodhicitta:', 'Examine the nature of unborn awareness.'),
+('Point Two: The main practice, which is training in bodhicitta - Absolute Bodhicitta:', 'Self-liberate even the antidote.'),
+('Point Two: The main practice, which is training in bodhicitta - Absolute Bodhicitta:', 'Rest in the nature of alaya, the essence, the present moment.'),
+('Point Two: The main practice, which is training in bodhicitta - Absolute Bodhicitta:', 'In post-meditation, be a child of illusion.'),
+('Point Two: The main practice, which is training in bodhicitta - Relative Bodhicitta:', 'Sending and taking should be practiced alternately. These two should ride the breath - practice Tonglen');
 
 INSERT INTO slogans (point, slogan, extra)
 VALUES
-('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'Three objects, three poisons, three roots of virtue.', 'The three objects are friends, enemies and neutrals. The three poisons are craving, aversion and indifference. The three roots of virtue are the remedies.');
+('Point Two: The main practice, which is training in bodhicitta - Relative Bodhicitta:', 'Three objects, three poisons, three roots of virtue.', 'The three objects are friends, enemies and neutrals. The three poisons are craving, aversion and indifference. The three roots of virtue are the remedies.');
 
 
 INSERT INTO slogans (point, slogan)
 VALUES
-('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'In all activities, train with slogans.'),
-('Point Two: The main practice, which is training in bodhicitta \n Relative Bodhicitta:', 'Begin the sequence of sending and taking with yourself.'),
+('Point Two: The main practice, which is training in bodhicitta - Relative Bodhicitta:', 'In all activities, train with slogans.'),
+('Point Two: The main practice, which is training in bodhicitta - Relative Bodhicitta:', 'Begin the sequence of sending and taking with yourself.'),
 ('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'When the world is filled with evil, transform all mishaps into the path of bodhi.'),
 ('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Drive all blames into one.'),
 ('Point Three: Transformation of Bad Circumstances into the Way of Enlightenment', 'Be grateful to everyone.');

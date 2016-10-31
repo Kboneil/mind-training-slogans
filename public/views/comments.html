@@ -1,0 +1,23 @@
+<header>
+  <nav>
+    <a href="/slogans">59</a>
+    <a href="/home">Lojong Slogans</a>
+    <a href="/profile">Profile</a>
+  </nav>
+</header>
+<h1>Comments</h1>
+<div ng-repeat="comment in comments.comment | orderBy:'-date':reverse">
+  <div>
+    <h4>{{comment.date | date}}</h4>
+    <p>Slogan: {{comment.slogan_id}}</p>
+    <p>{{comment.slogan}}</p>
+    <p>Comment: {{comment.text}}</p>
+  </div>
+</div>
+<footer>
+  <nav>
+    <a href="/calendar">Calendar</a>
+    <a href="/comments">Comments</a>
+    <a href="/questions">Questions</a>
+  </nav>
+</footer>
