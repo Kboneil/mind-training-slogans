@@ -2,21 +2,12 @@ const router = require('express').Router();
 const passport = require('passport');
 const pool = require('../db/connection');
 
-const User = require('../models/user');
-
-var user_id;
-
-exports.getId = function () {
-  user_id = User.user_id
-  console.log('id in comments', user_id);
-}
-
 var comments = [];
 
 //gets all the content from favorites table
 
 router.get('/', function (req, res) {
-  exports.getId();
+  var currentlyLoggedInUser = req.user;
   console.log('in get function');
   pool.connect(function (err, client, done) {
     try {
@@ -26,7 +17,7 @@ router.get('/', function (req, res) {
         return;
       }
 
-      client.query('SELECT * FROM comments JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE user_id = $1;', [user_id],
+      client.query('SELECT * FROM comments JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE user_id = $1;', [currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);
@@ -43,8 +34,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  exports.getId();
-  console.log('id', id);
+  var currentlyLoggedInUser = req.user;
   var id = req.params.id;
   console.log('in get function');
   pool.connect(function (err, client, done) {
@@ -55,7 +45,7 @@ router.get('/:id', function (req, res) {
         return;
       }
 
-      client.query('SELECT * FROM comments JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE slogan_id = $1 AND user_id = $2;', [id, user_id],
+      client.query('SELECT * FROM comments JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE slogan_id = $1 AND user_id = $2;', [id, currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);

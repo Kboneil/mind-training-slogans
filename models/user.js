@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
 const pool = require('../db/connection');
-var id;
+
 //find by username
 function findByUsername(username) {
 
@@ -25,8 +25,6 @@ function findByUsername(username) {
 }
 //find by id
 function findById(id) {
-  id = id;
-  console.log('findById', id);
   return new Promise(function (resolve, reject){
     pool.connect(function (err, client, done) {
       if (err) {
@@ -91,12 +89,10 @@ function comparePassword(user, passwordToCompare) {
     });
 }
 
-console.log('id in exports', id);
 
 module.exports = {
   findByUsername: findByUsername,
   findById: findById,
   create: create,
-  comparePassword: comparePassword,
-  user_id: id
+  comparePassword: comparePassword
 };

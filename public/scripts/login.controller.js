@@ -9,8 +9,7 @@ function LoginController($http, $location) {
     console.log('logging in');
     $http.post('/login', {
       username: ctrl.username,
-      password: ctrl.password,
-      logged_in: true
+      password: ctrl.password
     }).then(function(){
       $location.path('/home');
     }, function(error) {
