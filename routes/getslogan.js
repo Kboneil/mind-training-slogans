@@ -16,6 +16,7 @@ function timeout() {
   rule.second = 1;
 
   schedule.scheduleJob(rule, function(){
+
     if (slogans.length === 0) {
       console.log('getting all slogans');
       pool.connect(function (err, client, done) {
@@ -33,11 +34,11 @@ function timeout() {
               res.sendStatus(500);
               return;
             }
-
             slogans = result.rows;
             console.log('IF one slogan', slogans[0]);
             sloganOfTheDay = slogans[0];
             slogans.shift();
+
           });
         } finally {
           done();

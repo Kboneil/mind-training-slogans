@@ -1,7 +1,65 @@
 angular.module('lojongApp') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
   .controller('calendarCtrl', function($http, $location, moment, alert, calendarConfig) {
 
+
     var vm = this;
+    vm.slogans = []
+    $http.get('/date').then(function(response){
+      vm.slogans = response.data;
+      vm.slogans.forEach(function (slogan) {
+        var date = new Date(slogan.date);
+        var id = slogan.slogan_id;
+        var comment = [];
+        var question = [];
+        $http.get('/ques/' + id).then(function(response){
+          console.log('response questions', response.data);
+          // questions = [];
+          // response.data.forEach(function (slogan) {
+          //   comment.push(slogan.text);
+          // });
+          // console.log('question 1', question);
+          // vm.events.push({
+          //   title: 'Slogan: ' + slogan.slogan_id,
+          //   question: question,
+          //   slogan: slogan.slogan,
+          //   startsAt: date,
+          //   endsAt: date,
+          //   color: calendarConfig.colorTypes.important,
+          //   draggable: false,
+          //   resizable: false
+          // });
+
+        }, function(error) {
+          console.log('error getting slogan comments', error);
+        }).then(function(){
+        $http.get('/com/' + id).then(function(response){
+          comment = [];
+          response.data.forEach(function (slogan) {
+            comment.push(slogan.text);
+          });
+          console.log('comment 1', comment);
+          vm.events.push({
+            title: 'Slogan: ' + slogan.slogan_id,
+            comment: comment,
+            question: '',
+            slogan: slogan.slogan,
+            startsAt: date,
+            endsAt: date,
+            color: calendarConfig.colorTypes.important,
+            draggable: false,
+            resizable: false
+          });
+        }, function(error) {
+          console.log('error getting slogan comments', error);
+        });
+
+      });
+
+      });
+    }, function(error) {
+      console.log('error getting slogans', error);
+    });
+
 
     //These variables MUST be set as a minimum for the calendar to work
     vm.calendarView = 'month';
@@ -18,32 +76,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
       }
     }];
     vm.events = [
-      {
-        title: 'An event',
-        color: calendarConfig.colorTypes.warning,
-        startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-        endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-        draggable: true,
-        resizable: true,
-        actions: actions
-      }, {
-        title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-        color: calendarConfig.colorTypes.info,
-        startsAt: moment().subtract(1, 'day').toDate(),
-        endsAt: moment().add(5, 'days').toDate(),
-        draggable: true,
-        resizable: true,
-        actions: actions
-      }, {
-        title: 'This is a really long event title that occurs on every year',
-        color: calendarConfig.colorTypes.important,
-        startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-        endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-        recursOn: 'year',
-        draggable: true,
-        resizable: true,
-        actions: actions
-      }
     ];
 
     vm.cellIsOpen = true;
@@ -51,16 +83,24 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     vm.addEvent = function() {
       vm.events.push({
         title: 'New event',
+        comment: 'none',
+        question: 'none',
+        slogan: 'slogan',
         startsAt: moment().startOf('day').toDate(),
         endsAt: moment().endOf('day').toDate(),
         color: calendarConfig.colorTypes.important,
-        draggable: true,
-        resizable: true
+        draggable: false,
+        resizable: false
       });
     };
 
     vm.eventClicked = function(event) {
-      alert.show('Clicked', event);
+      console.log(event);
+      vm.id = event.title;
+      vm.slogan = event.slogan
+      vm.date = event.startsAt;
+      vm.comment = 'Comment: ' + event.comment;
+      vm.question = 'Questions: ' + event.question;
     };
 
     vm.eventEdited = function(event) {

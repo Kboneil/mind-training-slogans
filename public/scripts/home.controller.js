@@ -9,29 +9,120 @@ function HomeController($http, $location) {
   ctrl.slogan;
   ctrl.extra;
   var id;
+  ctrl.date = new Date();
 
+    //gets the slogan of the day
     $http.get('/getslogan').then(function(response){
       console.log('response', response.data);
       ctrl.point = response.data.point;
-      ctrl.id = "Slogan: " + response.data.id;
+      ctrl.id = response.data.id;
       ctrl.slogan = response.data.slogan;
       ctrl.extra = response.data.extra;
       id = response.data.id;
     }, function(error) {
       console.log('error getting slogan', error);
     }).then(function(){
+      //gets all the questions from this user for the slogan of the day
       $http.get('/ques/' + id).then(function(response){
         console.log('response', response.data);
         ctrl.question = response.data
       }, function(error) {
         console.log('error getting slogan comments', error);
       }).then(function(){
+      //gets all the comments from this user for the slogan of the day
       $http.get('/com/' + id).then(function(response){
         console.log('response', response.data);
         ctrl.comment = response.data
       }, function(error) {
         console.log('error getting slogan comments', error);
+      }).then(function(){
+        //sends the date that this slogan was practiced by this user to the DB
+        var data = {date: ctrl.date, slogan_id: id}
+        $http.post('/date', data).then(function(response){
+          console.log('response', response.data);
+      }, function(error) {
+        console.log('error getting slogan comments', error);
       });
     });
   });
+    });
+
+ctrl.deleteQuestion = function () {
+  console.log('in deleteQuestion');
+}
+
+ctrl.deleteComment = function () {
+  console.log('in deleteComment');
+}
+
+ctrl.postQuestion = function (question, slogan){
+  var date = new Date();
+  var data = {text: question, date: date, slogan_id: slogan}
+  console.log('data', data);
+  $http.post('/ques', data)
+   .then(function (result) {
+     $http.get('/getslogan').then(function(response){
+       console.log('response', response.data);
+       ctrl.point = response.data.point;
+       ctrl.id = response.data.id;
+       ctrl.slogan = response.data.slogan;
+       ctrl.extra = response.data.extra;
+       id = response.data.id;
+     }, function(error) {
+       console.log('error getting slogan', error);
+     }).then(function(){
+       $http.get('/ques/' + id).then(function(response){
+         console.log('response', response.data);
+         ctrl.question = response.data
+       }, function(error) {
+         console.log('error getting slogan comments', error);
+       }).then(function(){
+       $http.get('/com/' + id).then(function(response){
+         console.log('response', response.data);
+         ctrl.comment = response.data
+       }, function(error) {
+         console.log('error getting slogan comments', error);
+       });
+     });
+   });
+     return result;
+   });
+
+}
+
+ctrl.postComment = function (comment, slogan){
+  var date = new Date();
+  var data = {text: comment, date: date, slogan_id: slogan}
+  console.log('data', data);
+  $http.post('/com', data)
+   .then(function (result) {
+     $http.get('/getslogan').then(function(response){
+       console.log('response', response.data);
+       ctrl.point = response.data.point;
+       ctrl.id = response.data.id;
+       ctrl.slogan = response.data.slogan;
+       ctrl.extra = response.data.extra;
+       id = response.data.id;
+     }, function(error) {
+       console.log('error getting slogan', error);
+     }).then(function(){
+       $http.get('/ques/' + id).then(function(response){
+         console.log('response', response.data);
+         ctrl.question = response.data
+       }, function(error) {
+         console.log('error getting slogan comments', error);
+       }).then(function(){
+       $http.get('/com/' + id).then(function(response){
+         console.log('response', response.data);
+         ctrl.comment = response.data
+       }, function(error) {
+         console.log('error getting slogan comments', error);
+       });
+     });
+   });
+     return result;
+   });
+
+}
+
 }

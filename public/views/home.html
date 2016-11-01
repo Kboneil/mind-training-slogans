@@ -5,10 +5,11 @@
     <a href="/profile">Profile</a>
   </nav>
 </header>
-<main ng-click="reveal = !reveal">
+<h2 ng-click="reveal = !reveal">{{home.date | date:fullDate}}</h2>
+<main>
   <div ng-hide="reveal">
     <h1>Slogans</h1>
-    <h2>{{home.id}}</h2>
+    <h2 ng-model="home.id">Slogan: {{home.id}}</h2>
     <p>{{home.point}}</p>
     <p>{{home.slogan}}</p>
     <p>{{home.extra}}</p>
@@ -21,8 +22,13 @@
         <p>Slogan: {{comment.slogan_id}}</p>
         <p>{{comment.slogan}}</p>
         <p>Comment: {{comment.text}}</p>
+        <span><button type="submit" ng-click="home.deleteComment(home.comment.text)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
     </div>
+    <form>
+      <input type="text" ng-model="home.newComment" placeholder="New comment"></input>
+      <button type="submit" ng-click="home.postComment(home.newComment, home.id)" ><span class="glyphicon glyphicon-plus"></span></button>
+    </form>
     <h1>Questions</h1>
     <div ng-repeat="question in home.question | orderBy:'-date':reverse">
       <div>
@@ -30,8 +36,13 @@
         <p>Slogan: {{question.slogan_id}}</p>
         <p>{{question.slogan}}</p>
         <p>Question: {{question.text}}</p>
+        <span><button type="submit" ng-click="home.deleteQuestion(home.question.text)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
     </div>
+    <form>
+      <input type="text" ng-model="home.newQuestion" placeholder="New question"></input>
+      <button type="submit" ng-click="home.postQuestion(home.newQuestion, home.id)" ><span class="glyphicon glyphicon-plus"></span></button>
+    </form>
   </div>
 </main>
 <footer>
