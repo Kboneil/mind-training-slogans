@@ -6,7 +6,7 @@ function SlogansController($http, $location) {
   var ctrl = this;
   ctrl.slogans;
 
-    $http.get('/date').then(function(response){
+    $http.get('/sloganlist').then(function(response){
       console.log('response slogans', response.data);
       ctrl.slogans = response.data;
     }, function(error) {

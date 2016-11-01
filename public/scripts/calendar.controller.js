@@ -2,60 +2,58 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   .controller('calendarCtrl', function($http, $location, moment, alert, calendarConfig) {
 
 
-    var vm = this;
-    vm.slogans = []
-    $http.get('/date').then(function(response){
-      vm.slogans = response.data;
-      console.log('slogans', vm.slogans);
-      // var slogans = []
+  var vm = this;
+  vm.questions = '';
+  vm.comments = '';
+   $http.get('/date').then(function(response){
+    vm.slogans = response.data;
       vm.slogans.forEach(function (slogan) {
-        // var entry = {
-        // date: new Date(slogan.date),
-        // id: slogan.slogan_id,
-        // slogan: slogan.slogan,
-        // comment: slogan.comment,
-        // question: slogan.question
-        // }
-        // slogans.push(entry);
-        // vm.events.push({
-        //   title: 'Slogan: ' + entry.id,
-        //   comment: entry.comment,
-        //   question: entry.question,
-        //   slogan: entry.slogan,
-        //   startsAt: entry.date,
-        //   endsAt: entry.date,
-        //   color: calendarConfig.colorTypes.important,
-        //   draggable: false,
-        //   resizable: false
-        // });
-
-        date = new Date(slogan.date),
-        id = slogan.slogan_id,
-        slogan = slogan.slogan,
-        comment = slogan.comment,
-        question = slogan.question
-        vm.events.push({
-          title: 'Slogan: ' + id,
-          comment: comment,
-          question: question,
-          slogan: slogan,
-          startsAt: date,
-          endsAt: date,
-          color: calendarConfig.colorTypes.important,
-          draggable: false,
-          resizable: false
-        });
-
-
-
-
-
+        var date = new Date(slogan.date);
+      vm.events.push({
+        title: 'Slogan: ' + slogan.slogan_id,
+        slogan: slogan.slogan,
+        startsAt: date,
+        endsAt: date,
+        color: calendarConfig.colorTypes.important,
+        draggable: false,
+        resizable: false
+     });
+     vm.getCom = 'Get comments';
+     vm.getQues = 'Get questions';
       });
-    
-
     }, function(error) {
       console.log('error getting slogans', error);
     });
+
+
+vm.getComments = function(date, id) {
+  console.log('inside getComment date', date);
+  console.log('inside getComment id', id);
+  var id = id.substring(id.lastIndexOf(" ")+1);;
+  $http.get('/com/' + id).then(function(response){
+    console.log('response', response.data);
+    if(!response.data) {
+      vm.comments = 'No comments';
+    } else {
+      vm.comments = response.data;
+    }
+
+  }, function(error) {
+    console.log('error getting slogan comments', error);
+  })
+}
+
+vm.getQuestions = function(date, id) {
+  console.log('inside getQuestion date', date);
+  console.log('inside getQuestion id', id);
+  var id = id.substring(id.lastIndexOf(" ")+1);;
+  $http.get('/ques/' + id).then(function(response){
+    console.log('response', response.data);
+    vm.questions = response.data
+  }, function(error) {
+    console.log('error getting slogan quesetions', error);
+  })
+}
 
 
     //These variables MUST be set as a minimum for the calendar to work
@@ -96,8 +94,8 @@ angular.module('lojongApp') //you will need to declare your module with the depe
       vm.id = event.title;
       vm.slogan = event.slogan
       vm.date = event.startsAt;
-      vm.comment = 'Comment: ' + event.comment;
-      vm.question = 'Questions: ' + event.question;
+      vm.comments = '';
+      vm.questions = '';
     };
 
     vm.eventEdited = function(event) {

@@ -73,13 +73,25 @@
   </mwl-calendar>
 
   <div>
-    <h3>{{vm.date | date}}</h3>
-    <h4>{{vm.id}}</h4>
+    <h3 ng-model="vm.date">{{vm.date | date}}</h3>
+    <h4 ng-model="vm.id">{{vm.id}}</h4>
     <p>{{vm.slogan}}</p>
-    <p>{{vm.comment}}</p>
-    <p>{{vm.question}}</p>
-  </div>
-
+    <p type="submit" ng-click="vm.getComments(vm.date, vm.id)">{{vm.getCom}}</p>
+      <div ng-repeat="comment in vm.comments | orderBy:'-date':reverse">
+        <div>
+          <h5>{{comment.date | date}}</h5>
+          <p>Comment: {{comment.comment}}</p>
+          <span><button type="submit" ng-click="home.deleteComment(home.comment.text)" ><span class="glyphicon glyphicon-trash"></span></button></span>
+        </div>
+      </div>
+      <p type="submit" ng-click="vm.getQuestions(vm.date, vm.id)">{{vm.getQues}}</p>
+        <div ng-repeat="question in vm.questions | orderBy:'-date':reverse">
+          <div>
+            <h5>{{question.date | date}}</h5>
+            <p>Question: {{question.question}}</p>
+            <span><button type="submit" ng-click="home.deleteQuestion(home.question.text)" ><span class="glyphicon glyphicon-trash"></span></button></span>
+          </div
+        </div>
   <footer>
     <nav>
       <a href="/calendar">Calendar</a>

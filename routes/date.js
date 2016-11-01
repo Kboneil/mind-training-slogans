@@ -45,8 +45,7 @@ router.get('/', function (req, res) {
         return;
       }
 
-      client.query('SELECT * FROM slogan_date JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id Join comments ON  slogans.id = comments.slogan_id Join questions ON  slogans.id = questions.slogan_id WHERE users.id = $1;', [currentlyLoggedInUser.id],
-            function (err, result) {
++      client.query('SELECT * FROM slogan_date JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE user_id = $1;', [currentlyLoggedInUser.id],            function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);
                 res.sendStatus(500);
