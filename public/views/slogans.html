@@ -8,11 +8,27 @@
 <h1>list of slogans</h1>
 <ul>
   <div ng-repeat="slogan in slogans.slogans track by $index">
-    <div>
+    <div ng-model="slogan.newscopeobj">
       <h2>Slogan: {{slogan.id}}</h2>
       <p>{{slogan.point}}</p>
       <p>{{slogan.slogan}}</p>
       <p>{{slogan.extra}}</p>
+      <p type="submit" ng-click="slogans.getComments(slogans.slogans[$index].id)">Get Comments</p>
+        <div ng-repeat="comment in slogans.comments | orderBy:'-date':reverse track by $index">
+          <div>
+            <h5>{{comment.date | date}}</h5>
+            <p>Comment: {{comment.comment}}</p>
+            <!-- <span><button type="submit" ng-click="slogan.deleteComment(slogan.comment.text)" ><span class="glyphicon glyphicon-trash"></span></button></span> -->
+          </div>
+        </div>
+        <p type="submit" ng-click="slogans.getQuestions(slogan.id)">Get Questions</p>
+          <div ng-repeat="question in slogans.questions | orderBy:'-date':reverse">
+            <div>
+              <h5>{{question.date | date}}</h5>
+              <p>Question: {{question.question}}</p>
+              <!-- <span><button type="submit" ng-click="slogan.deleteQuestion(slogan.question.text)" ><span class="glyphicon glyphicon-trash"></span></button></span> -->
+            </div
+          </div>
     </div>
   </div>
 </ul>

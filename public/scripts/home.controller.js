@@ -13,7 +13,7 @@ function HomeController($http, $location) {
 
     //gets the slogan of the day
     $http.get('/getslogan').then(function(response){
-      console.log('response', response.data);
+      console.log('response slogans', response.data);
       ctrl.point = response.data.point;
       ctrl.id = response.data.id;
       ctrl.slogan = response.data.slogan;
@@ -24,14 +24,14 @@ function HomeController($http, $location) {
     }).then(function(){
       //gets all the questions from this user for the slogan of the day
       $http.get('/ques/' + id).then(function(response){
-        console.log('response', response.data);
+        console.log('response questions', response.data);
         ctrl.question = response.data
       }, function(error) {
         console.log('error getting slogan comments', error);
       }).then(function(){
       //gets all the comments from this user for the slogan of the day
       $http.get('/com/' + id).then(function(response){
-        console.log('response', response.data);
+        console.log('response comments', response.data);
         ctrl.comment = response.data
       }, function(error) {
         console.log('error getting slogan comments', error);
@@ -39,7 +39,7 @@ function HomeController($http, $location) {
         //sends the date that this slogan was practiced by this user to the DB
         var data = {date: ctrl.date, slogan_id: id}
         $http.post('/date', data).then(function(response){
-          console.log('response', response.data);
+          console.log('response post', response.data);
       }, function(error) {
         console.log('error getting slogan comments', error);
       });
@@ -47,11 +47,12 @@ function HomeController($http, $location) {
   });
     });
 
-ctrl.deleteQuestion = function () {
-  console.log('in deleteQuestion');
+ctrl.deleteQuestion = function (question, id) {
+  console.log('in deleteQuestion question', question);
+  console.log('in deleteQuestion id', id);
 }
 
-ctrl.deleteComment = function () {
+ctrl.deleteComment = function (question, id) {
   console.log('in deleteComment');
 }
 
