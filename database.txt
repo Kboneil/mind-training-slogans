@@ -15,7 +15,7 @@ CREATE TABLE users (
 
 CREATE TABLE comments (
 	id SERIAL PRIMARY KEY,
-	text varchar(200) NOT NULL,
+	comment varchar(200) NOT NULL,
 	date date NOT NULL,
 	slogan_id int REFERENCES slogans,
 	user_id int REFERENCES users
@@ -23,7 +23,7 @@ CREATE TABLE comments (
 
 CREATE TABLE questions (
 	id SERIAL PRIMARY KEY,
-	text varchar(200) NOT NULL,
+	question varchar(200) NOT NULL,
 	date date NOT NULL,
 	slogan_id int REFERENCES slogans,
 	user_id int REFERENCES users

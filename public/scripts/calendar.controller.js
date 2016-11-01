@@ -6,56 +6,53 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     vm.slogans = []
     $http.get('/date').then(function(response){
       vm.slogans = response.data;
+      console.log('slogans', vm.slogans);
+      // var slogans = []
       vm.slogans.forEach(function (slogan) {
-        var date = new Date(slogan.date);
-        var id = slogan.slogan_id;
-        var comment = [];
-        var question = [];
-        $http.get('/ques/' + id).then(function(response){
-          console.log('response questions', response.data);
-          // questions = [];
-          // response.data.forEach(function (slogan) {
-          //   comment.push(slogan.text);
-          // });
-          // console.log('question 1', question);
-          // vm.events.push({
-          //   title: 'Slogan: ' + slogan.slogan_id,
-          //   question: question,
-          //   slogan: slogan.slogan,
-          //   startsAt: date,
-          //   endsAt: date,
-          //   color: calendarConfig.colorTypes.important,
-          //   draggable: false,
-          //   resizable: false
-          // });
+        // var entry = {
+        // date: new Date(slogan.date),
+        // id: slogan.slogan_id,
+        // slogan: slogan.slogan,
+        // comment: slogan.comment,
+        // question: slogan.question
+        // }
+        // slogans.push(entry);
+        // vm.events.push({
+        //   title: 'Slogan: ' + entry.id,
+        //   comment: entry.comment,
+        //   question: entry.question,
+        //   slogan: entry.slogan,
+        //   startsAt: entry.date,
+        //   endsAt: entry.date,
+        //   color: calendarConfig.colorTypes.important,
+        //   draggable: false,
+        //   resizable: false
+        // });
 
-        }, function(error) {
-          console.log('error getting slogan comments', error);
-        }).then(function(){
-        $http.get('/com/' + id).then(function(response){
-          comment = [];
-          response.data.forEach(function (slogan) {
-            comment.push(slogan.text);
-          });
-          console.log('comment 1', comment);
-          vm.events.push({
-            title: 'Slogan: ' + slogan.slogan_id,
-            comment: comment,
-            question: '',
-            slogan: slogan.slogan,
-            startsAt: date,
-            endsAt: date,
-            color: calendarConfig.colorTypes.important,
-            draggable: false,
-            resizable: false
-          });
-        }, function(error) {
-          console.log('error getting slogan comments', error);
+        date = new Date(slogan.date),
+        id = slogan.slogan_id,
+        slogan = slogan.slogan,
+        comment = slogan.comment,
+        question = slogan.question
+        vm.events.push({
+          title: 'Slogan: ' + id,
+          comment: comment,
+          question: question,
+          slogan: slogan,
+          startsAt: date,
+          endsAt: date,
+          color: calendarConfig.colorTypes.important,
+          draggable: false,
+          resizable: false
         });
 
-      });
+
+
+
 
       });
+    
+
     }, function(error) {
       console.log('error getting slogans', error);
     });
