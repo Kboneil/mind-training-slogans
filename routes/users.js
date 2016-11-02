@@ -28,4 +28,12 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/logout', function(req, res)
+{
+    console.log("logging out ......");
+    req.session.destroy();
+    //res.redirect('/login.html');
+    res.send(200);
+});
+
 module.exports = router;
