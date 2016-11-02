@@ -4,13 +4,8 @@ angular.module('lojongApp')
 function QuestionsController($http, $location) {
   console.log('QuestionsController loaded');
   var ctrl = this;
+  getQuestions($http, ctrl);
 
-    $http.get('/ques').then(function(response){
-      console.log('response', response.data);
-      ctrl.question = response.data
-    }, function(error) {
-      console.log('error getting questions', error);
-    });
 
     ctrl.deleteQuestion = function (id){
       $http.delete('/ques/' + id)
@@ -24,4 +19,22 @@ function QuestionsController($http, $location) {
         });
     }
 
+    ctrl.changeQuestion = function (question, id){
+      var id = id;
+      var data = {question: question, id: id}
+      $http.put('/ques/' + id, data)
+       .then(function (response) {
+          getQuestions($http, ctrl);
+       });
+    }
+
+}//end of controller
+
+function getQuestions($http, ctrl) {
+  $http.get('/ques').then(function(response){
+    console.log('response', response.data);
+    ctrl.question = response.data
+  }, function(error) {
+    console.log('error getting questions', error);
+  });
 }

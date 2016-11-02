@@ -11,10 +11,23 @@
     <h4>{{comment.date | date}}</h4>
     <p>Slogan: {{comment.slogan_id}}</p>
     <p>{{comment.slogan}}</p>
-    <p>Comment: {{comment.comment}}</p>
+    <form>
+      <input type="text" ng-model="comment.comment"></input>
+      <button type="submit" ng-click="comments.changeComment(comment.comment, comment.id)">Update</button>
+    </form>
     <button type="submit" ng-click="comments.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button>
   </div>
 </div>
+<!-- <form>
+  <label for="select">Select Order:</label>
+  <select id="select" ng-model="ctrl.select" ng-change="ctrl.listPeople()" class="form-control">
+    <option value="-name">Name</option>
+    <option value="-hometown">Hometown</option>
+    <option value="-movie">Favorite Movie</option>
+</select>
+  <input type="text" ng-model="comment.newComment" placeholder="New comment"></input>
+  <button type="submit" ng-click="comments.postComment(comment.newComment, comments.comment.slogan_id)" ><span class="glyphicon glyphicon-plus"></span></button>
+</form> -->
 <footer>
   <nav>
     <a href="/calendar">Calendar</a>
