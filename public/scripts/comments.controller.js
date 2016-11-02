@@ -4,6 +4,7 @@ angular.module('lojongApp')
 function CommentsController($http, $location) {
   console.log('CommentsController loaded');
   var ctrl = this;
+  getUser($http, ctrl);
   getComments($http, ctrl);
 
     ctrl.deleteComment = function (id){
@@ -45,5 +46,13 @@ function getComments($http, ctrl) {
     ctrl.comment = response.data
   }, function(error) {
     console.log('error getting comments', error);
+  });
+}
+function getUser ($http, ctrl) {
+  $http.get('/users').then(function(response){
+    console.log('response', response.data);
+    ctrl.user = response.data
+  }, function(error) {
+    console.log('error getting questions', error);
   });
 }

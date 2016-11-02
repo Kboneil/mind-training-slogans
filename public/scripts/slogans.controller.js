@@ -2,8 +2,9 @@ angular.module('lojongApp')
 .controller('SlogansController', SlogansController);
 
 function SlogansController($http, $location) {
-  console.log('SlogansController loaded');
+
   var ctrl = this;
+  getUser($http, ctrl);
   ctrl.slogans = [];
 
   getAllSlogans($http, ctrl);
@@ -86,4 +87,12 @@ function getAllSlogans ($http, ctrl) {
     console.log('error getting slogans', error);
   });
 
+}
+function getUser ($http, ctrl) {
+  $http.get('/users').then(function(response){
+    console.log('response', response.data);
+    ctrl.user = response.data
+  }, function(error) {
+    console.log('error getting questions', error);
+  });
 }

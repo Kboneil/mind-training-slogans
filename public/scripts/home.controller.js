@@ -2,8 +2,9 @@ angular.module('lojongApp')
 .controller('HomeController', HomeController);
 
 function HomeController($http, $location) {
-  console.log('HomeController loaded');
+
   var ctrl = this;
+  getUser($http, ctrl);
   ctrl.point;
   ctrl.id;
   ctrl.slogan;
@@ -136,5 +137,13 @@ function loadSlogans ($http, ctrl) {
     });
   });
 });
+  });
+}
+function getUser ($http, ctrl) {
+  $http.get('/users').then(function(response){
+    console.log('response', response.data);
+    ctrl.user = response.data
+  }, function(error) {
+    console.log('error getting questions', error);
   });
 }

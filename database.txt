@@ -29,6 +29,13 @@ CREATE TABLE questions (
 	user_id int REFERENCES users
 );
 
+CREATE TABLE slogan_date (
+	id SERIAL PRIMARY KEY,
+	date date NOT NULL,
+	slogan_id int REFERENCES slogans,
+	user_id int REFERENCES users
+);
+
 INSERT INTO slogans (point, slogan, extra)
 VALUES
 ('Point One: The preliminaries, which are the basis for dharma practice', 'First, train in the preliminaries; The four reminders. or alternatively called the Four Thoughts.', '1. Maintain an awareness of the preciousness of human life. 2. Be aware of the reality that life ends; death comes for everyone: Impermanence. 3. Recall that whatever you do, whether virtuous or not, has a result: Karma. 4. Contemplate that as long as you are too focused on self-importance and too caught up in thinking about how you are good or bad, you will experience suffering. Obsessing about getting what you want and avoiding what you don''t want does not result in happiness: Ego.');

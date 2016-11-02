@@ -8,6 +8,7 @@ const getslogan = require('./routes/getslogan');
 const sloganlist = require('./routes/sloganlist');
 const comments = require('./routes/com');
 const questions = require('./routes/ques');
+const users = require('./routes/users');
 const date = require('./routes/date');
 const auth = require('./auth/setup');
 const passport = require('passport');
@@ -54,6 +55,7 @@ app.use('/sloganlist', sloganlist);
 app.use('/com', comments);
 app.use('/ques', questions);
 app.use('/date', date);
+app.use('/users', users);
 
 app.get('/*', function(req, res){
   res.sendFile(path.join(__dirname, 'public/views/index.html'));
