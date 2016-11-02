@@ -6,41 +6,65 @@ function SlogansController($http, $location) {
   var ctrl = this;
   ctrl.slogans = [];
 
-    $http.get('/sloganlist').then(function(response){
-      console.log('response slogans', response.data);
-      // ctrl.slogans = response.data;
-
-      response.data.forEach(function(slogan){
-        var id = slogan.id;
-        slogan.comments = [];
-        slogan.questions = [];
-
-        $http.get('/com/' + id).then(function(response){
-            response.data.forEach(function(comment){
-              slogan.comments.push({comment: comment.comment, date: comment.date, id: comment.id});
-            });
-        }, function(error) {
-          console.log('error getting slogan comments', error);
-        });//endGEt
-
-        $http.get('/ques/' + id).then(function(response){
-          console.log('question response', response.data);
-            response.data.forEach(function(question){
-            slogan.questions.push({question: question.question, date: question.date, id: question.id});
-            });
-
-        }, function(error) {
-          console.log('error getting slogan comments', error);
-        });//endGEt
-        ctrl.slogans.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
-      });//end forEach
+  getAllSlogans($http, ctrl);
 
 
-    }, function(error) {
-      console.log('error getting slogans', error);
-    });
+    ctrl.deleteComment = function (id){
+      console.log("in delete");
+      $http.delete('/com/' + id)
+        .then(function (response) {
+          console.log('delete complete');
+        }).then(function (response) {
+        getAllSlogans($http, ctrl);
+      });
+    }
+
+    ctrl.deleteQuestion = function (id){
+      console.log("in delete");
+      $http.delete('/ques/' + id)
+        .then(function (response) {
+          console.log('delete complete');
+        }).then(function (response) {
+        getAllSlogans($http, ctrl);
+      });
+    }
 
 
+}
 
+function getAllSlogans ($http, ctrl) {
+
+  $http.get('/sloganlist').then(function(response){
+    console.log('response slogans', response.data);
+    // ctrl.slogans = response.data;
+
+    response.data.forEach(function(slogan){
+      var id = slogan.id;
+      slogan.comments = [];
+      slogan.questions = [];
+
+      $http.get('/com/' + id).then(function(response){
+          response.data.forEach(function(comment){
+            slogan.comments.push({comment: comment.comment, date: comment.date, id: comment.id});
+          });
+      }, function(error) {
+        console.log('error getting slogan comments', error);
+      });//endGEt
+
+      $http.get('/ques/' + id).then(function(response){
+        console.log('question response', response.data);
+          response.data.forEach(function(question){
+          slogan.questions.push({question: question.question, date: question.date, id: question.id});
+          });
+
+      }, function(error) {
+        console.log('error getting slogan comments', error);
+      });//endGEt
+      ctrl.slogans.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
+    });//end forEach
+
+  }, function(error) {
+    console.log('error getting slogans', error);
+  });
 
 }

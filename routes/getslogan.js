@@ -13,7 +13,9 @@ getSlogans();
 
 
 function timeout() {
-  rule.second = 1;
+  rule.hour = 0;
+  rule.minute = 0;
+  rule.second = 0;
 
   schedule.scheduleJob(rule, function(){
 
@@ -50,6 +52,8 @@ function timeout() {
       sloganOfTheDay = slogans[0];
       slogans.shift();
     }
+
+
   });
 
 }

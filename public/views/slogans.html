@@ -19,11 +19,13 @@
       <div ng-repeat="comment in slogan.comments | orderBy:'-date':reverse">
           <h5>{{comment.date | date}}</h5>
           <p>{{comment.comment}}</p>
+          <button type="submit" ng-click="slogans.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button>
       </div>
       <h4>Questions:</h4>
       <div ng-repeat="question in slogan.questions | orderBy:'-date':reverse">
         <h5>{{question.date | date}}</h5>
         <p>{{question.question}}</p>
+        <button type="submit" ng-click="slogans.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button>
       </div>
     </div>
 </ul>

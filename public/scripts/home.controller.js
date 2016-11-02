@@ -10,7 +10,7 @@ function HomeController($http, $location) {
   ctrl.extra;
   var id;
   ctrl.date = new Date();
-  getAllSlogans($http, ctrl);
+  loadSlogans($http, ctrl);
 
 
 
@@ -39,16 +39,18 @@ ctrl.deleteComment = function (id){
   $http.delete('/com/' + id)
     .then(function (response) {
       console.log('delete complete');
-    });
+    }).then(function (response) {
     getSlogansCommentsQuestions($http, ctrl);
+  });
 }
 
 ctrl.deleteQuestion = function (id){
   $http.delete('/ques/' + id)
     .then(function (response) {
       console.log('delete complete');
-    });
+    }).then(function (response) {
     getSlogansCommentsQuestions($http, ctrl);
+  });
 }
 
 
@@ -80,7 +82,7 @@ function getSlogansCommentsQuestions($http, ctrl) {
   });
 });
 }
-function getAllSlogans ($http, ctrl) {
+function loadSlogans ($http, ctrl) {
   //gets the slogan of the day
   $http.get('/getslogan').then(function(response){
     console.log('response slogans', response.data);
