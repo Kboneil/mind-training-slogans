@@ -91,4 +91,27 @@ router.post('/', function (req, res) {
   });
 });
 
+router.delete('/:id', function (req, res) {
+  var id = req.params.id;
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error connecting to DB', err);
+        res.sendStatus(500);
+        return;
+      }
+      client.query('DELETE FROM comments WHERE id=$1', [id], function (err) {
+        if (err) {
+          console.log('Error querying DB', err);
+          res.sendStatus(500);
+          return;
+        }
+        res.sendStatus(204);
+      });
+    }finally {
+      done();
+    }
+  });
+});
+
 module.exports = router;

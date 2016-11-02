@@ -3,22 +3,48 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
 
   var vm = this;
-  vm.questions = '';
-  vm.comments = '';
+  vm.sloganArray = []
    $http.get('/date').then(function(response){
-    vm.slogans = response.data;
+     vm.slogans = response.data;
+
+
       vm.slogans.forEach(function (slogan) {
         var date = new Date(slogan.date);
+        var id =slogan.slogan_id
+
+        slogan.comments = [];
+        slogan.questions = [];
+
+        $http.get('/com/' + id).then(function(response){
+            response.data.forEach(function(comment){
+              slogan.comments.push({comment: comment.comment, date: comment.date, id: comment.id});
+            });
+        }, function(error) {
+          console.log('error getting slogan comments', error);
+        });//endGEt
+
+        $http.get('/ques/' + id).then(function(response){
+            response.data.forEach(function(question){
+            slogan.questions.push({question: question.question, date: question.date, id: question.id});
+            });
+
+        }, function(error) {
+          console.log('error getting slogan comments', error);
+        });//endGEt
+        vm.sloganArray.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
+
       vm.events.push({
         title: 'Slogan: ' + slogan.slogan_id,
         slogan: slogan.slogan,
         startsAt: date,
-
         color: calendarConfig.colorTypes.important,
+        comment: slogan.comments,
+        question: slogan.questions,
         draggable: false,
         resizable: false,
         incrementsBadgeTotal: false
      });
+     console.log("???", vm.sloganArray);
       });
     }, function(error) {
       console.log('error getting slogans', error);
@@ -90,13 +116,11 @@ vm.getQuestions = function(date, id) {
     };
 
     vm.eventClicked = function(event) {
-      alert.show('Clicked', event);
-      console.log(event);
       vm.id = event.title;
-      vm.slogan = event.slogan
+      vm.slogan = event.slogan;
       vm.date = event.startsAt;
-      vm.getCom = 'Get Comments';
-      vm.getQues = 'Get Questions';
+      vm.getCom = event.comment;
+      vm.getQues = event.question;
     };
 
     vm.eventEdited = function(event) {

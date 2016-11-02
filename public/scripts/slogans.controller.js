@@ -11,9 +11,6 @@ function SlogansController($http, $location) {
       // ctrl.slogans = response.data;
 
       response.data.forEach(function(slogan){
-
-        ctrl.comments = ''
-        console.log('foreach', slogan.id);
         var id = slogan.id;
         slogan.comments = [];
         slogan.questions = [];
@@ -36,7 +33,6 @@ function SlogansController($http, $location) {
           console.log('error getting slogan comments', error);
         });//endGEt
         ctrl.slogans.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
-        console.log("???", ctrl.slogans);
       });//end forEach
 
 

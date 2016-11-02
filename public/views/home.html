@@ -19,10 +19,10 @@
     <div ng-repeat="comment in home.comment | orderBy:'-date':reverse track by $index">
       <div>
         <h4>{{comment.date | date}}</h4>
-        <p>Slogan: {{comment.slogan_id}}</p>
-        <p>{{comment.slogan}}</p>
+        <p>Slogan: {{home.id}}</p>
+        <p>{{home.slogan}}</p>
         <p>Comment: {{comment.comment}}</p>
-        <span><button type="submit" ng-click="home.deleteComment(home.comment[$index].comment, home.comment[$index].id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
+        <span><button type="submit" ng-click="home.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
     </div>
     <form>
@@ -33,10 +33,10 @@
     <div ng-repeat="question in home.question | orderBy:'-date':reverse track by $index">
       <div>
         <h4>{{question.date | date}}</h4>
-        <p>Slogan: {{question.slogan_id}}</p>
-        <p>{{question.slogan}}</p>
+        <p>Slogan: {{home.id}}</p>
+        <p>{{home.slogan}}</p>
         <p>Question: {{question.question}}</p>
-        <span><button type="submit" ng-click="home.deleteQuestion(home.question[$index].question, home.question[$index].id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
+        <span><button type="submit" ng-click="home.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
     </div>
     <form>
