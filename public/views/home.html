@@ -21,7 +21,10 @@
         <h4>{{comment.date | date}}</h4>
         <p>Slogan: {{home.id}}</p>
         <p>{{home.slogan}}</p>
-        <p>Comment: {{comment.comment}}</p>
+        <form>
+          <input type="text" ng-model="comment.comment"></input>
+          <button type="submit" ng-click="home.changeComment(comment.comment, comment.id)">Update</button>
+        </form>
         <span><button type="submit" ng-click="home.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
     </div>
@@ -35,7 +38,10 @@
         <h4>{{question.date | date}}</h4>
         <p>Slogan: {{home.id}}</p>
         <p>{{home.slogan}}</p>
-        <p>Question: {{question.question}}</p>
+        <form>
+          <input type="text" ng-model="question.question"></input>
+          <button type="submit" ng-click="home.changeQuestion(question.question, question.id)">Update</button>
+        </form>
         <span><button type="submit" ng-click="home.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
     </div>

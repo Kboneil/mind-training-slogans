@@ -114,4 +114,35 @@ router.post('/', function (req, res) {
   });
 });
 
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var question = req.body.question;
+
+  pool.connect(function (err, client, done) {
+    try {
+      if (err) {
+        console.log('Error querying to DB', err);
+        res.sendStatus(500);
+        return;
+      }
+
+      client.query('UPDATE questions SET question=$1 WHERE id=$2 RETURNING *;',
+      [question, id],
+      function (err, result) {
+        if (err) {
+          console.log('Error querying database', err);
+          res.sendStatus(500);
+
+        } else {
+          console.log('result.rows', result.rows);
+          res.send(result.rows);
+        }
+      });
+    } finally {
+      done();
+    }
+  });
+
+});
+
 module.exports = router;

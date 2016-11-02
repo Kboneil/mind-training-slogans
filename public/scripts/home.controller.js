@@ -18,9 +18,9 @@ ctrl.postQuestion = function (question, slogan){
   var date = new Date();
   var data = {question: question, date: date, slogan_id: slogan}
   $http.post('/ques', data)
-   .then(function (result) {
+   .then(function (response) {
      getSlogansCommentsQuestions($http, ctrl);
-     return result;
+     ctrl.newQuestion = '';
    });
 
 }
@@ -29,11 +29,30 @@ ctrl.postComment = function (comment, slogan){
   var date = new Date();
   var data = {comment: comment, date: date, slogan_id: slogan}
   $http.post('/com', data)
-   .then(function (result) {
+   .then(function (response) {
       getSlogansCommentsQuestions($http, ctrl);
-     return result;
+      ctrl.newComment = '';
    });
 }
+
+ctrl.changeComment = function (comment, id){
+  var id = id;
+  var data = {comment: comment, id: id}
+  $http.put('/com/' + id, data)
+   .then(function (response) {
+      getSlogansCommentsQuestions($http, ctrl);
+   });
+}
+
+ctrl.changeQuestion = function (question, id){
+  var id = id;
+  var data = {question: question, id: id}
+  $http.put('/ques/' + id, data)
+   .then(function (response) {
+      getSlogansCommentsQuestions($http, ctrl);
+   });
+}
+
 
 ctrl.deleteComment = function (id){
   $http.delete('/com/' + id)

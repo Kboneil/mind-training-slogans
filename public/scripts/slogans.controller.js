@@ -29,11 +29,30 @@ function SlogansController($http, $location) {
       });
     }
 
+    ctrl.postComment = function (comment, slogan){
+      var date = new Date();
+      var data = {comment: comment, date: date, slogan_id: slogan}
+      $http.post('/com', data)
+       .then(function (response) {
+          getAllSlogans($http, ctrl);
+          ctrl.newComment = '';
+       });
+    }
+
+    ctrl.postQuestion = function (question, slogan){
+      var date = new Date();
+      var data = {question: question, date: date, slogan_id: slogan}
+      $http.post('/ques', data)
+       .then(function (response) {
+          getAllSlogans($http, ctrl);
+          ctrl.newQuestion = '';
+       });
+    }
 
 }
 
 function getAllSlogans ($http, ctrl) {
-
+  ctrl.slogans = [];
   $http.get('/sloganlist').then(function(response){
     console.log('response slogans', response.data);
     // ctrl.slogans = response.data;

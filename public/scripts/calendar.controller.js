@@ -4,81 +4,29 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
   var vm = this;
   vm.sloganArray = []
-   $http.get('/date').then(function(response){
-     vm.slogans = response.data;
+  getCalendarInfo ($http, moment, alert, calendarConfig, vm);
 
-
-      vm.slogans.forEach(function (slogan) {
-        var date = new Date(slogan.date);
-        var id =slogan.slogan_id
-
-        slogan.comments = [];
-        slogan.questions = [];
-
-        $http.get('/com/' + id).then(function(response){
-            response.data.forEach(function(comment){
-              slogan.comments.push({comment: comment.comment, date: comment.date, id: comment.id});
-            });
-        }, function(error) {
-          console.log('error getting slogan comments', error);
-        });//endGEt
-
-        $http.get('/ques/' + id).then(function(response){
-            response.data.forEach(function(question){
-            slogan.questions.push({question: question.question, date: question.date, id: question.id});
-            });
-
-        }, function(error) {
-          console.log('error getting slogan comments', error);
-        });//endGEt
-        vm.sloganArray.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
-
-      vm.events.push({
-        title: 'Slogan: ' + slogan.slogan_id,
-        slogan: slogan.slogan,
-        startsAt: date,
-        color: calendarConfig.colorTypes.important,
-        comment: slogan.comments,
-        question: slogan.questions,
-        draggable: false,
-        resizable: false,
-        incrementsBadgeTotal: false
-     });
-     console.log("???", vm.sloganArray);
-      });
-    }, function(error) {
-      console.log('error getting slogans', error);
+  vm.deleteComment = function (id){
+    $http.delete('/com/' + id)
+      .then(function (response) {
+        console.log('delete complete');
+      }).then(function (response) {
+        //this isn't refreshing
+      getCalendarInfo ($http, moment, alert, calendarConfig, vm);
     });
+  }
+
+  vm.deleteQuestion = function (id){
+    $http.delete('/ques/' + id)
+      .then(function (response) {
+        console.log('delete complete');
+      }).then(function (response) {
+        //this isn't refreshing
+      getCalendarInfo ($http, moment, alert, calendarConfig, vm);
+    });
+  }
 
 
-vm.getComments = function(date, id) {
-  console.log('inside getComment date', date);
-  console.log('inside getComment id', id);
-  var id = id.substring(id.lastIndexOf(" ")+1);;
-  $http.get('/com/' + id).then(function(response){
-    console.log('response', response.data);
-    if(!response.data) {
-      vm.comments = 'No comments';
-    } else {
-      vm.comments = response.data;
-    }
-
-  }, function(error) {
-    console.log('error getting slogan comments', error);
-  })
-}
-
-vm.getQuestions = function(date, id) {
-  console.log('inside getQuestion date', date);
-  console.log('inside getQuestion id', id);
-  var id = id.substring(id.lastIndexOf(" ")+1);;
-  $http.get('/ques/' + id).then(function(response){
-    console.log('response', response.data);
-    vm.questions = response.data
-  }, function(error) {
-    console.log('error getting slogan quesetions', error);
-  })
-}
 
 
     //These variables MUST be set as a minimum for the calendar to work
@@ -162,3 +110,50 @@ vm.getQuestions = function(date, id) {
     };
 
   });
+
+  function getCalendarInfo($http, moment, alert, calendarConfig, vm) {
+    $http.get('/date').then(function(response){
+      vm.slogans = response.data;
+
+
+       vm.slogans.forEach(function (slogan) {
+         var date = new Date(slogan.date);
+         var id =slogan.slogan_id
+
+         slogan.comments = [];
+         slogan.questions = [];
+
+         $http.get('/com/' + id).then(function(response){
+             response.data.forEach(function(comment){
+               slogan.comments.push({comment: comment.comment, date: comment.date, id: comment.id});
+             });
+         }, function(error) {
+           console.log('error getting slogan comments', error);
+         });//endGEt
+
+         $http.get('/ques/' + id).then(function(response){
+             response.data.forEach(function(question){
+             slogan.questions.push({question: question.question, date: question.date, id: question.id});
+             });
+
+         }, function(error) {
+           console.log('error getting slogan comments', error);
+         });//endGEt
+         vm.sloganArray.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
+
+       vm.events.push({
+         title: 'Slogan: ' + slogan.slogan_id,
+         slogan: slogan.slogan,
+         startsAt: date,
+         color: calendarConfig.colorTypes.important,
+         comment: slogan.comments,
+         question: slogan.questions,
+         draggable: false,
+         resizable: false,
+         incrementsBadgeTotal: false
+         });
+       });
+     }, function(error) {
+       console.log('error getting slogans', error);
+     });
+  }
