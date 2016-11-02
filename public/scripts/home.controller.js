@@ -58,7 +58,7 @@ ctrl.deleteComment = function (question, id) {
 
 ctrl.postQuestion = function (question, slogan){
   var date = new Date();
-  var data = {text: question, date: date, slogan_id: slogan}
+  var data = {question: question, date: date, slogan_id: slogan}
   console.log('data', data);
   $http.post('/ques', data)
    .then(function (result) {
@@ -93,7 +93,7 @@ ctrl.postQuestion = function (question, slogan){
 
 ctrl.postComment = function (comment, slogan){
   var date = new Date();
-  var data = {text: comment, date: date, slogan_id: slogan}
+  var data = {comment: comment, date: date, slogan_id: slogan}
   console.log('data', data);
   $http.post('/com', data)
    .then(function (result) {

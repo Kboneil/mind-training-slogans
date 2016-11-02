@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
         return;
       }
 
-      client.query('SELECT * FROM questions JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE user_id = $1;', [currentlyLoggedInUser.id],
+      client.query('SELECT questions.id, question, date, slogan_id, user_id, point slogan, extra  FROM questions JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE user_id = $1;', [currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);
@@ -45,7 +45,7 @@ router.get('/:id', function (req, res) {
         return;
       }
 
-      client.query('SELECT * FROM questions JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE slogan_id = $1 AND user_id = $2;', [id, currentlyLoggedInUser.id],
+      client.query('SELECT questions.id, question, date, slogan_id, user_id, point slogan, extra FROM questions JOIN slogans ON slogans.id = slogan_id JOIN users ON users.id = user_id WHERE slogan_id = $1 AND user_id = $2;', [id, currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);
@@ -64,12 +64,9 @@ router.get('/:id', function (req, res) {
 router.post('/', function (req, res) {
   console.log('in post request');
   var currentlyLoggedInUser = req.user;
-  var text = req.body.text
+  var question = req.body.question
   var id = req.body.slogan_id;
   var date = req.body.date;
-  console.log('in post function text', text);
-  console.log('in post function id', id);
-  console.log('in post function currentlyLoggedInUser', currentlyLoggedInUser);
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -78,7 +75,7 @@ router.post('/', function (req, res) {
         return;
       }
 
-      client.query('INSERT INTO questions (text, date, slogan_id, user_id) VALUES ($1, $2, $3, $4);', [text, date, id, currentlyLoggedInUser.id],
+      client.query('INSERT INTO questions (question, date, slogan_id, user_id) VALUES ($1, $2, $3, $4);', [question, date, id, currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);

@@ -13,13 +13,12 @@ angular.module('lojongApp') //you will need to declare your module with the depe
         title: 'Slogan: ' + slogan.slogan_id,
         slogan: slogan.slogan,
         startsAt: date,
-        endsAt: date,
+
         color: calendarConfig.colorTypes.important,
         draggable: false,
-        resizable: false
+        resizable: false,
+        incrementsBadgeTotal: false
      });
-     vm.getCom = 'Get comments';
-     vm.getQues = 'Get questions';
       });
     }, function(error) {
       console.log('error getting slogans', error);
@@ -70,6 +69,7 @@ vm.getQuestions = function(date, id) {
         alert.show('Deleted', args.calendarEvent);
       }
     }];
+
     vm.events = [
     ];
 
@@ -90,12 +90,13 @@ vm.getQuestions = function(date, id) {
     };
 
     vm.eventClicked = function(event) {
+      alert.show('Clicked', event);
       console.log(event);
       vm.id = event.title;
       vm.slogan = event.slogan
       vm.date = event.startsAt;
-      vm.comments = '';
-      vm.questions = '';
+      vm.getCom = 'Get Comments';
+      vm.getQues = 'Get Questions';
     };
 
     vm.eventEdited = function(event) {
