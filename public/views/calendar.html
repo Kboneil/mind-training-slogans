@@ -81,15 +81,29 @@
       <h4>Comments:</h4>
       <div ng-repeat="comment in vm.getCom | orderBy:'-date':reverse">
           <h5>{{comment.date | date}}</h5>
-          <p>Comment: {{comment.comment}}</p>
+          <form>
+            <input type="text" ng-model="comment.comment"></input>
+            <button type="submit" ng-click="vm.changeComment(comment.comment, comment.id)">Update</button>
+          </form>
           <span><button type="submit" ng-click="vm.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
       </div>
+      <form>
+        <input type="text" ng-model="vm.newComment" placeholder="New comment"></input>
+        <button type="submit" ng-click="vm.postComment(vm.newComment, vm.id)" ><span class="glyphicon glyphicon-plus"></span></button>
+      </form>
         <h4>Quesitons:</h4>
         <div ng-repeat="question in vm.getQues | orderBy:'-date':reverse">
             <h5>{{question.date | date}}</h5>
-            <p>{{question.question}}</p>
+            <form>
+              <input type="text" ng-model="question.question"></input>
+              <button type="submit" ng-click="vm.changeQuestion(question.question, question.id)">Update</button>
+            </form>
             <span><button type="submit" ng-click="vm.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
         </div>
+        <form>
+          <input type="text" ng-model="vm.newQuestion" placeholder="New question"></input>
+          <button type="submit" ng-click="vm.postQuestion(vm.newQuestion, vm.id)" ><span class="glyphicon glyphicon-plus"></span></button>
+        </form>
       </div>
   <footer>
     <nav>

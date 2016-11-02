@@ -26,6 +26,49 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     });
   }
 
+  vm.changeComment = function (comment, id){
+    var id = id;
+    var data = {comment: comment, id: id}
+    $http.put('/com/' + id, data)
+     .then(function (response) {
+        getCalendarInfo ($http, moment, alert, calendarConfig, vm);
+     });
+  }
+
+  vm.changeQuestion = function (question, id){
+    var id = id;
+    var data = {question: question, id: id}
+    $http.put('/ques/' + id, data)
+     .then(function (response) {
+        getCalendarInfo ($http, moment, alert, calendarConfig, vm);
+     });
+  }
+
+  vm.postComment = function (comment, slogan){
+    slogan = slogan.slice(-1);
+    console.log('id', slogan);
+    var date = new Date();
+    var data = {comment: comment, date: date, slogan_id: slogan}
+    $http.post('/com', data)
+     .then(function (response) {
+       console.log('success');
+        getCalendarInfo ($http, moment, alert, calendarConfig, vm);
+        vm.newComment = '';
+     });
+  }
+
+  vm.postQuestion = function (question, slogan){
+    slogan = slogan.slice(-1);
+    console.log('id', slogan);
+    var date = new Date();
+    var data = {question: question, date: date, slogan_id: slogan}
+    $http.post('/ques', data)
+     .then(function (response) {
+       console.log('success');
+        getCalendarInfo ($http, moment, alert, calendarConfig, vm);
+        vm.newQuestion = '';
+     });
+  }
 
 
 
