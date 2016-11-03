@@ -119,7 +119,7 @@ function loadSlogans ($http, ctrl) {
       console.log('response questions', response.data);
       ctrl.question = response.data
     }, function(error) {
-      console.log('error getting slogan comments', error);
+      console.log('error getting slogan questions', error);
     }).then(function(){
     //gets all the comments from this user for the slogan of the day
     $http.get('/com/' + id).then(function(response){
@@ -133,7 +133,7 @@ function loadSlogans ($http, ctrl) {
       $http.post('/date', data).then(function(response){
         console.log('response post', response.data);
     }, function(error) {
-      console.log('error getting slogan comments', error);
+      console.log('error posting slogan time', error);
     });
   });
 });

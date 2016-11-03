@@ -8,6 +8,17 @@
 <button type="submit" ng-click="profile.logout()">Logout</button>
 <h1>Returning User</h1>
 <h3>Hello, {{profile.user[0].username}}</h3>
+<form class="form-group">
+      <div class="form-group row">
+          <label for="select" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
+          <div class="col-xs-9">
+          <select class="form-control" id="select" ng-model="profile.select" ng-change="profile.changeOrder(profile.select)" class="form-control">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          </div>
+    </div>
+  </form>
 <footer>
   <nav>
     <a href="/calendar">Calendar</a>
