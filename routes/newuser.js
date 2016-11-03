@@ -2,37 +2,8 @@ const router = require('express').Router();
 const passport = require('passport');
 const pool = require('../db/connection');
 
-router.get('/', function (req, res) {
-  var currentlyLoggedInUser = req.user;
-  console.log('in get function users');
-  pool.connect(function (err, client, done) {
-    try {
-      if (err) {
-        console.log('Error querying to DB', err);
-        res.sendStatus(500);
-        return;
-      }
 
-      client.query('SELECT * FROM users WHERE id = $1;', [currentlyLoggedInUser.id],
-            function (err, result) {
-              if (err) {
-                console.log('Error querying DB', err);
-                res.sendStatus(500);
-                return;
-              }
-              res.send(result.rows);
-            });
-    } finally {
-      done();
-    }
-  });
-});
-
-router.get('/logout', function(req, res){
-    console.log("logging out");
-    req.logout();
-    res.send(200);
-});
+//----------------takes in user preference and generates slogan array ------------------------
 
 router.put('/', function (req, res) {
   console.log('in post request');
@@ -54,7 +25,6 @@ router.put('/', function (req, res) {
                 res.sendStatus(500);
                 return;
               }
-
               res.send(result.rows);
             });
             //after table is updated, the slogans is populated with an array of slogans id
@@ -63,7 +33,6 @@ router.put('/', function (req, res) {
             //if they want random slogans
             if (answer === 'true'){
               //get a random order of numbers from 1-59
-
                   for (var a=[],i=0;i<60;++i) a[i]=i;
 
                   function shuffle(array) {
@@ -124,9 +93,6 @@ router.put('/', function (req, res) {
                   res.sendStatus(500);
                   return;
                 }
-                console.log('result.rows', result.rows[0].slogans[0]);
-
-
                 var sloganOfTheDayId = result.rows[0].slogans[0];
                 console.log('sloganOfTheDay else', sloganOfTheDayId);
                 //remove that slogan
@@ -142,17 +108,11 @@ router.put('/', function (req, res) {
                           res.sendStatus(500);
                           return;
                         }
-
                         console.log('slogan of the day updated');
                       });
-
-
-
-
-
               });//end update
 
-              //will need to post to the /date
+              //then I think the date of the slogan needs to get updated here???
             }
 
 
@@ -161,5 +121,8 @@ router.put('/', function (req, res) {
     }
   });
 });
+
+
+
 
 module.exports = router;

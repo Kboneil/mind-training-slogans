@@ -3,218 +3,132 @@ const passport = require('passport');
 const pool = require('../db/connection');
 const schedule = require('node-schedule');
 
-//for each user they will have the particular slogan of the day updated
-var rule = new schedule.RecurrenceRule();
 
+var rule = new schedule.RecurrenceRule();
+timeout();
 
 function timeout() {
+  console.log('is this happening');
   // rule.hour = 00;
   // rule.minute = 00;
   rule.second = 00;
 
-  schedule.scheduleJob(rule, function(){
+  schedule.scheduleJob(rule, function() {
+    console.log('this should come up every minute');
+    //get all users
 
-//first get all the users
-router.get('/', function (req, res) {
-  console.log('in get function users');
-  console.log('am I right here?');
-  pool.connect(function (err, client, done) {
-    try {
-      if (err) {
-        console.log('Error querying to DB', err);
-        res.sendStatus(500);
-        return;
-      }
-      console.log('or here?');
-      client.query('SELECT * FROM users',
-            function (err, result) {
-              if (err) {
-                console.log('Error querying DB', err);
-                res.sendStatus(500);
-                return;
-              }
-              console.log('result.rows', result.rows);
-              //next forEach user
+      pool.connect(function (err, client, done) {
+        try {
+          if (err) {
+            console.log('Error querying to DB', err);
+            res.sendStatus(500);
+            return;
+          }
 
-              result.rows.forEach( function (user){
+          client.query('SELECT * FROM users',
+                function (err, result) {
+                  if (err) {
+                    console.log('Error querying DB', err);
+                    res.sendStatus(500);
+                    return;
+                  }
+                  users = result.rows;
 
-                //get the slogan array
-                var slogans = user.slogans;
+                  //forEach user check to see if array is empty
+                  users.forEach(function (user) {
+                    //if it is empty and the user wants ordered slogans, get a new ordered array
+                    if (user.slogans.length === 0 && user.random === FALSE) {
 
-                //if all slogans have been removed, it needs to be refilled
-                if (slogans.length === 0 && user.random === FALSE) {
-                  console.log('getting all slogans');
-
-                      client.query('UPDATE users SET slogans = ARRAY [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59] WHERE id = $1', [user.id],
+                      client.query('UPDATE users SET slogans = ARRAY [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59] WHERE id = $1 RETURNING *', [user.id],
                       function (err, result) {
                         if (err) {
                           console.log('Error querying DB', err);
                           res.sendStatus(500);
                           return;
                         }
-                        console.log('refilled ordered slogans');
+                        console.log('result.rows', result.rows[0].slogans[0]);
+                      });//end of update query
 
-                        //then get the updated information
-                        client.query('SELECT slogans FROM users WHERE id = $1', [user.id],
+                    //if it is empty and the user wants random slogans, get a new random array
+                  } else if (user.slogans.length === 0 && user.random === TRUE) {
+
+                    for (var a=[],i=0;i<60;++i) a[i]=i;
+
+                    function shuffle(array) {
+                      var tmp, current, top = array.length;
+                      if(top) while(--top) {
+                        current = Math.floor(Math.random() * (top + 1));
+                        tmp = array[current];
+                        array[current] = array[top];
+                        array[top] = tmp;
+                      }
+                      return array;
+                    }
+
+                    a = shuffle(a);
+                    var index = a.indexOf(0);
+                    if (index > -1) {
+                      a.splice(index, 1);
+                      }
+                    console.log('random array', a);
+
+                client.query('UPDATE users SET slogans = ARRAY [' + a + '] WHERE id = $1 RETURNING *', [user.id],
+                function (err, result) {
+                  if (err) {
+                    console.log('Error querying DB', err);
+                    res.sendStatus(500);
+                    return;
+                  }
+                  console.log('result.rows', result.rows[0].slogans[0]);
+                }); //end of update query
+
+              }//end of else if
+
+                  //then get a new slogan of the day and change that in the database
+                        client.query('SELECT * FROM users WHERE id = $1', [user.id],
                               function (err, result) {
                                 if (err) {
                                   console.log('Error querying DB', err);
                                   res.sendStatus(500);
                                   return;
                                 }
-                                //gets the slogan of the dayId
-                                console.log('before shift if', slogans);
-                                var sloganOfTheDayId = users.slogans[1];
-                                console.log('sloganOfTheDay if', sloganOfTheDayId);
+
+                                var sloganOfTheDayId = result.rows[0].slogans[0];
+                                console.log('sloganOfTheDay else', sloganOfTheDayId);
                                 //remove that slogan
-                                users.slogans.shift();
-                                console.log('after shift if', slogans);
+                                result.rows[0].slogans.shift();
+                                var array = result.rows[0].slogans;
+                                console.log('array', array);
                                 //updates that users entry of slogan of the day
-                                client.query('UPDATE users SET daily=$1 WHERE id = $2 RETURNING *', [sloganOfTheDayId, user.id],
+                                client.query('UPDATE users SET daily=$1, slogans = ARRAY [' + array + '] WHERE id = $2 RETURNING *', [sloganOfTheDayId, result.rows[0].id],
                                       function (err, result) {
                                         if (err) {
-                                          console.log('Error querying DB if', err);
+                                          console.log('Error querying DB else', err);
                                           res.sendStatus(500);
                                           return;
                                         }
 
-                                        res.send(result.rows);
-                                      });
+                                        console.log('slogan of the day updated');
+                                      });// end of update query
+                                }); //end of select query
 
-                              });//ends select query
-                  });//ends update query
+                  }); //end of forEach
 
-                  // else  if (slogans.length === 0 && user.random === TRUE)
-                } else {
+                });//end of select query
 
-                console.log('before shift else', slogans);
-                var sloganOfTheDayId = users.slogans[1];
-                console.log('sloganOfTheDay else', sloganOfTheDayId);
-                //remove that slogan
-                users.slogans.shift();
-                console.log('after shift else', slogans);
-                //updates that users entry of slogan of the day
-                client.query('UPDATE users SET daily=$1 WHERE id = $2 RETURNING *', [sloganOfTheDayId, user.id],
-                      function (err, result) {
-                        if (err) {
-                          console.log('Error querying DB else', err);
-                          res.sendStatus(500);
-                          return;
-                        }
-
-                        res.send(result.rows);
-                      });
-            }//ends else
-
-          })//ends forEach
+        } finally {
+          done();
+        }
+      });//end of pool.connect
 
 
-              res.send(result.rows);
-            }); //ends getting all users
+});//end of schedule function
+} //end of timeout
 
+//get the slogan on the day
 
-    } finally {
-      done();
-    } //ends finally
-  });//ends pool.connect
-}); //ends get
-});//ends schedule
+//get corresponding questions
 
-}//ends timeout
-
-
-
-
-
-
-// var rule = new schedule.RecurrenceRule();
-//
-//
-// var slogans = [];
-// var sloganOfTheDay;
-// getSlogans();
-//
-//
-// function timeout() {
-//   rule.hour = 00;
-//   rule.minute = 00;
-//   rule.second = 00;
-//
-//   schedule.scheduleJob(rule, function(){
-//
-//     if (slogans.length === 0) {
-//       console.log('getting all slogans');
-//       pool.connect(function (err, client, done) {
-//         try {
-//           if (err) {
-//             console.log('Error querying to DB', err);
-//             res.sendStatus(500);
-//             return;
-//           }
-//
-//           client.query('SELECT * FROM slogans',
-//           function (err, result) {
-//             if (err) {
-//               console.log('Error querying DB', err);
-//               res.sendStatus(500);
-//               return;
-//             }
-//             slogans = result.rows;
-//             console.log('IF one slogan', slogans[0]);
-//             sloganOfTheDay = slogans[0];
-//             slogans.push();
-//
-//           });
-//         } finally {
-//           done();
-//         }
-//       });
-//
-//     } else {
-//       console.log('ELSE one slogan', slogans[0]);
-//       sloganOfTheDay = slogans[0];
-//       slogans.push();
-//     }
-//
-//
-//   });
-//
-// }
-//
-// function getSlogans() {
-//   pool.connect(function (err, client, done) {
-//     try {
-//       if (err) {
-//         console.log('Error querying to DB', err);
-//         res.sendStatus(500);
-//         return;
-//       }
-//
-//       client.query('SELECT * FROM slogans',
-//       function (err, result) {
-//         if (err) {
-//           console.log('Error querying DB', err);
-//           res.sendStatus(500);
-//           return;
-//         }
-//
-//         slogans = result.rows;
-//         console.log('slogans from db', slogans);
-//         sloganOfTheDay = slogans[0];
-//         slogans.shift();
-//         timeout();
-//       });
-//     } finally {
-//       done();
-//     }
-//   });
-// }
-//
-// //gets all the content from favorites table
-//
-// router.get('/', function (req, res) {
-//   console.log('in get function');
-//   res.send(sloganOfTheDay);
-// });
+//get corresponding comments
 
 module.exports = router;
