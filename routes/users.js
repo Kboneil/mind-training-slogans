@@ -86,14 +86,36 @@ router.put('/', function (req, res) {
                     }
                   console.log('random array', a);
 
-              client.query('UPDATE users SET slogans = ARRAY [' + a + '] WHERE id = $1', [currentlyLoggedInUser.id],
+              client.query('UPDATE users SET slogans = ARRAY [' + a + '] WHERE id = $1 RETURNING *', [currentlyLoggedInUser.id],
               function (err, result) {
                 if (err) {
                   console.log('Error querying DB', err);
                   res.sendStatus(500);
                   return;
                 }
-                console.log('updated');
+                console.log('result.rows', result.rows[0].slogans[0]);
+
+
+                var sloganOfTheDayId = result.rows[0].slogans[0];
+                console.log('sloganOfTheDay else', sloganOfTheDayId);
+                //remove that slogan
+                result.rows[0].slogans.shift();
+                var array = result.rows[0].slogans;
+                console.log('array', array);
+                console.log('after shift else', result.rows[0].slogans);
+                //updates that users entry of slogan of the day
+                client.query('UPDATE users SET daily=$1, slogans = ARRAY [' + array + '] WHERE id = $2 RETURNING *', [sloganOfTheDayId, currentlyLoggedInUser.id],
+                      function (err, result) {
+                        if (err) {
+                          console.log('Error querying DB else', err);
+                          res.sendStatus(500);
+                          return;
+                        }
+
+                        console.log('slogan of the day updated');
+                      });
+
+
               });
               //else they get ordered slogans
             } else {
@@ -111,9 +133,11 @@ router.put('/', function (req, res) {
                 console.log('sloganOfTheDay else', sloganOfTheDayId);
                 //remove that slogan
                 result.rows[0].slogans.shift();
+                var array = result.rows[0].slogans;
+                console.log('array', array);
                 console.log('after shift else', result.rows[0].slogans);
                 //updates that users entry of slogan of the day
-                client.query('UPDATE users SET daily=$1 WHERE id = $2 RETURNING *', [sloganOfTheDayId, currentlyLoggedInUser.id],
+                client.query('UPDATE users SET daily=$1, slogans = ARRAY [' + array + '] WHERE id = $2 RETURNING *', [sloganOfTheDayId, currentlyLoggedInUser.id],
                       function (err, result) {
                         if (err) {
                           console.log('Error querying DB else', err);
