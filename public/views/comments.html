@@ -1,10 +1,5 @@
-<header>
-  <nav>
-    <a href="/slogans">59</a>
-    <a href="/home">Lojong Slogans</a>
-    <a href="/profile">Profile ({{comments.user[0].username}})</a>
-  </nav>
-</header>
+
+<a href="/slogans">back to slogans</a>
 <h1>Comments</h1>
 <div ng-repeat="comment in comments.comment | orderBy:'-date':reverse">
   <div>
@@ -13,7 +8,7 @@
     <p>{{comment.slogan}}</p>
     <form>
       <input type="text" ng-model="comment.comment"></input>
-      <button type="submit" ng-click="comments.changeComment(comment.comment, comment.id)">Update</button>
+      <button type="submit" ng-click="comments.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
     </form>
     <button type="submit" ng-click="comments.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button>
   </div>
@@ -28,10 +23,3 @@
   <input type="text" ng-model="comment.newComment" placeholder="New comment"></input>
   <button type="submit" ng-click="comments.postComment(comment.newComment, comments.comment.slogan_id)" ><span class="glyphicon glyphicon-plus"></span></button>
 </form> -->
-<footer>
-  <nav>
-    <a href="/calendar">Calendar</a>
-    <a href="/comments">Comments</a>
-    <a href="/questions">Questions</a>
-  </nav>
-</footer>

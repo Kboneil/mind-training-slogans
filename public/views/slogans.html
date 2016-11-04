@@ -1,24 +1,72 @@
-<header>
-  <nav>
-    <a href="/slogans">59</a>
-    <a href="/home">Lojong Slogans</a>
-    <a href="/profile">Profile ({{slogans.user[0].username}})</a>
-  </nav>
-</header>
 <h1>list of slogans</h1>
+<a href="/comments">Comments</a>
+<a href="/questions">Questions</a>
 <ul>
-  <div ng-repeat="slogan in slogans.slogans track by $index">
+  <div ng-repeat="slogan in slogans.slogans | orderBy: '-id'">
     <div>
       <h2>Slogan: {{slogan.id}}</h2>
       <p>{{slogan.point}}</p>
       <p>{{slogan.slogan}}</p>
       <p>{{slogan.extra}}</p>
       <button ng-click="reveal = !reveal">Comments and Questions</button>
+      <!-- <button data-toggle="modal" data-target="#myModal">Comments and Questions</button>
+
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+              <h4>Comments:</h4>
+              <div ng-repeat="comment in slogan.comments | orderBy:'-date':reverse">
+                  <h5>{{comment.date | date}}</h5>
+                  <form>
+                    <input type="text" ng-model="comment.comment"></input>
+                    <button type="submit" ng-click="slogans.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                  </form>
+                  <button type="submit" ng-click="slogans.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button>
+              </div>
+              <form>
+                <input type="text" ng-model="slogans.newComment" placeholder="New comment"></input>
+                <button type="submit" ng-click="slogans.postComment(slogans.newComment, slogan.id)" ><span class="glyphicon glyphicon-plus"></span></button>
+              </form>
+              <h4>Questions:</h4>
+              <div ng-repeat="question in slogan.questions | orderBy:'-date':reverse">
+                <h5>{{question.date | date}}</h5>
+                <form>
+                  <input type="text" ng-model="question.question"></input>
+                  <button type="submit" ng-click="slogans.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
+                </form>
+                <button type="submit" ng-click="slogans.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button>
+              </div>
+              <form>
+                <input type="text" ng-model="slogans.newQuestion" placeholder="New question"></input>
+                <button type="submit" ng-click="slogans.postQuestion(slogans.newQuestion, slogan.id)" ><span class="glyphicon glyphicon-plus"></span></button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div> -->
+
+
+
+
       <div ng-show="reveal">
       <h4>Comments:</h4>
       <div ng-repeat="comment in slogan.comments | orderBy:'-date':reverse">
           <h5>{{comment.date | date}}</h5>
-          <p>{{comment.comment}}</p>
+          <form>
+            <input type="text" ng-model="comment.comment"></input>
+            <button type="submit" ng-click="slogans.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+          </form>
           <button type="submit" ng-click="slogans.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button>
       </div>
       <form>
@@ -28,7 +76,10 @@
       <h4>Questions:</h4>
       <div ng-repeat="question in slogan.questions | orderBy:'-date':reverse">
         <h5>{{question.date | date}}</h5>
-        <p>{{question.question}}</p>
+        <form>
+          <input type="text" ng-model="question.question"></input>
+          <button type="submit" ng-click="slogans.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
+        </form>
         <button type="submit" ng-click="slogans.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button>
       </div>
       <form>
@@ -37,10 +88,3 @@
       </form>
     </div>
 </ul>
-<footer>
-  <nav>
-    <a href="/calendar">Calendar</a>
-    <a href="/comments">Comments</a>
-    <a href="/questions">Questions</a>
-  </nav>
-</footer>

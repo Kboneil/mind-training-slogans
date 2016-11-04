@@ -5,7 +5,7 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   var vm = this;
   getUser($http, vm);
   vm.sloganArray = []
-  getCalendarInfo ($http, moment, alert, calendarConfig, vm);
+  getCalendarInfo ($http, moment, alert, calendarConfig, vm, actions);
 
   vm.deleteComment = function (id){
     $http.delete('/com/' + id)
@@ -46,8 +46,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   }
 
   vm.postComment = function (comment, slogan){
-    slogan = slogan.slice(-1);
-    console.log('id', slogan);
     var date = new Date();
     var data = {comment: comment, date: date, slogan_id: slogan}
     $http.post('/com', data)
@@ -59,8 +57,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   }
 
   vm.postQuestion = function (question, slogan){
-    slogan = slogan.slice(-1);
-    console.log('id', slogan);
     var date = new Date();
     var data = {question: question, date: date, slogan_id: slogan}
     $http.post('/ques', data)
@@ -91,6 +87,8 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     vm.events = [
     ];
 
+
+
     vm.cellIsOpen = true;
 
     vm.addEvent = function() {
@@ -108,11 +106,12 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     };
 
     vm.eventClicked = function(event) {
-      vm.id = event.title;
-      vm.slogan = event.slogan;
-      vm.date = event.startsAt;
-      vm.getCom = event.comment;
-      vm.getQues = event.question;
+      alert.show('Clicked', event);
+      // vm.id = event.title;
+      // vm.slogan = event.slogan;
+      // vm.date = event.startsAt;
+      // vm.getCom = event.comment;
+      // vm.getQues = event.question;
     };
 
     vm.eventEdited = function(event) {
@@ -155,14 +154,25 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
   });
 
-  function getCalendarInfo($http, moment, alert, calendarConfig, vm) {
+  function getCalendarInfo($http, moment, alert, calendarConfig, vm, actions) {
+    var actions = [{
+      label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
+      onClick: function(args) {
+        alert.show('Edited', args.calendarEvent);
+      }
+    }, {
+      label: '<i class=\'glyphicon glyphicon-remove\'></i>',
+      onClick: function(args) {
+        alert.show('Deleted', args.calendarEvent);
+      }
+    }];
     $http.get('/date').then(function(response){
       vm.slogans = response.data;
 
 
        vm.slogans.forEach(function (slogan) {
          var date = new Date(slogan.date);
-         var id =slogan.slogan_id
+         var id = slogan.slogan_id;
 
          slogan.comments = [];
          slogan.questions = [];
@@ -186,7 +196,7 @@ angular.module('lojongApp') //you will need to declare your module with the depe
          vm.sloganArray.push({slogan: slogan.slogan, id: slogan.id, point: slogan.point, extra: slogan.extra, comments: slogan.comments, questions: slogan.questions})
 
        vm.events.push({
-         title: 'Slogan: ' + slogan.slogan_id,
+         title: slogan.slogan_id,
          slogan: slogan.slogan,
          startsAt: date,
          color: calendarConfig.colorTypes.important,
@@ -204,7 +214,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
   function getUser ($http, vm) {
     $http.get('/users').then(function(response){
-      console.log('response', response.data);
       vm.user = response.data
     }, function(error) {
       console.log('error getting questions', error);

@@ -1,16 +1,36 @@
+<h3>Hello, {{new.user[0].name}}</h3>
+<div id="hideForm">
+<h2>Welcome to Lojong slogans. Before we get started could you please enter some information</h2>
+<form class="form-group">
+    <div class="form-group row">
+      <label for="name" class="col-xs-3 col-form-label">What is your name?</label>
+        <input ng-model="new.name" class="col-xs-9" />
+    </div>
+    <div class="form-group row">
+        <label for="frequency" class="col-xs-3 col-form-label">How often would you like to receive the slogans?</label>
+        <div class="col-xs-9">
+        <select class="form-control" id="frequency" ng-model="new.frequency" class="form-control">
+          <option value="one">Daily</option>
+          <option value="two">Monday, Wednesday and Friday</option>
+          <option value="week">Every Sunday</option>
+        </select>
+        </div>
+  </div>
+      <div class="form-group row">
+          <label for="order" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
+          <div class="col-xs-9">
+          <select class="form-control" id="order" ng-model="new.order" class="form-control">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          </div>
+    </div>
+    <button type="submit" ng-click="new.sendUserInfo(new.name, new.frequency, new.order)">submit</button>
+  </form>
+  </div>
+  <div id="showButton">
 
-<header>
-  <nav>
-    <a href="/slogans">59</a>
-    <a href="/home">Lojong Slogans</a>
-    <a href="/profile">Profile ({{newUser.user[0].username}})</a>
-  </nav>
-</header>
-<h1>New User</h1>
-<footer>
-  <nav>
-    <a href="/calendar">Calendar</a>
-    <a href="/comments">Comments</a>
-    <a href="/questions">Questions</a>
-  </nav>
-</footer>
+
+    <button><a href="/home">See your first Lojong Slogan</a></button>
+    <button type="submit" ng-click="new.logout()">Logout</button>
+  </div>

@@ -5,10 +5,13 @@ function ProfileController($http, $location) {
   var ctrl = this;
   getUser($http, ctrl);
 
-ctrl.changeOrder = function (answer){
-  console.log(answer);
-  var data = {random: answer};
-  $http.put('/users', data).then(function(response){
+ctrl.sendUserInfo = function (name, frequency, order){
+  var data = {name:name, frequency: frequency, random: order};
+  ctrl.name = '';
+  ctrl.frequency = '';
+  ctrl.order = '';
+    console.log(data);
+  $http.put('/users/returning', data).then(function(response){
     console.log('response post', response.data);
 }, function(error) {
   console.log('error posting order answer', error);

@@ -24,7 +24,7 @@ angular.module('lojongApp').config(function($routeProvider, $locationProvider) {
     templateUrl: 'views/slogans.html',
     controller: 'SlogansController as slogans'
   }).when('/newuser', {
-    templateUrl: 'newuser/slogans.html',
+    templateUrl: 'views/newuser.html',
     controller: 'NewUserController as new'
   }).otherwise({
     templateUrl: 'views/login.html',

@@ -12,7 +12,9 @@ CREATE TABLE users (
 	username varchar(80) UNIQUE NOT NULL,
 	password varchar(120) NOT NULL,
 	slogans integer[],
-	random boolean DEFAULT false
+	random boolean DEFAULT false,
+	name varchar(15),
+	frequency text DEFAULT one
 );
 
 CREATE TABLE comments (

@@ -1,27 +1,15 @@
-<header>
-  <nav>
-    <a href="/slogans">59</a>
-    <a href="/home">Lojong Slogans</a>
-    <a href="/profile">Profile ({{questions.user[0].username}})</a>
-  </nav>
-</header>
+<a href="/slogans">back to slogans</a>
 <h1>Questions</h1>
 <div ng-repeat="question in questions.question | orderBy:'-date':reverse">
   <div>
     <h4>{{question.date | date}}</h4>
     <p>Slogan: {{question.slogan_id}}</p>
     <p>{{question.slogan}}</p>
+
     <form>
       <input type="text" ng-model="question.question"></input>
-      <button type="submit" ng-click="questions.changeQuestion(question.question, question.id)">Update</button>
+      <button type="submit" ng-click="questions.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
     </form>
     <button type="submit" ng-click="questions.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button>
   </div>
 </div>
-<footer>
-  <nav>
-    <a href="/calendar">Calendar</a>
-    <a href="/comments">Comments</a>
-    <a href="/questions">Questions</a>
-  </nav>
-</footer>

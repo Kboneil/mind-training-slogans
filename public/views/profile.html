@@ -1,28 +1,46 @@
-<header>
-  <nav>
-    <a href="/slogans">59</a>
-    <a href="/home">Lojong Slogans</a>
-    <a href="/profile">Profile ({{profile.user[0].username}})</a>
-  </nav>
-</header>
 <button type="submit" ng-click="profile.logout()">Logout</button>
-<h1>Returning User</h1>
-<h3>Hello, {{profile.user[0].username}}</h3>
-<form class="form-group">
+<h3>Hello, {{profile.user[0].name}}</h3>
+
+<p>Would you like to update you settings? <span></span><button ng-click="reveal = !reveal">Yes!</button></span></p>
+
+<form ng-show="reveal" class="form-group">
+    <div class="form-group row">
+      <label for="name" class="col-xs-3 col-form-label">What is your name?</label>
+        <input ng-model="profile.name" class="col-xs-9" />
+    </div>
+    <div class="form-group row">
+        <label for="frequency" class="col-xs-3 col-form-label">How often would you like to receive the slogans?</label>
+        <div class="col-xs-9">
+        <select class="form-control" id="frequency" ng-model="profile.frequency" class="form-control">
+          <option value="one">Daily</option>
+          <option value="two">Monday, Wednesday and Friday</option>
+          <option value="week">Every Sunday</option>
+        </select>
+        </div>
+  </div>
       <div class="form-group row">
-          <label for="select" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
+          <label for="order" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
           <div class="col-xs-9">
-          <select class="form-control" id="select" ng-model="profile.select" ng-change="profile.changeOrder(profile.select)" class="form-control">
+          <select class="form-control" id="order" ng-model="profile.order" class="form-control">
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
           </div>
     </div>
+    <button type="submit" ng-click="profile.sendUserInfo(profile.name, profile.frequency, profile.order)">submit</button>
   </form>
-<footer>
-  <nav>
-    <a href="/calendar">Calendar</a>
-    <a href="/comments">Comments</a>
-    <a href="/questions">Questions</a>
-  </nav>
-</footer>
+  <div>
+    <h2>Lojong Slogans</h2>
+    <p>Here is some information about praticing mind training</p>
+    <button ng-click="revealInfo = !revealInfo">More information about Lojong</button>
+    <div ng-show="revealInfo">
+      <ul>Online information:</ul>
+        <li><a href="http://www.lionsroar.com/dont-give-up/">Commentary by Pema Chödrön</a></li>
+        <li><a href="http://tricycle.org/trikedaily/train-your-mind-lojong-commentary-judy-lief/">Commentary and practice advice by Judy Lief</a></li>
+        <li><a href="http://www.lotsawahouse.org/topics/lojong/">Various texts on Lojong</a></li>
+      <ul>Book recommendations:</ul>
+        <li><a href="http://www.shambhala.com/training-the-mind-and-cultivating-loving-kindness-1518.html">Training the Mind and Cultivating Loving-Kindness by Chögyam Trungpa</a></li>
+        <li><a href="http://pemachodronfoundation.org/product/start-where-you-are-book/">Start Where You Are by Pema Chödrön</a></li>
+        <li><a href="http://www.shambhala.com/enlightened-courage.html">Enlightened Courage by Dilgo Khyentse Rinpoche</a></li>
+    </div>
+  </div>

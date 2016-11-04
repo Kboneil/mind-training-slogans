@@ -50,13 +50,30 @@ function SlogansController($http, $location) {
        });
     }
 
+    ctrl.changeQuestion = function (question, id){
+      var id = id;
+      var data = {question: question, id: id}
+      $http.put('/ques/' + id, data)
+       .then(function (response) {
+          getAllSlogans($http, ctrl);
+       });
+    }
+
+    ctrl.changeComment = function (comment, id){
+      console.log('in here!', comment);
+      var id = id;
+      var data = {comment: comment, id: id}
+      $http.put('/com/' + id, data)
+       .then(function (response) {
+          getAllSlogans($http, ctrl);
+       });
+    }
+
 }
 
 function getAllSlogans ($http, ctrl) {
   ctrl.slogans = [];
   $http.get('/sloganlist').then(function(response){
-    console.log('response slogans', response.data);
-    // ctrl.slogans = response.data;
 
     response.data.forEach(function(slogan){
       var id = slogan.id;
@@ -72,7 +89,6 @@ function getAllSlogans ($http, ctrl) {
       });//endGEt
 
       $http.get('/ques/' + id).then(function(response){
-        console.log('question response', response.data);
           response.data.forEach(function(question){
           slogan.questions.push({question: question.question, date: question.date, id: question.id});
           });
@@ -90,7 +106,6 @@ function getAllSlogans ($http, ctrl) {
 }
 function getUser ($http, ctrl) {
   $http.get('/users').then(function(response){
-    console.log('response', response.data);
     ctrl.user = response.data
   }, function(error) {
     console.log('error getting questions', error);
