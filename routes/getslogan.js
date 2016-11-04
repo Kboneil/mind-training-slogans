@@ -107,8 +107,17 @@ function timeout() {
                                           res.sendStatus(500);
                                           return;
                                         }
+                                        var date = new Date();
+                                        client.query('INSERT INTO slogan_date (date, slogan_id, user_id) values ($1, $2, $3) RETURNING *', [date, sloganOfTheDayId, result.rows[0].id],
+                                              function (err, result) {
+                                                if (err) {
+                                                  console.log('Error querying DB', err);
+                                                  res.sendStatus(500);
+                                                  return;
+                                                }
 
-                                        console.log('slogan of the day updated');
+                                                console.log('new slogan information updated');
+                                              });
                                       });// end of update query
                                 }); //end of select query
 
