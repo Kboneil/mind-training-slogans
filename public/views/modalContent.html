@@ -1,13 +1,22 @@
 <div class="modal-header">
-  <h3 class="modal-title">Event action occurred!</h3>
+  <h2 class="modal-title">{{vm.event.startsAt | date}}</h2>
 </div>
 <div class="modal-body">
-  <p>Action:
-  <pre>{{ vm.action }}</pre>
-  </p>
-  <p>Event:
-  <pre>{{ vm.event | json }}</pre>
-  </p>
+  <h3>Slogan: {{vm.event.title}}</h3>
+  <h3>{{ vm.event.slogan }}</h3>
+
+  <h5>Comments:</h5>
+     <div ng-repeat="comment in vm.event.comment | orderBy:'-date':reverse">
+            <h6>{{comment.date | date}}<span></span></h6>
+            <h6>{{comment.comment}}</h6>
+        </div>
+  <h5>Questions:</h5>
+    <div ng-repeat="question in vm.event.question | orderBy:'-date':reverse">
+            <h6>{{question.date | date}}</h6>
+            <h6>{{question.question}}</h6>
+        </div>
+
+
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary" ng-click="$close()">OK</button>

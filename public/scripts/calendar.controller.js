@@ -107,11 +107,11 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
     vm.eventClicked = function(event) {
       alert.show('Clicked', event);
-      // vm.id = event.title;
-      // vm.slogan = event.slogan;
-      // vm.date = event.startsAt;
-      // vm.getCom = event.comment;
-      // vm.getQues = event.question;
+      vm.id = event.title;
+      vm.slogan = event.slogan;
+      vm.date = event.startsAt;
+      vm.getCom = event.comment;
+      vm.getQues = event.question;
     };
 
     vm.eventEdited = function(event) {
