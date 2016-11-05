@@ -1,73 +1,52 @@
 angular.module('lojongApp')
 .controller('SlogansController', SlogansController);
 
-function SlogansController($http, $location) {
+function SlogansController($http, $location, IndexService, qcService) {
 
   var ctrl = this;
-  getUser($http, ctrl);
+  IndexService.status.login = true;
   ctrl.slogans = [];
 
   getAllSlogans($http, ctrl);
 
+    ctrl.postQuestion = function(question, slogan){
+      qcService.postQuestion(question, slogan).then(function(){
+        getAllSlogans($http, ctrl);
+        ctrl.newQuestion = '';
+      });
+    }
 
-    ctrl.deleteComment = function (id){
-      console.log("in delete");
-      $http.delete('/com/' + id)
-        .then(function (response) {
-          console.log('delete complete');
-        }).then(function (response) {
+    ctrl.postComment = function(comment, slogan){
+      qcService.postComment(comment, slogan).then(function(){
+        getAllSlogans($http, ctrl);
+        ctrl.newComment = '';
+      });
+    }
+
+    ctrl.deleteQuestion = function(id){
+      qcService.deleteQuestion(id).then(function(){
         getAllSlogans($http, ctrl);
       });
     }
 
-    ctrl.deleteQuestion = function (id){
-      console.log("in delete");
-      $http.delete('/ques/' + id)
-        .then(function (response) {
-          console.log('delete complete');
-        }).then(function (response) {
+    ctrl.deleteComment = function(id){
+      qcService.deleteComment(id).then(function(){
         getAllSlogans($http, ctrl);
       });
     }
 
-    ctrl.postComment = function (comment, slogan){
-      var date = new Date();
-      var data = {comment: comment, date: date, slogan_id: slogan}
-      $http.post('/com', data)
-       .then(function (response) {
-          getAllSlogans($http, ctrl);
-          ctrl.newComment = '';
-       });
+    ctrl.changeQuestion = function(question, id){
+      qcService.changeQuestion(question, id).then(function(){
+        getAllSlogans($http, ctrl);
+      });
     }
 
-    ctrl.postQuestion = function (question, slogan){
-      var date = new Date();
-      var data = {question: question, date: date, slogan_id: slogan}
-      $http.post('/ques', data)
-       .then(function (response) {
-          getAllSlogans($http, ctrl);
-          ctrl.newQuestion = '';
-       });
+    ctrl.changeComment = function(comment, id){
+      qcService.changeComment(comment, id).then(function(){
+        getAllSlogans($http, ctrl);
+      });
     }
 
-    ctrl.changeQuestion = function (question, id){
-      var id = id;
-      var data = {question: question, id: id}
-      $http.put('/ques/' + id, data)
-       .then(function (response) {
-          getAllSlogans($http, ctrl);
-       });
-    }
-
-    ctrl.changeComment = function (comment, id){
-      console.log('in here!', comment);
-      var id = id;
-      var data = {comment: comment, id: id}
-      $http.put('/com/' + id, data)
-       .then(function (response) {
-          getAllSlogans($http, ctrl);
-       });
-    }
 
 }
 
@@ -103,11 +82,4 @@ function getAllSlogans ($http, ctrl) {
     console.log('error getting slogans', error);
   });
 
-}
-function getUser ($http, ctrl) {
-  $http.get('/users').then(function(response){
-    ctrl.user = response.data
-  }, function(error) {
-    console.log('error getting questions', error);
-  });
 }

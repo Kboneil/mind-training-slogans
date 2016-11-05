@@ -1,8 +1,9 @@
 angular.module('lojongApp')
 .controller('ProfileController', ProfileController);
 
-function ProfileController($http, $location) {
+function ProfileController($http, $location, IndexService) {
   var ctrl = this;
+  IndexService.status.login = true;
   getUser($http, ctrl);
 
 ctrl.sendUserInfo = function (name, frequency, order){

@@ -1,11 +1,10 @@
 angular.module('lojongApp')
 .controller('HomeController', HomeController);
 
-function HomeController($http, $location, IndexService) {
+function HomeController($http, $location, IndexService, qcService) {
 
   var ctrl = this;
   IndexService.status.login = true;
-  getUser($http, ctrl);
   ctrl.point;
   ctrl.id;
   ctrl.slogan;
@@ -15,64 +14,46 @@ function HomeController($http, $location, IndexService) {
   loadSlogans($http, ctrl);
 
 
+  ctrl.postQuestion = function(question, slogan){
+    qcService.postQuestion(question, slogan).then(function(){
+      getSlogansCommentsQuestions($http, ctrl);
+      ctrl.newQuestion = '';
+    });
+  }
 
-ctrl.postQuestion = function (question, slogan){
-  var date = new Date();
-  var data = {question: question, date: date, slogan_id: slogan}
-  $http.post('/ques', data)
-   .then(function (response) {
-     getSlogansCommentsQuestions($http, ctrl);
-     ctrl.newQuestion = '';
-   });
-
-}
-
-ctrl.postComment = function (comment, slogan){
-  var date = new Date();
-  var data = {comment: comment, date: date, slogan_id: slogan}
-  $http.post('/com', data)
-   .then(function (response) {
+  ctrl.postComment = function(comment, slogan){
+    qcService.postComment(comment, slogan).then(function(){
       getSlogansCommentsQuestions($http, ctrl);
       ctrl.newComment = '';
-   });
-}
+    });
+  }
 
-ctrl.changeComment = function (comment, id){
-  var id = id;
-  var data = {comment: comment, id: id}
-  $http.put('/com/' + id, data)
-   .then(function (response) {
+  ctrl.deleteQuestion = function(id){
+    qcService.deleteQuestion(id).then(function(){
       getSlogansCommentsQuestions($http, ctrl);
-   });
-}
+    });
+  }
 
-ctrl.changeQuestion = function (question, id){
-  var id = id;
-  var data = {question: question, id: id}
-  $http.put('/ques/' + id, data)
-   .then(function (response) {
+  ctrl.deleteComment = function(id){
+    qcService.deleteComment(id).then(function(){
       getSlogansCommentsQuestions($http, ctrl);
-   });
-}
+    });
+  }
 
 
-ctrl.deleteComment = function (id){
-  $http.delete('/com/' + id)
-    .then(function (response) {
-      console.log('delete complete');
-    }).then(function (response) {
-    getSlogansCommentsQuestions($http, ctrl);
-  });
-}
+  ctrl.changeQuestion = function(question, id){
+    qcService.changeQuestion(question, id).then(function(){
+      getSlogansCommentsQuestions($http, ctrl);
+    });
+  }
 
-ctrl.deleteQuestion = function (id){
-  $http.delete('/ques/' + id)
-    .then(function (response) {
-      console.log('delete complete');
-    }).then(function (response) {
-    getSlogansCommentsQuestions($http, ctrl);
-  });
-}
+  ctrl.changeComment = function(comment, id){
+    qcService.changeComment(comment, id).then(function(){
+      getSlogansCommentsQuestions($http, ctrl);
+    });
+  }
+
+
 
 
 }//end of controller
@@ -132,13 +113,4 @@ function loadSlogans ($http, ctrl) {
     });
   });
 
-
-}
-function getUser ($http, ctrl) {
-  $http.get('/users').then(function(response){
-    console.log('response getUser', response.data);
-    ctrl.user = response.data
-  }, function(error) {
-    console.log('error getting user', error);
-  });
 }
