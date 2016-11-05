@@ -1,8 +1,9 @@
 angular.module('lojongApp') //you will need to declare your module with the dependencies ['mwl.calendar', 'ui.bootstrap', 'ngAnimate']
-  .controller('calendarCtrl', function($http, $location, moment, alert, calendarConfig) {
+  .controller('calendarCtrl', function($http, $location, moment, alert, calendarConfig, IndexService) {
 
 
   var vm = this;
+    IndexService.status.login = true;
   getUser($http, vm);
   vm.sloganArray = []
   getCalendarInfo ($http, moment, alert, calendarConfig, vm, actions);
