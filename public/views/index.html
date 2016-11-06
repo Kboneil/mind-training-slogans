@@ -6,18 +6,20 @@
 
   <link rel="stylesheet" href="vendors/bootstrap.min.css" media="screen" title="no title">
   <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+  <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendors/angular-bootstrap-calendar.min.css" rel="stylesheet">
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.1/moment.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.4/interact.min.js"></script>
+  <script src="vendors/moment.min.js"></script>
+
 
   <script src="vendors/angular.min.js" charset="utf-8"></script>
   <script src="vendors/angular-route.min.js" charset="utf-8"></script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.0.0/ui-bootstrap-tpls.min.js"></script>
-  <script src="//cdn.rawgit.com/jkbrzt/rrule/v2.1.0/lib/rrule.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-bootstrap-colorpicker/3.0.25/js/bootstrap-colorpicker-module.min.js"></script>
-  <script src="//mattlewis92.github.io/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+  <script src="vendors/ui-bootstrap-tpls.js"></script>
+
+
+  <script src="vendors/angular-bootstrap-calendar-tpls.min.js"></script>
 
   <script src="scripts/app.module.js" charset="utf-8"></script>
   <script src="scripts/calendar.controller.js" charset="utf-8"></script>
@@ -36,28 +38,24 @@
   <script src="scripts/questionscomments.service.js" charset="utf-8"></script>
   <script src="scripts/app.config.js" charset="utf-8"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/angular-bootstrap-colorpicker/3.0.25/css/colorpicker.min.css" rel="stylesheet">
-  <link href="//mattlewis92.github.io/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css" rel="stylesheet">
-
-
   <base href="/" />
 </head>
 <body class="container" ng-controller="IndexController as index">
   <header ng-show="index.isLoggedIn.status.login">
-    <nav>
-      <a href="/home">Lojong Slogans</a>
+    <nav id="header">
+      <a href="/home">Lojong</a>
     </nav>
   </header>
+
+  <main>
   <ng-view></ng-view>
+    </main>
   <footer ng-show="index.isLoggedIn.status.login">
-    <nav>
-      <a href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br />{{index.date | date:'shortDate'}}</a>
-      <a href="/slogans">59</a>
-      <a href="/profile"><span class="glyphicon glyphicon-user">{{index.user[0].name}}</a>
+    <nav id="footer">
+      <a id="slogansButton" href="/slogans"><span class="sloganCircle">59</span><br /><div class="headerText">Slogans</div></a>
+      <a id="calendarButton" href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">{{index.date | date:'shortDate'}}</div></a>
+      <a id="profileButton"  href="/profile"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">{{index.user[0].name}}</div></a>
+
     </nav>
   </footer>
 </body>

@@ -1,0 +1,133 @@
+@mixin makeCircle($height, $color, $width, $borderColor) {
+                 border-radius: 50%;
+                    height: $height;
+                     width: $height;
+           background-color: $color;
+  border: $width solid $borderColor;
+}
+$main-border: 2px solid #D4AF37;
+
+
+//--------------header----------------------
+
+header {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  z-index: 1;
+  font-size: 32px;
+  text-align: center;
+  border-bottom: 2px solid black;
+  a{
+    color: black;
+    display: inline-block;
+   }
+   a:hover, a:active {
+     color: #D4AF37;
+     text-decoration: none;
+   }
+   nav{
+     width: 100%;
+     border-bottom: $main-border;
+   }
+
+}
+
+//--------------body----------------------
+
+.sloganCircle {
+  height: 150px;
+  width: 150px;
+  @include makeCircle(75px, black, 2px, #D4AF37);
+  color: white;
+  text-align: center;
+  padding-top:7px;
+ }
+
+ #showButton {
+   display: none;
+ }
+
+ .container{
+   margin: 0 !important;
+   padding: 0 !important;
+   width: 100% !important;
+ }
+
+ main{
+   margin: 90px 40px 140px 40px;
+ }
+ #home, #slogans {
+   h2{
+     font-size: 50px;
+   }
+ }
+ h2.sloganCircle {
+   margin: 10px auto;
+ }
+
+ #home{
+   text-align: center;
+ }
+//---------------slogan page----------------
+
+
+
+#slogans{
+  .sloganGroup{
+    margin: 15px;
+    text-align: center;
+    border-bottom: 2px solid #D4AF37;
+  }
+}
+
+
+ //------------------footer--------------------------
+
+ nav#footer{
+   margin-left: 0;
+   padding: 15px;
+ }
+
+ footer {
+   position: fixed;
+   bottom: 0;
+   height: 100px;
+   width: 100%;
+   background-color: white;
+   font-size: 32px;
+   text-align: center;
+   border-top: 2px solid black;
+   nav{
+     width: 100%;
+     border-top: $main-border;
+     margin:2px;
+   }
+
+   .headerText {
+     font-size: 15px;
+   }
+   span.sloganCircle{
+     padding: 5px;
+   }
+   a{
+     color: black;
+     display: inline-block;
+    }
+    a:hover, a:active {
+      color: #D4AF37;
+      text-decoration: none;
+    }
+    a#slogansButton{
+      float: left;
+      clear: both;
+    }
+    a#calendarButton{
+      float: none;
+    }
+    a#profileButton {
+      float: right;
+    }
+ }

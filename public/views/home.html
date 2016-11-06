@@ -1,19 +1,15 @@
-<h2 ng-click="reveal = !reveal">{{home.date | date:fullDate}}</h2>
-<main>
-  <div ng-hide="reveal">
-    <h1>Slogans</h1>
-    <h2 ng-model="home.id">Slogan: {{home.id}}</h2>
-    <p>{{home.point}}</p>
-    <p>{{home.slogan}}</p>
-    <p>{{home.extra}}</p>
-  </div>
-  <div ng-show="reveal">
+
+  <div id="home">
+    <h2 ng-model="home.id" class="sloganCircle">{{home.id}}</h2>
+    <h1>{{home.point}}</h1>
+    <h3>{{home.slogan}}</h3>
+    <h4>{{home.extra}}</h4>
+
+  <div>
     <h1>Comments</h1>
     <div ng-repeat="comment in home.comment | orderBy:'-date':reverse track by $index">
       <div>
         <h4>{{comment.date | date}}</h4>
-        <p>Slogan: {{home.id}}</p>
-        <p>{{home.slogan}}</p>
         <form>
           <input type="text" ng-model="comment.comment"></input>
           <button type="submit" ng-click="home.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
@@ -29,8 +25,6 @@
     <div ng-repeat="question in home.question | orderBy:'-date':reverse track by $index">
       <div>
         <h4>{{question.date | date}}</h4>
-        <p>Slogan: {{home.id}}</p>
-        <p>{{home.slogan}}</p>
         <form>
           <input type="text" ng-model="question.question"></input>
           <button type="submit" ng-click="home.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
@@ -43,4 +37,4 @@
       <button type="submit" ng-click="home.postQuestion(home.newQuestion, home.id)" ><span class="glyphicon glyphicon-plus"></span></button>
     </form>
   </div>
-</main>
+    </div>
