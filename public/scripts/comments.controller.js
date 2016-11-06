@@ -1,7 +1,7 @@
 angular.module('lojongApp')
 .controller('CommentsController', CommentsController);
 
-function CommentsController($http, $location, IndexService) {
+function CommentsController($http, $location, IndexService, qcService) {
   console.log('CommentsController loaded');
   var ctrl = this;
   IndexService.status.login = true;

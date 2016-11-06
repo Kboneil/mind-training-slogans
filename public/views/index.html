@@ -55,9 +55,9 @@
   <ng-view></ng-view>
   <footer ng-show="index.isLoggedIn.status.login">
     <nav>
-      <a href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br />{{home.date | date:'shortDate'}}</a>
+      <a href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br />{{index.date | date:'shortDate'}}</a>
       <a href="/slogans">59</a>
-      <a href="/profile"><span class="glyphicon glyphicon-user">{{home.user[0].name}}</a>
+      <a href="/profile"><span class="glyphicon glyphicon-user">{{index.user[0].name}}</a>
     </nav>
   </footer>
 </body>

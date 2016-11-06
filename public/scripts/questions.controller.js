@@ -1,7 +1,7 @@
 angular.module('lojongApp')
 .controller('QuestionsController', QuestionsController);
 
-function QuestionsController($http, $location, IndexService) {
+function QuestionsController($http, $location, IndexService, qcService) {
 
   var ctrl = this;
   IndexService.status.login = true;

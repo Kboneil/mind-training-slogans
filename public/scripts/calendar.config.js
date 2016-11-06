@@ -3,7 +3,9 @@ angular.module('lojongApp')
 
     console.log(calendarConfig); //view all available config
 
-    calendarConfig.templates.calendarMonthCellEvents =  'views/calendarCell.html'
+    calendarConfig.templates.calendarMonthCellEvents =  'views/calendarCell.html';
+
+    calendarConfig.templates.calendarSlideBox =  'views/calendarSlideBox.html';
 
     calendarConfig.dateFormatter = 'moment'; //use either moment or angular to format dates on the calendar. Default angular. Setting this will override any date formats you have already set.
 
