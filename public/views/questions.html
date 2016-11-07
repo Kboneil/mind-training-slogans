@@ -1,4 +1,16 @@
-<a href="/slogans">back to slogans</a>
+<div id="questions">
+<div id="nav" class="row">
+  <div class="col-xs-2 col-lg-2">
+      <button class="form-control"><a href="/comments">Comments</a></button>
+  </div>
+  <div class="col-xs-8 col-lg-8">
+<button class="form-control"><a style="text-align: center" href="/slogans">back to slogans</a></button>
+  </div>
+  <div class="col-xs-2 col-lg-2">
+    <button class="form-control"><a id="highlighted" href="/questions">Questions</a></button>
+  </div>
+</div>
+<div id="list">
 <h1>Questions</h1>
 <div ng-repeat="question in questions.question | orderBy:'-date':reverse">
   <div>
@@ -6,10 +18,18 @@
     <p>Slogan: {{question.slogan_id}}</p>
     <p>{{question.slogan}}</p>
 
-    <form>
-      <input type="text" ng-model="question.question"></input>
-      <button type="submit" ng-click="questions.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
-    </form>
-    <button type="submit" ng-click="questions.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button>
+    <div class="row">
+      <form>
+      <div class="col-xs-10 col-lg-10">
+        <textarea type="text" id="small" class="form-control" ng-model="question.question"></textarea>
+      </div>
+      <div class="col-xs-1 col-lg-1">
+        <button type="submit" class="btn btn-default" ng-click="questions.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span><br />edit</button>
+      </div>
+      <div class="col-xs-1 col-lg-1">
+        <button type="submit" class="btn btn-default" ng-click="questions.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span><br />delete</button>
+      </div>
+      </form>
+    </div>
   </div>
-</div>
+  </div>

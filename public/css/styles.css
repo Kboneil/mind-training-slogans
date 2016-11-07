@@ -36,7 +36,8 @@ header {
 .container {
   margin: 0 !important;
   padding: 0 !important;
-  width: 100% !important; }
+  width: 100% !important;
+  font-family: 'Signika', sans-serif; }
 
 main {
   margin: 90px 40px 140px 40px; }
@@ -50,10 +51,119 @@ h2.sloganCircle {
 #home {
   text-align: center; }
 
+#home #questionsList, #home #commentsList {
+  text-align: left;
+  padding: 15px;
+  margin: 10px 0; }
+#home #cqList {
+  text-align: left; }
+#home .row {
+  margin: 10px 0; }
+  #home .row div {
+    padding: 0; }
+#home button {
+  height: 50px;
+  width: 50px; }
+#home textarea {
+  height: 50px;
+  resize: none; }
+#home textarea#small {
+  border: none;
+  box-shadow: none; }
+#home textarea#small:focus {
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+#center {
+  margin: 10px auto;
+  width: 600px;
+  text-align: center; }
+  #center a {
+    color: black;
+    margin: auto; }
+  #center a:hover, #center a:active {
+    cursor: pointer;
+    color: #D4AF37;
+    text-decoration: none; }
+
 #slogans .sloganGroup {
   margin: 15px;
   text-align: center;
   border-bottom: 2px solid #D4AF37; }
+#slogans .sloganGroup:last-child {
+  border-bottom: none; }
+#slogans .sloganInfo {
+  margin-bottom: 10px; }
+#slogans #nav {
+  height: 50px; }
+  #slogans #nav button, #slogans #nav input {
+    height: 50px; }
+  #slogans #nav #input, #slogans #nav #button {
+    padding: 0; }
+  #slogans #nav a {
+    color: black;
+    margin: auto; }
+  #slogans #nav a:hover, #slogans #nav a:active {
+    color: #D4AF37;
+    text-decoration: none; }
+#slogans #list h4 {
+  color: #D4AF37; }
+#slogans #list #questionsList, #slogans #list #commentsList {
+  border: 2px solid black;
+  padding: 15px;
+  margin: 10px 0; }
+#slogans #list #cqList {
+  text-align: left; }
+#slogans #list .row {
+  margin: 10px 0; }
+  #slogans #list .row div {
+    padding: 0; }
+#slogans #list button {
+  height: 50px;
+  width: 50px; }
+#slogans #list textarea {
+  height: 50px;
+  resize: none; }
+#slogans #list textarea#small {
+  border: none;
+  box-shadow: none; }
+#slogans #list textarea#small:focus {
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+#slogans .row, #comments .row, #questions .row {
+  text-align: center; }
+
+#questions #nav, #comments #nav {
+  height: 50px; }
+  #questions #nav button, #questions #nav input, #comments #nav button, #comments #nav input {
+    height: 50px; }
+  #questions #nav #highlighted, #comments #nav #highlighted {
+    color: #D4AF37 !important; }
+  #questions #nav #input, #questions #nav #button, #comments #nav #input, #comments #nav #button {
+    padding: 0; }
+  #questions #nav a, #comments #nav a {
+    color: black;
+    margin: auto; }
+  #questions #nav a:hover, #questions #nav a:active, #comments #nav a:hover, #comments #nav a:active {
+    color: #D4AF37;
+    text-decoration: none; }
+#questions #list .row, #comments #list .row {
+  margin: 10px 0; }
+  #questions #list .row div, #comments #list .row div {
+    padding: 0; }
+#questions #list button, #comments #list button {
+  height: 50px;
+  width: 50px; }
+#questions #list textarea, #comments #list textarea {
+  height: 50px;
+  resize: none; }
+#questions #list textarea#small, #comments #list textarea#small {
+  border: none;
+  box-shadow: none; }
+#questions #list textarea#small:focus, #comments #list textarea#small:focus {
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
 nav#footer {
   margin-left: 0;
@@ -75,7 +185,7 @@ footer {
   footer .headerText {
     font-size: 15px; }
   footer span.sloganCircle {
-    padding: 5px; }
+    padding: 0 4px; }
   footer a {
     color: black;
     display: inline-block; }
@@ -83,10 +193,9 @@ footer {
     color: #D4AF37;
     text-decoration: none; }
   footer a#slogansButton {
-    float: left;
-    clear: both; }
+    float: left; }
   footer a#calendarButton {
-    float: none; }
+    float: center; }
   footer a#profileButton {
     float: right; }
 

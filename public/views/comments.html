@@ -1,31 +1,36 @@
-<nav class="navbar navbar-default">
-  <ul class="nav navbar-nav">
-    <li class="pull-left" class="active"><a href="/comments">Comments</a></li>
-    <li><a href="/slogans">back to slogans</a></li>
-    <li class="social pull-right"><a href="/questions">Questions</a></li>
-  </ul>
-</nav>
-
+<div id="comments">
+<div id="nav" class="row">
+  <div class="col-xs-2 col-lg-2">
+      <button class="form-control"><a id="highlighted" href="/comments">Comments</a></button>
+  </div>
+  <div class="col-xs-8 col-lg-8">
+<button class="form-control"><a style="text-align: center" href="/slogans">back to slogans</a></button>
+  </div>
+  <div class="col-xs-2 col-lg-2">
+    <button class="form-control"><a href="/questions">Questions</a></button>
+  </div>
+</div>
+<div id="list">
 <h1>Comments</h1>
 <div ng-repeat="comment in comments.comment | orderBy:'-date':reverse">
   <div>
     <h4>{{comment.date | date}}</h4>
     <p>Slogan: {{comment.slogan_id}}</p>
     <p>{{comment.slogan}}</p>
-    <form>
-      <input type="text" ng-model="comment.comment"></input>
-      <button type="submit" ng-click="comments.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
-    </form>
-    <button type="submit" ng-click="comments.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button>
+    <div class="row">
+      <form>
+        <div class="col-xs-10 col-lg-10">
+          <textarea type="text" id="small" class="form-control" ng-model="comment.comment"></textarea>
+        </div>
+        <div class="col-xs-1 col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="comments.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span><br />edit</button>
+        </div>
+        <div class="col-xs-1 col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="comments.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span><br />delete</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-<!-- <form>
-  <label for="select">Select Order:</label>
-  <select id="select" ng-model="ctrl.select" ng-change="ctrl.listPeople()" class="form-control">
-    <option value="-name">Name</option>
-    <option value="-hometown">Hometown</option>
-    <option value="-movie">Favorite Movie</option>
-</select>
-  <input type="text" ng-model="comment.newComment" placeholder="New comment"></input>
-  <button type="submit" ng-click="comments.postComment(comment.newComment, comments.comment.slogan_id)" ><span class="glyphicon glyphicon-plus"></span></button>
-</form> -->
+</div>
+</div>

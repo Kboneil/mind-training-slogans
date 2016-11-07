@@ -65,18 +65,27 @@ function getSlogansCommentsQuestions($http, ctrl) {
     ctrl.id = user.daily;
     ctrl.slogan = user.slogan;
     ctrl.extra = user.extra;
+    ctrl.question = [];
+    ctrl.comment = [];
   }, function(error) {
     console.log('error getting slogan', error);
   }).then(function(){
     $http.get('/ques/' + id).then(function(response){
-      console.log('response', response.data);
+      if (!response.data[0]) {
+        ctrl.question.push({question: 'no questions yet'});
+      } else {
       ctrl.question = response.data
+    }
     }, function(error) {
       console.log('error getting slogan comments', error);
     }).then(function(){
     $http.get('/com/' + id).then(function(response){
       console.log('response', response.data);
+      if (!response.data[0]) {
+        ctrl.comment.push({comment: 'no comments yet'});;
+      } else {
       ctrl.comment = response.data
+    }
     }, function(error) {
       console.log('error getting slogan comments', error);
     });
@@ -93,20 +102,28 @@ function loadSlogans ($http, ctrl) {
     ctrl.slogan = user.slogan;
     ctrl.extra = user.extra;
     id = user.daily
+    ctrl.question = [];
+    ctrl.comment = [];
   }, function(error) {
     console.log('error getting slogan', error);
   }).then(function(){
     //gets all the questions from this user for the slogan of the day
     $http.get('/ques/' + id).then(function(response){
-      console.log('response questions', response.data);
+      if (!response.data[0]) {
+        ctrl.question.push({question: 'no questions yet'});
+      } else {
       ctrl.question = response.data
+    }
     }, function(error) {
       console.log('error getting slogan questions', error);
     }).then(function(){
     //gets all the comments from this user for the slogan of the day
     $http.get('/com/' + id).then(function(response){
-      console.log('response comments', response.data);
+      if (!response.data[0]) {
+        ctrl.comment.push({comment: 'no comments yet'});;
+      } else {
       ctrl.comment = response.data
+    }
     }, function(error) {
       console.log('error getting slogan comments', error);
     });

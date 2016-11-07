@@ -179,18 +179,25 @@ angular.module('lojongApp') //you will need to declare your module with the depe
          slogan.questions = [];
 
          $http.get('/com/' + id).then(function(response){
+           if (!response.data[0]) {
+             slogan.comments.push({comment: 'no comments yet'});;
+           } else {
              response.data.forEach(function(comment){
                slogan.comments.push({comment: comment.comment, date: comment.date, id: comment.id});
              });
+           }
          }, function(error) {
            console.log('error getting slogan comments', error);
          });//endGEt
 
          $http.get('/ques/' + id).then(function(response){
+           if (!response.data[0]) {
+             slogan.questions.push({question: 'no questions yet'});
+           } else {
              response.data.forEach(function(question){
              slogan.questions.push({question: question.question, date: question.date, id: question.id});
              });
-
+           }
          }, function(error) {
            console.log('error getting slogan comments', error);
          });//endGEt

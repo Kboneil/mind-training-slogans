@@ -5,36 +5,61 @@
     <h3>{{home.slogan}}</h3>
     <h4>{{home.extra}}</h4>
 
-  <div>
-    <h1>Comments</h1>
-    <div ng-repeat="comment in home.comment | orderBy:'-date':reverse track by $index">
-      <div>
-        <h4>{{comment.date | date}}</h4>
-        <form>
-          <input type="text" ng-model="comment.comment"></input>
-          <button type="submit" ng-click="home.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
-        </form>
-        <span><button type="submit" ng-click="home.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
-      </div>
+    <div id="commentsList">
+    <h4>Comments:</h4>
+    <div ng-repeat="comment in home.comment | orderBy:'-date':reverse">
+        <h5>{{comment.date | date}}</h5>
+        <div class="row">
+          <form>
+            <div class="col-xs-10 col-lg-10">
+              <textarea type="text" id="small" class="form-control" ng-model="comment.comment"></textarea>
+            </div>
+            <div class="col-xs-1 col-lg-1">
+              <button type="submit" class="btn btn-default" ng-click="home.changeComment(comment.comment, comment.id)"><span class="glyphicon glyphicon-pencil"></span><br />edit</button>
+            </div>
+            <div class="col-xs-1 col-lg-1">
+              <button type="submit" class="btn btn-default" ng-click="home.deleteComment(comment.id)" ><span class="glyphicon glyphicon-trash"></span><br />delete</button>
+            </div>
+          </form>
+        </div>
     </div>
-    <form>
-      <input type="text" ng-model="home.newComment" placeholder="New comment"></input>
-      <button type="submit" ng-click="home.postComment(home.newComment, home.id)" ><span class="glyphicon glyphicon-plus"></span></button>
-    </form>
-    <h1>Questions</h1>
-    <div ng-repeat="question in home.question | orderBy:'-date':reverse track by $index">
-      <div>
-        <h4>{{question.date | date}}</h4>
-        <form>
-          <input type="text" ng-model="question.question"></input>
-          <button type="submit" ng-click="home.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span> </button>
-        </form>
-        <span><button type="submit" ng-click="home.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span></button></span>
-      </div>
+    <div class="row">
+      <form>
+        <div class="col-xs-11 col-lg-11">
+          <textarea type="text" id="large" class="form-control" ng-model="home.newComment" placeholder="New comment"></textarea>
+        </div>
+        <div class="col-xs-1 col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="home.postComment(home.newComment, home.id)" ><span class="glyphicon glyphicon-plus"></span><br />Add</button>
+        </div>
+      </form>
     </div>
-    <form>
-      <input type="text" ng-model="home.newQuestion" placeholder="New question"></input>
-      <button type="submit" ng-click="home.postQuestion(home.newQuestion, home.id)" ><span class="glyphicon glyphicon-plus"></span></button>
-    </form>
   </div>
+    <div id="questionsList">
+    <h4>Questions:</h4>
+    <div ng-repeat="question in home.question | orderBy:'-date':reverse">
+      <h5>{{question.date | date}}</h5>
+      <div class="row">
+        <form>
+        <div class="col-xs-10 col-lg-10">
+          <textarea type="text" id="small" class="form-control" ng-model="question.question"></textarea>
+        </div>
+        <div class="col-xs-1 col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="home.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span><br />edit</button>
+        </div>
+        <div class="col-xs-1 col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="home.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span><br />delete</button>
+        </div>
+        </form>
+      </div>
     </div>
+    <div class="row">
+      <form>
+        <div class="col-xs-11 col-lg-11">
+          <textarea id="large" type="text" class="form-control" ng-model="home.newQuestion" placeholder="New question"></textarea>
+        </div>
+        <div class="col-xs-1 col-lg-1">
+          <button type="submit" class="btn btn-default" ng-click="home.postQuestion(home.newQuestion, home.id)" ><span class="glyphicon glyphicon-plus"></span><br />Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
