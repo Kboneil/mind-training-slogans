@@ -8,7 +8,7 @@ var slogans = [];
 //gets all the content from favorites table
 
 router.get('/', function (req, res) {
-  console.log('in get function');
+  console.log('in get slogan list function');
   pool.connect(function (err, client, done) {
     try {
       if (err) {

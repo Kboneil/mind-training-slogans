@@ -8,7 +8,7 @@ var comments = [];
 
 router.get('/', function (req, res) {
   var currentlyLoggedInUser = req.user;
-  console.log('in get function');
+  console.log('in get comments function');
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -36,7 +36,7 @@ router.get('/', function (req, res) {
 router.get('/:id', function (req, res) {
   var currentlyLoggedInUser = req.user;
   var id = req.params.id;
-  console.log('in get function');
+  console.log('in get comments for specific slogan function');
   pool.connect(function (err, client, done) {
     try {
       if (err) {

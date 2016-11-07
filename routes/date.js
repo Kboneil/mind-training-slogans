@@ -5,7 +5,7 @@ const pool = require('../db/connection');
 
 router.get('/', function (req, res) {
   var currentlyLoggedInUser = req.user;
-  console.log('in get function');
+  console.log('in get date function');
   pool.connect(function (err, client, done) {
     try {
       if (err) {

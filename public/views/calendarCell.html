@@ -5,11 +5,7 @@
     ng-click="$event.stopPropagation(); vm.onEventClick({calendarEvent: event})"
 
     ng-class="event.cssClass"
-
-    ng-mouseenter="vm.highlightEvent(event, true)"
-    ng-mouseleave="vm.highlightEvent(event, false)"
-    tooltip-append-to-body="true"
-    uib-tooltip-html="vm.calendarEventTitle.monthViewTooltip(event) | calendarTrustAsHtml"
+    id="calBox"
     drop-data="{event: event.title, slogan: event.slogan}">Slogan {{event.title}}
   </a>
 </div>

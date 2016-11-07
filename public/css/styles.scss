@@ -74,6 +74,22 @@ header {
  #home{
    text-align: center;
  }
+ //--------------login---------------------
+ #login {
+   form {
+   border: 2px solid black;
+   padding: 20px 0;
+   a {
+     color: black;
+     margin: auto;
+   }
+   a:hover, a:active {
+     cursor: pointer;
+     color: $gold;
+     text-decoration: none;
+   }
+    }
+ }
 
  //--------------home-----------------------
  #home{
@@ -255,6 +271,32 @@ header {
 }
 
 }
+//-------------------calendar------------------------
+
+#calendar {
+
+.btn{
+  outline: none;
+  #selected{
+    color: $gold;
+  }
+}
+
+    a:active, a:hover{
+      text-decoration: none;
+      outline: none;
+
+    }
+  a#calBox{
+    color: $gold;
+  }
+  #modal{
+    .btn{
+      outline: none;
+    }
+  }
+}
+
 
 
  //------------------footer--------------------------

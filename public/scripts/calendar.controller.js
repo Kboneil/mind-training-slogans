@@ -3,7 +3,7 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
 
   var vm = this;
-    IndexService.status.login = true;
+  IndexService.status.login = true;
   getUser($http, vm);
   vm.sloganArray = []
   getCalendarInfo ($http, moment, alert, calendarConfig, vm, actions);

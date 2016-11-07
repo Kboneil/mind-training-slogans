@@ -8,7 +8,7 @@ var questions = [];
 
 router.get('/', function (req, res) {
   var currentlyLoggedInUser = req.user;
-  console.log('in get function');
+  console.log('in get questions function');
   pool.connect(function (err, client, done) {
     try {
       if (err) {
