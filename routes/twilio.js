@@ -44,28 +44,43 @@ pool.connect(function (err, client, done) {
             //forEach user check to see if they want to receive slogan message
             users.forEach(function (user) {
               //if no return
-
-
+              if(user.messages === false){
+                return
+              }
               // if yes get the time of day and schedule a message to be sent
+              var time = new Date (user.time)
+              var hour = time.getUTCHours();
+              var minute = time.getUTCMinutes();
+              console.log('hour', hour);
+              console.log('minute', minute);
 
-            //assign the slogan of the day to that user's number
+              var rule = new schedule.RecurrenceRule();
+                rule.hour = hour;
+                rule.minute = minute;
 
-            clientTwilio.sms.messages.create({
+                schedule.scheduleJob(rule, function(){
+                  console.log('in rule');
 
-                to: user.number, // Any number Twilio can deliver to
-                from: '17639511301', // A number you bought from Twilio and can use for outbound communication
-                body: user.slogan // body of the SMS message
+                  // send the slogan of the day to that user's number
 
-            }, function(err, responseData) { //this function is executed when a response is received from Twilio
+                  clientTwilio.sms.messages.create({
 
-                if (!err) { // "err" is an error received during the request, if any
+                      to: user.number, // Any number Twilio can deliver to
+                      from: '17639511301', // A number you bought from Twilio and can use for outbound communication
+                      body: user.slogan // body of the SMS message
 
-                    console.log(responseData.body); // outputs slogan of the day
+                  }, function(err, responseData) { //this function is executed when a response is received from Twilio
 
-                } else {
-                  console.log('error sending message');
-                }
-            });//end of send message
+                      if (!err) { // "err" is an error received during the request, if any
+
+                          console.log(responseData.body); // outputs slogan of the day
+
+                      } else {
+                        console.log('error sending message');
+                      }
+                  });//end of send message
+                });
+
 
             }); //end of forEach
 

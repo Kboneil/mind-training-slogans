@@ -26,7 +26,7 @@ header {
     color: black;
     display: inline-block;
    }
-   a:hover, a:active {
+   a:hover, a:active, a:focus {
      color: $gold;
      text-decoration: none;
    }
@@ -331,7 +331,7 @@ header {
      color: black;
      display: inline-block;
     }
-    a:hover, a:active {
+    a:hover, a:active, a:focus {
       color: $gold;
       text-decoration: none;
     }

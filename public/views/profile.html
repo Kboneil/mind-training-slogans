@@ -12,15 +12,25 @@
           </div>
     </div>
     <div class="form-group row">
-        <label for="frequency" class="col-xs-3 col-form-label">How often would you like to receive the slogans?</label>
+        <label for="frequency" class="col-xs-3 col-form-label">Would you like your daily slogan sent to your phone each day?</label>
         <div class="col-xs-9">
-        <select class="form-control" id="frequency" ng-model="profile.frequency" class="form-control">
-          <option value="one">Daily</option>
-          <option value="two">Monday, Wednesday and Friday</option>
-          <option value="week">Every Sunday</option>
+        <select class="form-control" id="frequency" ng-model="profile.messages" class="form-control">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
         </select>
         </div>
-  </div>
+          </div>
+        <div class="form-group row">
+          <label  for="name" class="col-xs-3 col-form-label">What is your number?</label>
+          <div class="col-xs-9">
+            <input class="form-control" ng-model="profile.number" />
+              </div>
+        </div>
+        <div class="form-group row">
+          <label for="frequency" class="col-xs-3 col-form-label">At what time?</label>
+          <div uib-timepicker class="col-xs-9" ng-model="profile.time" ng-change="profile.changed(profile.time)" hour-step="1" minute-step="1" show-meridian="['AM', 'PM']"></div>
+
+          </div>
       <div class="form-group row">
           <label for="order" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
           <div class="col-xs-9">
@@ -30,7 +40,7 @@
           </select>
           </div>
     </div>
-    <button type="submit" class="btn btn-default" ng-click="profile.sendUserInfo(profile.name, profile.frequency, profile.order)">submit</button>
+    <button type="submit" class="btn btn-default" ng-click="profile.sendUserInfo(profile.name, profile.messages, profile.time, profile.number, profile.order)">submit</button>
   </form>
   <div>
     <h2>Lojong Slogans</h2>

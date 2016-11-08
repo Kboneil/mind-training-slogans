@@ -39,7 +39,9 @@ router.put('/', function (req, res) {
   var currentlyLoggedInUser = req.user;
   var answer = req.body.random;
   var name = req.body.name;
-  var frequency = req.body.frequency;
+  var messages = req.body.messages;
+  var time = req.body.time;
+  var number = req.body.number;
   console.log('answer', answer);
   pool.connect(function (err, client, done) {
     try {
@@ -49,7 +51,7 @@ router.put('/', function (req, res) {
         return;
       }
       //this changes the boolean value in users table
-      client.query('UPDATE users SET random=$1, name=$2, frequency=$3 WHERE id = $4 RETURNING *', [answer, name, frequency, currentlyLoggedInUser.id],
+      client.query('UPDATE users SET random=$1, name=$2, messages=$3, time=$4, number=$5 WHERE id = $6 RETURNING *', [answer, name, messages, time, number, currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);
@@ -169,7 +171,9 @@ router.put('/returning', function (req, res) {
   var currentlyLoggedInUser = req.user;
   var answer = req.body.random;
   var name = req.body.name;
-  var frequency = req.body.frequency;
+  var messages = req.body.messages;
+  var time = req.body.time;
+  var number = req.body.number;
   console.log('answer', answer);
   pool.connect(function (err, client, done) {
     try {
@@ -179,7 +183,7 @@ router.put('/returning', function (req, res) {
         return;
       }
       //this changes the boolean value in users table
-      client.query('UPDATE users SET random=$1, name=$2, frequency=$3 WHERE id = $4 RETURNING *', [answer, name, frequency, currentlyLoggedInUser.id],
+      client.query('UPDATE users SET random=$1, name=$2, messages=$3, time=$4, number=$5 WHERE id = $6 RETURNING *', [answer, name, messages, time, number, currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);
