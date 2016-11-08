@@ -40,9 +40,9 @@ timeoutDaily();
 //--------------------------------daily slogan----------------------------------
 
 function timeoutDaily() {
-  rule.hour = 00;
-  rule.minute = 00;
-  rule.second = 00;
+  rule.hour = 0;
+  rule.minute = 05;
+
 
 
   schedule.scheduleJob(rule, function() {
@@ -53,7 +53,6 @@ function timeoutDaily() {
         try {
           if (err) {
             console.log('Error querying to DB', err);
-            res.sendStatus(500);
             return;
           }
 
@@ -61,7 +60,6 @@ function timeoutDaily() {
                 function (err, result) {
                   if (err) {
                     console.log('Error querying DB', err);
-                    res.sendStatus(500);
                     return;
                   }
                   users = result.rows;
@@ -76,7 +74,6 @@ function timeoutDaily() {
                       function (err, result) {
                         if (err) {
                           console.log('Error querying DB', err);
-                          res.sendStatus(500);
                           return;
                         }
                         console.log('ordered array updated');
@@ -108,7 +105,6 @@ function timeoutDaily() {
                 function (err, result) {
                   if (err) {
                     console.log('Error querying DB', err);
-                    res.sendStatus(500);
                     return;
                   }
                   console.log('random array updated');
@@ -121,7 +117,6 @@ function timeoutDaily() {
                               function (err, result) {
                                 if (err) {
                                   console.log('Error querying DB select', err);
-                                  res.sendStatus(500);
                                   return;
                                 }
 
@@ -144,7 +139,6 @@ function timeoutDaily() {
                                       function (err, result) {
                                         if (err) {
                                           console.log('Error querying DB else', err);
-                                          res.sendStatus(500);
                                           return;
                                         }
                                         var date = new Date();
@@ -152,7 +146,6 @@ function timeoutDaily() {
                                               function (err, result) {
                                                 if (err) {
                                                   console.log('Error querying DB', err);
-                                                  res.sendStatus(500);
                                                   return;
                                                 }
 

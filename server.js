@@ -15,6 +15,7 @@ const passport = require('passport');
 const session = require('express-session');
 const user = require('./models/user');
 
+
 auth.setup();
 
 const sessionConfig = {
@@ -39,6 +40,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 app.use('/login', login);
 app.use('/register', register);
