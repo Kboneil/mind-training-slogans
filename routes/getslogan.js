@@ -41,7 +41,7 @@ timeoutDaily();
 
 function timeoutDaily() {
   rule.hour = 0;
-  rule.minute = 05;
+  rule.minute = 0;
 
 
 

@@ -5,16 +5,23 @@ function NewUserController($http, $location) {
   var ctrl = this;
   getUser($http, ctrl);
 
-  ctrl.sendUserInfo = function (name, frequency, order){
-    var data = {name:name, frequency: frequency, random: order};
+  ctrl.sendUserInfo = function (name, messages, time, number, order){
+    var data = {name:name, messages: messages, time: time, number: number, random: order};
+    ctrl.name = '';
+    ctrl.messages = '';
+    ctrl.order = '';
+    ctrl.time = '';
+    ctrl.number = '';
       console.log(data);
-    $http.put('/users', data).then(function(response){
+    $http.put('/users/returning', data).then(function(response){
       console.log('response post', response.data);
-    }, function(error) {
-      console.log('error posting order answer', error);
-    });
+  }, function(error) {
+    console.log('error posting order answer', error);
+  }).then(function(){
+    getUser($http, ctrl);
     document.getElementById('hideForm').style.display = 'none';
     document.getElementById('showButton').style.display = 'inherit';
+  });
   };
 
   ctrl.logout = function (){
