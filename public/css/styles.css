@@ -51,13 +51,29 @@ h2.sloganCircle {
 #home {
   text-align: center; }
 
-#login form {
+#home button.btn.btn-default, #comments button.btn.btn-default, #questions button.btn.btn-default, #slogans button.btn.btn-default {
+  font-size: 10px; }
+#home .glyphicon, #comments .glyphicon, #questions .glyphicon, #slogans .glyphicon {
+  font-size: 20px; }
+#home button.form-control, #comments button.form-control, #questions button.form-control, #slogans button.form-control {
+  border: none;
+  box-shadow: none; }
+
+#login h1, #registration h1 {
+  text-align: center; }
+#login #border, #registration #border {
+  border: 2px solid #D4AF37;
+  padding-bottom: 220px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px; }
+#login form, #registration form {
   border: 2px solid black;
   padding: 40px 0; }
-  #login form a {
+  #login form a, #registration form a {
     color: black;
     margin: auto; }
-  #login form a:hover, #login form a:active {
+  #login form a:hover, #login form a:active, #registration form a:hover, #registration form a:active {
     cursor: pointer;
     color: #D4AF37;
     text-decoration: none; }
@@ -71,7 +87,7 @@ h2.sloganCircle {
 #home .row {
   margin: 10px 0; }
   #home .row div {
-    padding: 0; }
+    padding: 8px; }
 #home button {
   height: 50px;
   width: 50px; }
@@ -97,6 +113,8 @@ h2.sloganCircle {
     color: #D4AF37;
     text-decoration: none; }
 
+#slogans #submit {
+  font-size: 14px; }
 #slogans .sloganGroup {
   margin: 15px;
   text-align: center;
@@ -121,6 +139,7 @@ h2.sloganCircle {
   color: #D4AF37; }
 #slogans #list #questionsList, #slogans #list #commentsList {
   border: 2px solid black;
+  border-radius: 5px;
   padding: 15px;
   margin: 10px 0; }
 #slogans #list #cqList {

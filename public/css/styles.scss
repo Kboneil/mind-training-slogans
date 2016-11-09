@@ -74,8 +74,33 @@ header {
  #home{
    text-align: center;
  }
+
+ #home, #comments, #questions, #slogans{
+   button.btn.btn-default{
+     font-size: 10px;
+   }
+   .glyphicon{
+     font-size: 20px;
+   }
+   button.form-control {
+     border: none;
+     box-shadow: none;
+   }
+ }
  //--------------login---------------------
- #login {
+ #login, #registration {
+   h1{
+     text-align: center;
+   }
+   #border{
+     border: 2px solid $gold;
+     padding-bottom:220px;
+     padding-top: 5px;
+     padding-left: 5px;
+     padding-right: 5px;
+
+   }
+
    form {
    border: 2px solid black;
    padding: 40px 0;
@@ -105,7 +130,7 @@ header {
  .row{
    margin: 10px 0;
    div {
-       padding: 0;
+       padding: 8px;
    }
 
  }
@@ -146,6 +171,9 @@ header {
 
 #slogans{
 
+  #submit{
+    font-size: 14px;
+  }
   .sloganGroup{
     margin: 15px;
     text-align: center;
@@ -181,6 +209,7 @@ header {
   }
   #questionsList, #commentsList{
     border: 2px solid black;
+    border-radius: 5px;
     padding: 15px;
     margin: 10px 0;
   }
