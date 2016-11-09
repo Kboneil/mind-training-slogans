@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const passport = require('passport');
 const pool = require('../db/connection');
+const fromTwilio = require('./twilio');
+const schedule = require('node-schedule');
+const twilio = require('twilio');
+var clientTwilio = new twilio.RestClient('AC48b3cc30d5cdaa484b63d8110435c1be', '8143ab068cb139e0f618dc1c22211be6');
 
 router.get('/', function (req, res) {
   var currentlyLoggedInUser = req.user;
@@ -149,15 +153,11 @@ router.put('/', function (req, res) {
 
                         console.log('slogan of the day updated');
                       });
-
-
-
-
-
               });//end update
 
-              //will need to post to the /date
+
             }
+            // check to see if they want an SMS
 
 
     } finally {
@@ -246,7 +246,7 @@ router.put('/returning', function (req, res) {
 
               });//end update
 
-              //will need to post to the /date
+
             }
 
 

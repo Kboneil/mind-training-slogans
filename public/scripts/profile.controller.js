@@ -3,8 +3,9 @@ angular.module('lojongApp')
 
 function ProfileController($http, $location, IndexService) {
   var ctrl = this;
+
   IndexService.status.login = true;
-  getUser($http, ctrl);
+  // getUser($http, ctrl);
 
 ctrl.sendUserInfo = function (name, messages, time, number, order){
   var data = {name:name, messages: messages, time: time, number: number, random: order};
@@ -22,6 +23,10 @@ ctrl.sendUserInfo = function (name, messages, time, number, order){
 }
 
 
+IndexService.getUser().then(function(response) {
+  console.log('response');
+});
+
 
 
 ctrl.logout = function (){
@@ -35,7 +40,6 @@ ctrl.logout = function (){
     console.log('error logging out', error);
   });
 }
-
 
 
 

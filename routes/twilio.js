@@ -4,27 +4,11 @@ const router = require('express').Router();
 const pool = require('../db/connection');
 const schedule = require('node-schedule');
 
-//Send an SMS text message
-// clientTwilio.sms.messages.create({
-//
-//     to:'9522011053', // Any number Twilio can deliver to
-//     from: '17639511301', // A number you bought from Twilio and can use for outbound communication
-//     body: 'word to your mother.' // body of the SMS message
-//
-// }, function(err, responseData) { //this function is executed when a response is received from Twilio
-//
-//     if (!err) { // "err" is an error received during the request, if any
-//
-//         // "responseData" is a JavaScript object containing data received from Twilio.
-//         // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-//         // http://www.twilio.com/docs/api/rest/sending-sms#example-1
-//
-//         console.log(responseData.from); // outputs "+14506667788"
-//         console.log(responseData.body); // outputs "word to your mother."
-//
-//     }
-// });
+// console.log('jobs', schedule.scheduledJobs);
 
+scheduleSMS();
+
+function scheduleSMS () {
 
 pool.connect(function (err, client, done) {
   try {
@@ -43,44 +27,8 @@ pool.connect(function (err, client, done) {
 
             //forEach user check to see if they want to receive slogan message
             users.forEach(function (user) {
-              //if no return
-              if(user.messages === false){
-                return
-              }
-              // if yes get the time of day and schedule a message to be sent
-              var time = new Date (user.time)
-              var hour = time.getUTCHours();
-              var minute = time.getUTCMinutes();
-              console.log('hour', hour);
-              console.log('minute', minute);
 
-              var rule = new schedule.RecurrenceRule();
-                rule.hour = hour;
-                rule.minute = minute;
-
-                schedule.scheduleJob(rule, function(){
-                  console.log('in rule');
-
-                  // send the slogan of the day to that user's number
-
-                  clientTwilio.sms.messages.create({
-
-                      to: user.number, // Any number Twilio can deliver to
-                      from: '17639511301', // A number you bought from Twilio and can use for outbound communication
-                      body: user.slogan // body of the SMS message
-
-                  }, function(err, responseData) { //this function is executed when a response is received from Twilio
-
-                      if (!err) { // "err" is an error received during the request, if any
-
-                          console.log(responseData.body); // outputs slogan of the day
-
-                      } else {
-                        console.log('error sending message');
-                      }
-                  });//end of send message
-                });
-
+              sendSMS(user);
 
             }); //end of forEach
 
@@ -90,3 +38,51 @@ pool.connect(function (err, client, done) {
     done();
   }
   });//end of pool.connect
+
+} //end of scheduleSMS
+
+function sendSMS(user) {
+  //if no return
+  if(user.messages === false){
+    return
+  }
+  // if yes get the time of day and schedule a message to be sent
+  var time = new Date (user.time)
+  var hour = time.getHours();
+  var minute = time.getMinutes();
+  console.log('hour', hour);
+  console.log('minute', minute);
+
+  var rule = new schedule.RecurrenceRule();
+    rule.hour = hour;
+    rule.minute = minute;
+
+    schedule.scheduleJob(user.username ,rule, function(){
+      console.log('in rule');
+
+      // send the slogan of the day to that user's number
+
+      clientTwilio.sms.messages.create({
+
+          to: user.number, // Any number Twilio can deliver to
+          from: '17639511301', // A number you bought from Twilio and can use for outbound communication
+          body: user.slogan // body of the SMS message
+
+      }, function(err, responseData) { //this function is executed when a response is received from Twilio
+
+          if (!err) { // "err" is an error received during the request, if any
+
+              console.log(responseData.body); // outputs slogan of the day
+
+          } else {
+            console.log('error sending message');
+          }
+      });//end of send message
+    });
+
+
+}
+
+module.exports = {
+  sendSMS: sendSMS
+}

@@ -2,9 +2,21 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   .service('IndexService', IndexService);
 
   function IndexService($http) {
-    var status = {
+
+    this.status = {
       login: false,
     };
-    return {status: status};
+
+
+    this.getUser = function () {
+      console.log('here');
+      return $http.get('/users').then(function(response){
+        console.log('response', response.data);
+        return response.data;
+      }, function(error) {
+        console.log('error getting questions', error);
+      });
+    };
+
 
   }

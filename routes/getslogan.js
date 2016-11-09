@@ -40,8 +40,9 @@ timeoutDaily();
 //--------------------------------daily slogan----------------------------------
 
 function timeoutDaily() {
-  rule.hour = 0;
-  rule.minute = 0;
+  console.log('in here');
+  // rule.hour = 0;
+  rule.second = 00;
 
 
 
