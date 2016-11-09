@@ -9,6 +9,56 @@ $gold: #D4AF37;
 $main-border: 2px solid $gold;
 
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
 
 //--------------header----------------------
 
@@ -118,7 +168,7 @@ header {
 
  //--------------home-----------------------
  #home{
-
+   animation: fadeInDown 0.25s ease-in both;
    #questionsList, #commentsList{
      text-align: left;
      padding: 15px;
@@ -152,6 +202,22 @@ header {
    }
 
  }
+
+ //---------------profile----------------------
+#profile{
+  animation: fadeInRight 0.25s ease-in both;
+}
+#profile, #newuser{
+  #logout {
+    float: right;
+  }
+  a {
+    color: $gold;
+    margin: auto;
+  }
+
+}
+
 //---------------slogan page----------------
 #center{
   margin: 10px auto;
@@ -170,6 +236,7 @@ header {
 
 
 #slogans{
+  animation: fadeInLeft 0.25s ease-in both;
 
   #submit{
     font-size: 14px;
@@ -250,6 +317,14 @@ header {
 }
 //-----------------questions and comments---------------
 
+#comments{
+  animation: fadeInLeft 0.25s ease-in both;
+}
+
+#questions{
+  animation: fadeInRight 0.25s ease-in both;
+}
+
 #questions, #comments{
   #nav {
     height: 50px;
@@ -303,6 +378,7 @@ header {
 //-------------------calendar------------------------
 
 #calendar {
+  animation: fadeInUp 0.25s ease-in both;
 
 .btn{
   outline: none;

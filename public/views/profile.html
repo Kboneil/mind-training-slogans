@@ -1,53 +1,13 @@
-<button type="submit" class="btn btn-default" ng-click="profile.logout()">Logout</button>
+<div id="profile">
+<button type="submit" id="logout" class="btn btn-default" ng-click="profile.logout()">Logout</button>
 <h2>Hello, {{profile.user[0].name}}</h2>
-
-<h3>Update settings: <button ng-click="reveal = !reveal" ng-hide="reveal" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
-      <button ng-click="reveal = !reveal" ng-show="reveal" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button></h3>
-
-<form ng-show="reveal" class="form-group">
-    <div class="form-group row">
-      <label  for="name" class="col-xs-3 col-form-label">What is your name?</label>
-      <div class="col-xs-9">
-        <input class="form-control" ng-model="profile.name" />
-          </div>
-    </div>
-    <div class="form-group row">
-        <label for="frequency" class="col-xs-3 col-form-label">Would you like your daily slogan sent to your phone each day?</label>
-        <div class="col-xs-9">
-        <select class="form-control" id="frequency" ng-model="profile.messages" class="form-control">
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-        </div>
-          </div>
-        <div class="form-group row">
-          <label  for="name" class="col-xs-3 col-form-label">What is your number?</label>
-          <div class="col-xs-9">
-            <input class="form-control" ng-model="profile.number" />
-              </div>
-        </div>
-        <div class="form-group row">
-          <label for="frequency" class="col-xs-3 col-form-label">At what time?</label>
-          <div uib-timepicker class="col-xs-9" ng-model="profile.time" ng-change="profile.changed(profile.time)" hour-step="1" minute-step="1" show-meridian="['AM', 'PM']"></div>
-
-          </div>
-      <div class="form-group row">
-          <label for="order" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
-          <div class="col-xs-9">
-          <select class="form-control" id="order" ng-model="profile.order" class="form-control">
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-          </div>
-    </div>
-    <button type="submit" class="btn btn-default" ng-click="profile.sendUserInfo(profile.name, profile.messages, profile.time, profile.number, profile.order)">submit</button>
-  </form>
   <div>
     <h2>Lojong Slogans</h2>
     <p>Lojong, or mind training, is a core practice in all the lineages of the Tibetan tradition. They can perhaps best be characterized as a method for transforming our mind by turning away from self-centeredness and cultivating instead the mental habits that generate bodhicitta, the awakened mind that puts the benefit of others above all else.</p>
 
     <h3>More information on Lojong: <button ng-click="revealInfo = !revealInfo" ng-hide="revealInfo" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
-          <button ng-click="revealInfo = !revealInfo" ng-show="revealInfo" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button></h3>    <div ng-show="revealInfo">
+          <button ng-click="revealInfo = !revealInfo" ng-show="revealInfo" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button></h3>
+          <div ng-show="revealInfo">
       <h4>Online information:</h4>
           <p><a href="http://www.lionsroar.com/dont-give-up/">Commentary </a>by Pema Chödrön</p>
           <p><a href="http://tricycle.org/trikedaily/train-your-mind-lojong-commentary-judy-lief/">Commentary and practice advice </a>by Judy Lief</p>
@@ -58,4 +18,46 @@
           <p><a href="http://pemachodronfoundation.org/product/start-where-you-are-book/">Start Where You Are </a>by Pema Chödrön</p>
           <p><a href="http://www.shambhala.com/enlightened-courage.html">Enlightened Courage </a>by Dilgo Khyentse Rinpoche</p>
     </div>
+  </div>
+  <h3>Update settings: <button ng-click="reveal = !reveal" ng-hide="reveal" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
+        <button ng-click="reveal = !reveal" ng-show="reveal" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button></h3>
+
+  <form ng-show="reveal" class="form-group">
+      <div class="form-group row">
+        <label  for="name" class="col-xs-3 col-form-label">What is your name?</label>
+        <div class="col-xs-9">
+          <input class="form-control" ng-model="profile.name" />
+            </div>
+      </div>
+      <div class="form-group row">
+          <label for="frequency" class="col-xs-3 col-form-label">Would you like your daily slogan sent to your phone each day?</label>
+          <div class="col-xs-9">
+          <select class="form-control" id="frequency" ng-model="profile.messages" class="form-control">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          </div>
+            </div>
+          <div class="form-group row">
+            <label  for="name" class="col-xs-3 col-form-label">What is your number?</label>
+            <div class="col-xs-9">
+              <input class="form-control" ng-model="profile.number" />
+                </div>
+          </div>
+          <div class="form-group row">
+            <label for="frequency" class="col-xs-3 col-form-label">At what time?</label>
+            <div uib-timepicker class="col-xs-9" ng-model="profile.time" ng-change="profile.changed(profile.time)" hour-step="1" minute-step="1" show-meridian="['AM', 'PM']"></div>
+
+            </div>
+        <div class="form-group row">
+            <label for="order" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
+            <div class="col-xs-9">
+            <select class="form-control" id="order" ng-model="profile.order" class="form-control">
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+            </div>
+      </div>
+      <button type="submit" class="btn btn-default" ng-click="profile.sendUserInfo(profile.name, profile.messages, profile.time, profile.number, profile.order)">submit</button>
+    </form>
   </div>
