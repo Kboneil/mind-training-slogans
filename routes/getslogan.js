@@ -40,11 +40,7 @@ timeoutDaily();
 //--------------------------------daily slogan----------------------------------
 
 function timeoutDaily() {
-  console.log('in here');
-  // rule.hour = 0;
-  rule.second = 00;
-
-
+  rule.hour = 0;
 
   schedule.scheduleJob(rule, function() {
 

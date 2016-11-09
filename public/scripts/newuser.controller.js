@@ -13,7 +13,7 @@ function NewUserController($http, $location) {
     ctrl.time = '';
     ctrl.number = '';
       console.log(data);
-    $http.put('/users/returning', data).then(function(response){
+    $http.put('/users', data).then(function(response){
       console.log('response post', response.data);
   }, function(error) {
     console.log('error posting order answer', error);

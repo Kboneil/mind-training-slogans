@@ -39,14 +39,14 @@ router.get('/logout', function(req, res){
 });
 
 router.put('/', function (req, res) {
-  console.log('in post request');
+
   var currentlyLoggedInUser = req.user;
   var answer = req.body.random;
   var name = req.body.name;
   var messages = req.body.messages;
   var time = req.body.time;
   var number = req.body.number;
-  console.log('answer', answer);
+
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -90,7 +90,7 @@ router.put('/', function (req, res) {
                   if (index > -1) {
                     a.splice(index, 1);
                     }
-                  console.log('random array', a);
+
 
               client.query('UPDATE users SET slogans = ARRAY [' + a + '] WHERE id = $1 RETURNING *', [currentlyLoggedInUser.id],
               function (err, result) {
@@ -99,15 +99,13 @@ router.put('/', function (req, res) {
                   res.sendStatus(500);
                   return;
                 }
-                console.log('result.rows', result.rows[0].slogans[0]);
-
 
                 var sloganOfTheDayId = result.rows[0].slogans[0];
-                console.log('sloganOfTheDay else', sloganOfTheDayId);
+
                 //remove that slogan
                 result.rows[0].slogans.shift();
                 var array = result.rows[0].slogans;
-                console.log('array', array);
+
                 //updates that users entry of slogan of the day
                 client.query('UPDATE users SET daily=$1, slogans = ARRAY [' + array + '] WHERE id = $2 RETURNING *', [sloganOfTheDayId, currentlyLoggedInUser.id],
                       function (err, result) {
@@ -117,7 +115,17 @@ router.put('/', function (req, res) {
                           return;
                         }
 
-                        console.log('slogan of the day updated');
+                        // check to see if they want an SMS
+                        client.query('SELECT * FROM users JOIN slogans ON slogans.id = daily WHERE users.id = $1', [currentlyLoggedInUser.id],
+                              function (err, result) {
+                                if (err) {
+                                  console.log('Error querying DB', err);
+                                  return;
+                                }
+
+                                fromTwilio.sendSMS(result.rows[0]);
+
+                        });
                       });
 
 
@@ -132,16 +140,13 @@ router.put('/', function (req, res) {
                   res.sendStatus(500);
                   return;
                 }
-                console.log('result.rows', result.rows[0].slogans[0]);
-
 
                 var sloganOfTheDayId = result.rows[0].slogans[0];
-                console.log('sloganOfTheDay else', sloganOfTheDayId);
+
                 //remove that slogan
                 result.rows[0].slogans.shift();
                 var array = result.rows[0].slogans;
-                console.log('array', array);
-                console.log('after shift else', result.rows[0].slogans);
+
                 //updates that users entry of slogan of the day
                 client.query('UPDATE users SET daily=$1, slogans = ARRAY [' + array + '] WHERE id = $2 RETURNING *', [sloganOfTheDayId, currentlyLoggedInUser.id],
                       function (err, result) {
@@ -151,13 +156,23 @@ router.put('/', function (req, res) {
                           return;
                         }
 
-                        console.log('slogan of the day updated');
+                        // check to see if they want an SMS
+                        client.query('SELECT * FROM users JOIN slogans ON slogans.id = daily WHERE users.id = $1', [currentlyLoggedInUser.id],
+                              function (err, result) {
+                                if (err) {
+                                  console.log('Error querying DB', err);
+                                  return;
+                                }
+                                fromTwilio.sendSMS(result.rows[0]);
+                                console.log('jobs', schedule.scheduledJobs);
+                        });
+
                       });
               });//end update
 
 
             }
-            // check to see if they want an SMS
+
 
 
     } finally {
@@ -227,7 +242,19 @@ router.put('/returning', function (req, res) {
                   res.sendStatus(500);
                   return;
                 }
-                console.log('returning user array updated')
+                console.log('returning user array updated');
+                // check to see if they want an SMS
+                console.log('currently', currentlyLoggedInUser.id);
+                client.query('SELECT * FROM users JOIN slogans ON slogans.id = daily WHERE users.id = $1', [currentlyLoggedInUser.id],
+                      function (err, result) {
+                        if (err) {
+                          console.log('Error querying DB', err);
+                          return;
+                        }
+                        console.log('user after get', result.rows[0]);
+                        fromTwilio.sendSMS(result.rows[0]);
+                        console.log('jobs', schedule.scheduledJobs);
+                });
 
 
               });
