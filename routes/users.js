@@ -189,7 +189,7 @@ router.put('/returning', function (req, res) {
   var messages = req.body.messages;
   var time = req.body.time;
   var number = req.body.number;
-  console.log('answer', answer);
+
   pool.connect(function (err, client, done) {
     try {
       if (err) {
@@ -251,9 +251,13 @@ router.put('/returning', function (req, res) {
                           console.log('Error querying DB', err);
                           return;
                         }
-                        console.log('user after get', result.rows[0]);
-                        fromTwilio.sendSMS(result.rows[0]);
-                        console.log('jobs', schedule.scheduledJobs);
+                                    console.log('jobs before', schedule.scheduledJobs);
+                                    console.log('username', result.rows[0].username);
+                         schedule.scheduledJobs[result.rows[0].username].cancel()
+                          fromTwilio.sendSMS(result.rows[0]);
+                          console.log('jobs finished', schedule.scheduledJobs);
+
+
                 });
 
 
@@ -269,7 +273,23 @@ router.put('/returning', function (req, res) {
                   return;
                 }
                 console.log('returning user array updated');
+                // check to see if they want an SMS
+                console.log('currently', currentlyLoggedInUser.id);
+                client.query('SELECT * FROM users JOIN slogans ON slogans.id = daily WHERE users.id = $1', [currentlyLoggedInUser.id],
+                      function (err, result) {
+                        if (err) {
+                          console.log('Error querying DB', err);
+                          return;
+                        }
+                        console.log('jobs before', schedule.scheduledJobs);
+                         schedule.scheduledJobs[result.rows[0].username].cancel()
+                          fromTwilio.sendSMS(result.rows[0]);
 
+
+                          console.log('jobs finished', schedule.scheduledJobs);
+
+
+                });
 
               });//end update
 

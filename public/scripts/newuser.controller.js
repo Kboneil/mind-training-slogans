@@ -6,6 +6,12 @@ function NewUserController($http, $location) {
   getUser($http, ctrl);
 
   ctrl.sendUserInfo = function (name, messages, time, number, order){
+    if (time === ''){
+      time = null;
+    }
+    if (number === ''){
+      number = null;
+    }
     var data = {name:name, messages: messages, time: time, number: number, random: order};
     ctrl.name = '';
     ctrl.messages = '';

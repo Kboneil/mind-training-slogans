@@ -8,12 +8,9 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     // getUser($http, index);
 
 
-// IndexService.getUser = function(){
-//   console.log('inhere');
-//     IndexService.getUser().then(function(response) {
-//       console.log('response');
-//     });
-// }
-//
-// IndexService.getUser();
+    IndexService.getUser().then(function(response) {
+      console.log('response.data', response);
+      index.user = response;
+    });
+
 }

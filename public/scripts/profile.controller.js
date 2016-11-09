@@ -8,6 +8,12 @@ function ProfileController($http, $location, IndexService) {
   // getUser($http, ctrl);
 
 ctrl.sendUserInfo = function (name, messages, time, number, order){
+  if (time === ''){
+    time = null;
+  }
+  if (number === ''){
+    number = null;
+  }
   var data = {name:name, messages: messages, time: time, number: number, random: order};
   ctrl.name = '';
   ctrl.messages = '';
@@ -24,7 +30,8 @@ ctrl.sendUserInfo = function (name, messages, time, number, order){
 
 
 IndexService.getUser().then(function(response) {
-  console.log('response');
+  console.log('response.data', response);
+  ctrl.user = response;
 });
 
 
@@ -35,7 +42,8 @@ ctrl.logout = function (){
   }, function(error) {
     console.log('error getting user to logout', error);
   }).then(function(){
-    $location.path('/login');
+    IndexService.status.login = false;
+    $location.path('/');
   }, function(error) {
     console.log('error logging out', error);
   });
