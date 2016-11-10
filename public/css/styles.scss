@@ -207,6 +207,7 @@ header {
 #profile{
   animation: fadeInRight 0.25s ease-in both;
 }
+
 #profile, #newuser{
   #logout {
     float: right;
@@ -216,6 +217,19 @@ header {
     margin: auto;
   }
 
+}
+#newuser{
+
+    a {
+      color: black;
+      margin: auto;
+    }
+    a:hover, a:active {
+      cursor: pointer;
+      color: $gold;
+      text-decoration: none;
+    }
+  
 }
 
 //---------------slogan page----------------
@@ -271,6 +285,7 @@ header {
 }
 
 #list{
+
   h4{
     color: $gold;
   }

@@ -140,6 +140,14 @@ h2.sloganCircle {
   color: #D4AF37;
   margin: auto; }
 
+#newuser a {
+  color: black;
+  margin: auto; }
+#newuser a:hover, #newuser a:active {
+  cursor: pointer;
+  color: #D4AF37;
+  text-decoration: none; }
+
 #center {
   margin: 10px auto;
   width: 600px;

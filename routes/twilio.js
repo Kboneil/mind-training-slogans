@@ -75,7 +75,7 @@ function sendSMS(user) {
               console.log(responseData.body); // outputs slogan of the day
 
           } else {
-            console.log('error sending message');
+            console.log('error sending message', err);
           }
       });//end of send message
     });

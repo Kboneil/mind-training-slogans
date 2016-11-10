@@ -114,6 +114,16 @@ router.put('/', function (req, res) {
                           res.sendStatus(500);
                           return;
                         }
+                        var date = new Date();
+                        client.query('INSERT INTO slogan_date (date, slogan_id, user_id) values ($1, $2, $3) RETURNING *', [date, sloganOfTheDayId, result.rows[0].id],
+                              function (err, result) {
+                                if (err) {
+                                  console.log('Error querying DB', err);
+                                  return;
+                                }
+
+                                console.log('new slogan information updated');
+                              });
 
                         // check to see if they want an SMS
                         client.query('SELECT * FROM users JOIN slogans ON slogans.id = daily WHERE users.id = $1', [currentlyLoggedInUser.id],
@@ -155,6 +165,17 @@ router.put('/', function (req, res) {
                           res.sendStatus(500);
                           return;
                         }
+
+                        var date = new Date();
+                        client.query('INSERT INTO slogan_date (date, slogan_id, user_id) values ($1, $2, $3) RETURNING *', [date, sloganOfTheDayId, result.rows[0].id],
+                              function (err, result) {
+                                if (err) {
+                                  console.log('Error querying DB', err);
+                                  return;
+                                }
+
+                                console.log('new slogan information updated');
+                              });
 
                         // check to see if they want an SMS
                         client.query('SELECT * FROM users JOIN slogans ON slogans.id = daily WHERE users.id = $1', [currentlyLoggedInUser.id],
@@ -253,7 +274,8 @@ router.put('/returning', function (req, res) {
                         }
                                     console.log('jobs before', schedule.scheduledJobs);
                                     console.log('username', result.rows[0].username);
-                         schedule.scheduledJobs[result.rows[0].username].cancel()
+                                    if(!schedule.scheduledJobs[result.rows[0].username]){
+                         schedule.scheduledJobs[result.rows[0].username].cancel();};
                           fromTwilio.sendSMS(result.rows[0]);
                           console.log('jobs finished', schedule.scheduledJobs);
 
@@ -282,7 +304,8 @@ router.put('/returning', function (req, res) {
                           return;
                         }
                         console.log('jobs before', schedule.scheduledJobs);
-                         schedule.scheduledJobs[result.rows[0].username].cancel()
+                        if(!schedule.scheduledJobs[result.rows[0].username]){
+                         schedule.scheduledJobs[result.rows[0].username].cancel();};
                           fromTwilio.sendSMS(result.rows[0]);
 
 
