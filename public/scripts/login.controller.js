@@ -14,6 +14,7 @@ function LoginController($http, $location) {
       $location.path('/home');
     }, function(error) {
       console.log('error loggin in', error);
+      alert('Sorry! Your username and password was not accepted. Please try again');
     });
   };
 

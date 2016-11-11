@@ -33,30 +33,15 @@
   <script src="scripts/questions.controller.js" charset="utf-8"></script>
   <script src="scripts/profile.controller.js" charset="utf-8"></script>
   <script src="scripts/newuser.controller.js" charset="utf-8"></script>
-  <script src="scripts/index.controller.js" charset="utf-8"></script>
   <script src="scripts/index.service.js" charset="utf-8"></script>
   <script src="scripts/questionscomments.service.js" charset="utf-8"></script>
   <script src="scripts/app.config.js" charset="utf-8"></script>
 
   <base href="/" />
 </head>
-<body class="container" ng-controller="IndexController as index">
-  <header ng-show="index.isLoggedIn.status.login">
-    <nav id="header">
-      <a href="/home">Lojong</a>
-    </nav>
-  </header>
-
+<body class="container">
   <main>
   <ng-view></ng-view>
     </main>
-  <footer ng-show="index.isLoggedIn.status.login">
-    <nav id="footer">
-      <a id="slogansButton" href="/slogans"><span class="sloganCircle">59</span><br /><div class="headerText">Slogans</div></a>
-      <a id="calendarButton" href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">{{index.date | date:'shortDate'}}</div></a>
-      <a id="profileButton"  href="/profile"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">{{index.user[0].name}}</div></a>
-
-    </nav>
-  </footer>
 </body>
 </html>

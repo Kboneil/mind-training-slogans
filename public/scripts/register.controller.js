@@ -13,6 +13,7 @@ function RegisterController($http, $location) {
     }).then(function(){
       $location.path('/newuser');
     }, function(error) {
+      alert('That username is already taken.');
       console.log('error registering', error);
     });
   };

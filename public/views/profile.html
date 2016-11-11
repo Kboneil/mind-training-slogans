@@ -1,3 +1,8 @@
+<header>
+  <nav id="header">
+    <a href="/home">Lojong</a>
+  </nav>
+</header>
 <div id="profile">
 <button type="submit" id="logout" class="btn btn-default" ng-click="profile.logout()">Logout</button>
 <h2>Hello, {{profile.user[0].name}}</h2>
@@ -32,22 +37,23 @@
       <div class="form-group row">
           <label for="frequency" class="col-xs-3 col-form-label">Would you like your daily slogan sent to your phone each day?</label>
           <div class="col-xs-9">
-          <select class="form-control" id="frequency" ng-model="profile.messages" class="form-control">
+          <select class="form-control" id="frequency" ng-model="profile.messages" class="form-control" ng-change="profile.selectSMS(profile.messages)">
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
           </div>
             </div>
+            <div id="SMS">
           <div class="form-group row">
             <label  for="name" class="col-xs-3 col-form-label">What is your number?</label>
             <div class="col-xs-9">
-              <input class="form-control" ng-model="profile.number" />
+              <input class="form-control" ng-model="profile.number" placeholder="Enter like this: 1001001000"/>
                 </div>
           </div>
           <div class="form-group row">
             <label for="frequency" class="col-xs-3 col-form-label">At what time?</label>
             <div uib-timepicker class="col-xs-9" ng-model="profile.time" ng-change="profile.changed(profile.time)" hour-step="1" minute-step="1" show-meridian="['AM', 'PM']"></div>
-
+          </div>
             </div>
         <div class="form-group row">
             <label for="order" class="col-xs-3 col-form-label">Would you like to receive the slogans randomly?</label>
@@ -61,3 +67,11 @@
       <button type="submit" class="btn btn-default" ng-click="profile.sendUserInfo(profile.name, profile.messages, profile.time, profile.number, profile.order)">submit</button>
     </form>
   </div>
+  <footer>
+    <nav id="footer">
+      <a id="slogansButton" href="/slogans"><span class="sloganCircle">59</span><br /><div class="headerText">Slogans</div></a>
+      <a id="calendarButton" href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">{{profile.date | date:'shortDate'}}</div></a>
+      <a id="profileButton"  href="/profile" class="highlighted"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">{{profile.user[0].name}}</div></a>
+
+    </nav>
+  </footer>

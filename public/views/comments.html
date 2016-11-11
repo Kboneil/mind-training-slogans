@@ -1,3 +1,8 @@
+<header>
+  <nav id="header">
+    <a href="/home">Lojong</a>
+  </nav>
+</header>
 <div id="comments">
 <div id="nav" class="row">
   <div class="col-xs-2 col-lg-2">
@@ -34,3 +39,11 @@
 </div>
 </div>
 </div>
+<footer>
+  <nav id="footer">
+    <a id="slogansButton" href="/slogans" class="highlighted"><span class="sloganCircle">59</span><br /><div class="headerText">Slogans</div></a>
+    <a id="calendarButton" href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">{{comments.date | date:'shortDate'}}</div></a>
+    <a id="profileButton"  href="/profile"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">{{comments.user[0].name}}</div></a>
+
+  </nav>
+</footer>

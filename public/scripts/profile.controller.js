@@ -3,16 +3,22 @@ angular.module('lojongApp')
 
 function ProfileController($http, $location, IndexService) {
   var ctrl = this;
+  ctrl.date = new Date();
 
-  IndexService.status.login = true;
-  // getUser($http, ctrl);
-
+  IndexService.getUser().then(function(response) {
+    console.log('response.data', response);
+    ctrl.user = response;
+  });
 ctrl.sendUserInfo = function (name, messages, time, number, order){
   if (time === ''){
     time = null;
   }
   if (number === ''){
     number = null;
+  }
+  if (name.length > 15){
+    alert('Please enter a name that is fewer than 15 characters');
+    return;
   }
   var data = {name:name, messages: messages, time: time, number: number, random: order};
   ctrl.name = '';
@@ -24,6 +30,7 @@ ctrl.sendUserInfo = function (name, messages, time, number, order){
   $http.put('/users/returning', data).then(function(response){
     console.log('response post', response.data);
 }, function(error) {
+  alert('Sorry! There was an error. Please try again.')
   console.log('error posting order answer', error);
 });
 }
@@ -35,6 +42,14 @@ IndexService.getUser().then(function(response) {
 });
 
 
+ctrl.selectSMS = function (selection){
+  if (selection === 'true'){
+    document.getElementById('SMS').style.display = 'inherit';
+  } else {
+    document.getElementById('SMS').style.display = 'none';
+  }
+}
+
 
 ctrl.logout = function (){
   $http.get('/users/logout').then(function(response){
@@ -42,7 +57,6 @@ ctrl.logout = function (){
   }, function(error) {
     console.log('error getting user to logout', error);
   }).then(function(){
-    IndexService.status.login = false;
     $location.path('/');
   }, function(error) {
     console.log('error logging out', error);
@@ -52,12 +66,3 @@ ctrl.logout = function (){
 
 
 }//end of controller
-
-function getUser ($http, ctrl) {
-  $http.get('/users').then(function(response){
-    console.log('response', response.data);
-    ctrl.user = response.data
-  }, function(error) {
-    console.log('error getting questions', error);
-  });
-}

@@ -4,7 +4,12 @@ angular.module('lojongApp')
 function QuestionsController($http, $location, IndexService, qcService) {
 
   var ctrl = this;
-  IndexService.status.login = true;
+  ctrl.date = new Date();
+
+  IndexService.getUser().then(function(response) {
+    console.log('response.data', response);
+    ctrl.user = response;
+  });
   getQuestions($http, ctrl);
 
 

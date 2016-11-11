@@ -1,11 +1,16 @@
-
+<header>
+  <nav id="header">
+    <a href="/home" class="highlighted">Lojong</a>
+  </nav>
+  </header>
   <div id="home">
+    <div id="homeBody">
     <h2 ng-model="home.id" class="sloganCircle">{{home.id}}</h2>
-    <h1>{{home.point}}</h1>
-    <h3>{{home.slogan}}</h3>
+    <h3>{{home.point}}</h3>
+    <h1>{{home.slogan}}</h1>
     <h4>{{home.extra}}</h4>
 
-    <div id="commentsList">
+    <div id="commentsList" ng-show="home.comments.show">
     <h4>Comments:</h4>
     <div ng-repeat="comment in home.comment | orderBy:'-date':reverse">
         <h5>{{comment.date | date}}</h5>
@@ -34,32 +39,59 @@
       </form>
     </div>
   </div>
-    <div id="questionsList">
-    <h4>Questions:</h4>
-    <div ng-repeat="question in home.question | orderBy:'-date':reverse">
-      <h5>{{question.date | date}}</h5>
-      <div class="row">
-        <form>
-        <div class="col-xs-10 col-lg-10">
-          <textarea type="text" id="small" class="form-control" ng-model="question.question"></textarea>
-        </div>
-        <div class="col-xs-1 col-lg-1">
-          <button type="submit" class="btn btn-default" ng-click="home.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span><br />edit</button>
-        </div>
-        <div class="col-xs-1 col-lg-1">
-          <button type="submit" class="btn btn-default" ng-click="home.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span><br />delete</button>
-        </div>
-        </form>
-      </div>
-    </div>
+
+  <div id="questionsList" ng-show="home.questions.show">
+  <h4>Questions:</h4>
+  <div ng-repeat="question in home.question | orderBy:'-date':reverse">
+    <h5>{{question.date | date}}</h5>
     <div class="row">
       <form>
-        <div class="col-xs-11 col-lg-11">
-          <textarea id="large" type="text" class="form-control" ng-model="home.newQuestion" placeholder="New question"></textarea>
-        </div>
-        <div class="col-xs-1 col-lg-1">
-          <button type="submit" class="btn btn-default" ng-click="home.postQuestion(home.newQuestion, home.id)" ><span class="glyphicon glyphicon-plus"></span><br />Add</button>
-        </div>
+      <div class="col-xs-10 col-lg-10">
+        <textarea type="text" id="small" class="form-control" ng-model="question.question"></textarea>
+      </div>
+      <div class="col-xs-1 col-lg-1">
+        <button type="submit" class="btn btn-default" ng-click="home.changeQuestion(question.question, question.id)"><span class="glyphicon glyphicon-pencil"></span><br />edit</button>
+      </div>
+      <div class="col-xs-1 col-lg-1">
+        <button type="submit" class="btn btn-default" ng-click="home.deleteQuestion(question.id)" ><span class="glyphicon glyphicon-trash"></span><br />delete</button>
+      </div>
       </form>
     </div>
   </div>
+  <div class="row">
+    <form>
+      <div class="col-xs-11 col-lg-11">
+        <textarea id="large" type="text" class="form-control" ng-model="home.newQuestion" placeholder="New question"></textarea>
+      </div>
+      <div class="col-xs-1 col-lg-1">
+        <button type="submit" class="btn btn-default" ng-click="home.postQuestion(home.newQuestion, home.id)" ><span class="glyphicon glyphicon-plus"></span><br />Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<div id="options" class="row">
+  <div class="col-xs-3">
+  </div>
+  <div class="col-xs-2">
+    <h2 id="addComment" class="sloganCircle" ng-class="home.right" ng-show="home.status.add" ng-click="home.expandCom()">C</h2>
+  </div>
+  <div class="col-xs-2">
+      <h2 id="more" class="sloganCircle" ng-class="home.active" ng-click="home.more()">+</h2>
+  </div>
+  <div class="col-xs-2">
+    <h2 id="addQuestion" class="sloganCircle" ng-class="home.left" ng-show="home.status.add" ng-click="home.expandQues()">?</h2>
+  </div>
+  <div class="col-xs-3">
+
+  </div>
+</div>
+
+    </div>
+  <footer>
+    <nav id="footer">
+      <a id="slogansButton" href="/slogans"><span class="sloganCircle">59</span><br /><div class="headerText">Slogans</div></a>
+      <a id="calendarButton" href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">{{home.date | date:'shortDate'}}</div></a>
+      <a id="profileButton"  href="/profile"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">{{home.user[0].name}}</div></a>
+    </nav>
+  </footer>

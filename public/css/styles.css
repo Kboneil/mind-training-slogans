@@ -26,10 +26,15 @@
   100% {
     opacity: 1;
     transform: none; } }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1); }
+  100% {
+    transform: rotate(360deg) scale(1.2); } }
 header {
   position: fixed;
   top: 0;
-  height: 50px;
+  height: 60px;
   width: 100%;
   background-color: white;
   z-index: 1;
@@ -37,14 +42,20 @@ header {
   text-align: center;
   border-bottom: 2px solid black; }
   header a {
-    color: black;
+    color: #D4AF37;
     display: inline-block; }
   header a:hover, header a:active, header a:focus {
-    color: #D4AF37;
+    color: black;
     text-decoration: none; }
   header nav {
     width: 100%;
-    border-bottom: 2px solid #D4AF37; }
+    border-bottom: 4px solid #D4AF37;
+    background-color: darkred;
+    padding: 3px; }
+
+.highlighted {
+  color: black;
+  transform: scale(1.2); }
 
 .sloganCircle {
   height: 150px;
@@ -67,9 +78,6 @@ header {
   width: 100% !important;
   font-family: 'Signika', sans-serif; }
 
-main {
-  margin: 90px 40px 140px 40px; }
-
 #home h2, #slogans h2 {
   font-size: 50px; }
 
@@ -78,6 +86,9 @@ h2.sloganCircle {
 
 #home {
   text-align: center; }
+
+#home, #comments, #questions, #slogans, #calendar, #profile {
+  margin: 90px 40px 140px 40px; }
 
 #home button.btn.btn-default, #comments button.btn.btn-default, #questions button.btn.btn-default, #slogans button.btn.btn-default {
   font-size: 10px; }
@@ -88,16 +99,16 @@ h2.sloganCircle {
   box-shadow: none; }
 
 #login h1, #registration h1 {
-  text-align: center; }
+  text-align: center;
+  color: #D4AF37; }
 #login #border, #registration #border {
   border: 2px solid #D4AF37;
-  padding-bottom: 220px;
-  padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px; }
+  height: 160px;
+  padding-top: 15px; }
 #login form, #registration form {
   border: 2px solid black;
-  padding: 40px 0; }
+  height: 185px;
+  padding: 10px; }
   #login form a, #registration form a {
     color: black;
     margin: auto; }
@@ -108,6 +119,9 @@ h2.sloganCircle {
 
 #home {
   animation: fadeInDown 0.25s ease-in both; }
+  #home h1 {
+    top: 50%;
+    font-size: 500%; }
   #home #questionsList, #home #commentsList {
     text-align: left;
     padding: 15px;
@@ -130,9 +144,26 @@ h2.sloganCircle {
   #home textarea#small:focus {
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+  #home #options {
+    width: 100%;
+    position: fixed;
+    bottom: 100px;
+    transform: translateX(-40px);
+    margin: 0; }
+    #home #options .move {
+      animation: spin 0.5s ease-in both; }
+    #home #options .slideLeft {
+      animation: fadeInLeft 0.25s ease-in both; }
+    #home #options .slideRight {
+      animation: fadeInRight 0.25s ease-in both; }
+    #home #options .moveBack {
+      animation: spin 0.5s ease-in both; }
 
 #profile {
   animation: fadeInRight 0.25s ease-in both; }
+
+#SMS {
+  display: none; }
 
 #profile #logout, #newuser #logout {
   float: right; }
@@ -140,13 +171,15 @@ h2.sloganCircle {
   color: #D4AF37;
   margin: auto; }
 
-#newuser a {
-  color: black;
-  margin: auto; }
-#newuser a:hover, #newuser a:active {
-  cursor: pointer;
-  color: #D4AF37;
-  text-decoration: none; }
+#newuser {
+  margin: 50px; }
+  #newuser a {
+    color: black;
+    margin: auto; }
+  #newuser a:hover, #newuser a:active {
+    cursor: pointer;
+    color: #D4AF37;
+    text-decoration: none; }
 
 #center {
   margin: 10px auto;
@@ -162,12 +195,15 @@ h2.sloganCircle {
 
 #slogans {
   animation: fadeInLeft 0.25s ease-in both; }
+  #slogans #largerSlogan {
+    text-transform: uppercase;
+    font-size: 20px; }
   #slogans #submit {
     font-size: 14px; }
   #slogans .sloganGroup {
     margin: 15px;
     text-align: center;
-    border-bottom: 2px solid #D4AF37; }
+    border-bottom: 4px solid #D4AF37; }
   #slogans .sloganGroup:last-child {
     border-bottom: none; }
   #slogans .sloganInfo {
@@ -252,6 +288,8 @@ h2.sloganCircle {
 
 #calendar {
   animation: fadeInUp 0.25s ease-in both; }
+  #calendar #cal-week-box {
+    display: none; }
   #calendar .btn {
     outline: none; }
     #calendar .btn #selected {
@@ -279,22 +317,24 @@ footer {
   border-top: 2px solid black; }
   footer nav {
     width: 100%;
-    border-top: 2px solid #D4AF37;
-    margin: 2px; }
+    border-top: 4px solid #D4AF37;
+    margin: 4px;
+    background-color: darkred; }
   footer .headerText {
     font-size: 15px; }
   footer span.sloganCircle {
     padding: 0 4px; }
   footer a {
-    color: black;
+    color: #D4AF37;
     display: inline-block; }
   footer a:hover, footer a:active, footer a:focus {
-    color: #D4AF37;
+    color: black;
     text-decoration: none; }
   footer a#slogansButton {
     float: left; }
   footer a#calendarButton {
-    float: center; }
+    float: center;
+    transform: translateX(-10px); }
   footer a#profileButton {
     float: right; }
 

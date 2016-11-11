@@ -1,6 +1,10 @@
+<header>
+  <nav id="header">
+    <a href="/home">Lojong</a>
+    <!-- <a style="float: right;" href="/home"><span class="glyphicon glyphicon-home"></span></a> -->
+  </nav>
+</header>
 <div id="slogans">
-
-
   <div class="row" id="nav">
     <div class="col-xs-2 col-lg-2">
       <button class="form-control"><a href="/comments">Comments</a></button>
@@ -24,7 +28,7 @@
         <h2 class="sloganCircle">{{slogan.id}}</h2>
         <div class="sloganInfo">
           <p>{{slogan.point}}</p>
-          <p>{{slogan.slogan}}</p>
+          <p id="largerSlogan">{{slogan.slogan}}</p>
           <p>{{slogan.extra}}</p>
       <button ng-click="reveal = !reveal" ng-hide="reveal" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
       <button ng-click="reveal = !reveal" ng-show="reveal" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>
@@ -93,3 +97,11 @@
 
     </div>
     </div>
+    <footer>
+      <nav id="footer">
+        <a id="slogansButton" href="/slogans" class="highlighted"><span class="sloganCircle">59</span><br /><div class="headerText">Slogans</div></a>
+        <a id="calendarButton" href="/calendar"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">{{slogans.date | date:'shortDate'}}</div></a>
+        <a id="profileButton"  href="/profile"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">{{slogans.user[0].name}}</div></a>
+
+      </nav>
+    </footer>

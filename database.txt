@@ -14,7 +14,10 @@ CREATE TABLE users (
 	slogans integer[],
 	random boolean DEFAULT false,
 	name varchar(15),
-	frequency text DEFAULT one
+	messages boolean DEFAULT false,
+	number bigint,
+	time varchar(100),
+	daily int REFERENCES slogans
 );
 
 CREATE TABLE comments (

@@ -4,7 +4,12 @@ angular.module('lojongApp')
 function CommentsController($http, $location, IndexService, qcService) {
   console.log('CommentsController loaded');
   var ctrl = this;
-  IndexService.status.login = true;
+  ctrl.date = new Date();
+
+  IndexService.getUser().then(function(response) {
+    console.log('response.data', response);
+    ctrl.user = response;
+  });
   getComments($http, ctrl);
 
   ctrl.deleteComment = function(id){

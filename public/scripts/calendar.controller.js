@@ -3,8 +3,12 @@ angular.module('lojongApp') //you will need to declare your module with the depe
 
 
   var vm = this;
-  IndexService.status.login = true;
-  getUser($http, vm);
+  vm.date = new Date();
+
+  IndexService.getUser().then(function(response) {
+    console.log('response.data', response);
+    vm.user = response;
+  });
   vm.sloganArray = []
   getCalendarInfo ($http, moment, alert, calendarConfig, vm, actions);
 
@@ -218,12 +222,4 @@ angular.module('lojongApp') //you will need to declare your module with the depe
      }, function(error) {
        console.log('error getting slogans', error);
      });
-  }
-
-  function getUser ($http, vm) {
-    $http.get('/users').then(function(response){
-      vm.user = response.data
-    }, function(error) {
-      console.log('error getting questions', error);
-    });
   }

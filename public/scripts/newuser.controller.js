@@ -1,9 +1,13 @@
 angular.module('lojongApp')
 .controller('NewUserController', NewUserController);
 
-function NewUserController($http, $location) {
+function NewUserController($http, $location, IndexService) {
   var ctrl = this;
-  getUser($http, ctrl);
+
+  IndexService.getUser().then(function(response) {
+    console.log('response.data', response);
+    ctrl.user = response;
+  });
 
   ctrl.sendUserInfo = function (name, messages, time, number, order){
     if (time === ''){
@@ -11,6 +15,10 @@ function NewUserController($http, $location) {
     }
     if (number === ''){
       number = null;
+    }
+    if (name.length > 15){
+      alert('Please enter a name that is fewer than 15 characters');
+      return;
     }
     var data = {name:name, messages: messages, time: time, number: number, random: order};
     ctrl.name = '';
@@ -22,6 +30,7 @@ function NewUserController($http, $location) {
     $http.put('/users', data).then(function(response){
       console.log('response post', response.data);
   }, function(error) {
+    alert('Sorry! There was an error. Please try again.')
     console.log('error posting order answer', error);
   }).then(function(){
     getUser($http, ctrl);
@@ -42,15 +51,12 @@ function NewUserController($http, $location) {
     });
   };
 
-
+ctrl.selectSMS = function (selection){
+  if (selection === 'true'){
+    document.getElementById('SMS').style.display = 'inherit';
+  } else {
+    document.getElementById('SMS').style.display = 'none';
+  }
+}
 
 }//end of controller
-
-function getUser ($http, ctrl) {
-  $http.get('/users').then(function(response){
-    console.log('response', response.data);
-    ctrl.user = response.data
-  }, function(error) {
-    console.log('error getting questions', error);
-  });
-}

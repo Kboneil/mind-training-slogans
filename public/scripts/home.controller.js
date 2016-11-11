@@ -4,7 +4,10 @@ angular.module('lojongApp')
 function HomeController($http, $location, IndexService, qcService) {
 
   var ctrl = this;
-  IndexService.status.login = true;
+  IndexService.getUser().then(function(response) {
+    console.log('response.data', response);
+    ctrl.user = response;
+  });
   ctrl.point;
   ctrl.id;
   ctrl.slogan;
@@ -13,6 +16,26 @@ function HomeController($http, $location, IndexService, qcService) {
   ctrl.date = new Date();
   loadSlogans($http, ctrl);
 
+ctrl.active = {move:false};
+ctrl.left = {slideLeft:false};
+ctrl.right = {slideRight:false};
+ctrl.status = {add:false};
+ctrl.more = function(){
+  this.active.move = !this.active.move;
+  this.left.slideLeft = !this.left.slideLeft;
+  this.right.slideRight = !this.right.slideRight;
+  this.status.add = !this.status.add;
+}
+
+ctrl.comments = {show:false}
+ctrl.expandCom = function () {
+  this.comments.show =!this.comments.show
+}
+
+ctrl.questions = {show:false}
+ctrl.expandQues = function () {
+  this.questions.show =!this.questions.show
+}
 
   ctrl.postQuestion = function(question, slogan){
     qcService.postQuestion(question, slogan).then(function(){
