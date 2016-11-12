@@ -26,11 +26,32 @@
   100% {
     opacity: 1;
     transform: none; } }
+@keyframes getBigLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-200%) scale(0.1); }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+@keyframes getBigRight {
+  0% {
+    opacity: 0;
+    transform: translateX(200%) scale(0.1); }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
 @keyframes spin {
   0% {
     transform: rotate(0deg) scale(1); }
   100% {
-    transform: rotate(360deg) scale(1.2); } }
+    transform: rotate(360deg) scale(0.8); } }
+@keyframes blink {
+  50% {
+    color: #D4AF37; } }
 header {
   position: fixed;
   top: 0;
@@ -117,6 +138,148 @@ h2.sloganCircle {
     color: #D4AF37;
     text-decoration: none; }
 
+#welcome {
+  text-align: center; }
+  #welcome h2 {
+    font-size: 400%; }
+  #welcome h1 {
+    font-size: 500%;
+    margin-bottom: 10%; }
+  #welcome button {
+    position: fixed;
+    bottom: 5%;
+    font-size: 200%;
+    transform: translateX(-80px); }
+  #welcome .sloganCircle {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    background-color: black;
+    border: 2px solid #D4AF37;
+    color: white;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 100px; }
+
+#hideForm h2 {
+  font-size: 400%;
+  text-align: center; }
+#hideForm .navbar-default {
+  background-color: white !important;
+  border: none;
+  bottom: 10%; }
+#hideForm #submit {
+  font-size: 200%; }
+
+#showButton .navbar-default {
+  width: 100% !important;
+  background-color: darkred !important;
+  border: none;
+  border-bottom: 4px solid #D4AF37;
+  height: 60px; }
+#showButton h2 {
+  margin-top: 120px;
+  font-size: 400%;
+  text-align: center; }
+#showButton #buttons button {
+  margin: 10px;
+  font-size: 100%; }
+#showButton #buttons a, #showButton #buttons a:hover, #showButton #buttons a:active {
+  cursor: pointer;
+  color: black;
+  text-decoration: none; }
+#showButton #tutorial {
+  width: 100%;
+  margin-top: 100px; }
+  #showButton #tutorial button {
+    font-size: 200%;
+    margin: auto;
+    display: block; }
+
+#one, #two, #three, #four, #five {
+  width: 100%;
+  margin: auto;
+  text-align: center; }
+  #one .navbar-default, #two .navbar-default, #three .navbar-default, #four .navbar-default, #five .navbar-default {
+    width: 100% !important;
+    background-color: darkred !important;
+    border: none;
+    border-bottom: 4px solid #D4AF37;
+    height: 60px; }
+    #one .navbar-default button, #two .navbar-default button, #three .navbar-default button, #four .navbar-default button, #five .navbar-default button {
+      font-size: 100% !important;
+      margin: 10px !important; }
+  #one h1, #two h1, #three h1, #four h1, #five h1 {
+    font-size: 400%;
+    margin-top: 100px; }
+  #one #next, #two #next, #three #next, #four #next, #five #next {
+    float: right;
+    margin: 0; }
+  #one #last, #two #last, #three #last, #four #last, #five #last {
+    float: left;
+    margin: 0; }
+  #one img, #two img, #three img, #four img, #five img {
+    width: 40%; }
+  #one #options .sloganCircle, #two #options .sloganCircle, #three #options .sloganCircle, #four #options .sloganCircle, #five #options .sloganCircle {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border: 2px solid #D4AF37;
+    color: white;
+    padding-top: 20px;
+    font-size: 50px;
+    margin: 15px auto; }
+  #one #options #move, #two #options #move, #three #options #move, #four #options #move, #five #options #move {
+    animation: spin 2s linear infinite; }
+  #one #options #slideLeft, #two #options #slideLeft, #three #options #slideLeft, #four #options #slideLeft, #five #options #slideLeft {
+    animation: getBigLeft 2s linear infinite; }
+  #one #options #slideRight, #two #options #slideRight, #three #options #slideRight, #four #options #slideRight, #five #options #slideRight {
+    animation: getBigRight 2s linear infinite; }
+  #one #buttons, #two #buttons, #three #buttons, #four #buttons, #five #buttons {
+    text-align: center;
+    width: 100%; }
+    #one #buttons a, #one #buttons a:hover, #one #buttons a:active, #two #buttons a, #two #buttons a:hover, #two #buttons a:active, #three #buttons a, #three #buttons a:hover, #three #buttons a:active, #four #buttons a, #four #buttons a:hover, #four #buttons a:active, #five #buttons a, #five #buttons a:hover, #five #buttons a:active {
+      cursor: pointer;
+      color: black;
+      text-decoration: none; }
+  #one button, #two button, #three button, #four button, #five button {
+    font-size: 200%;
+    text-align: center;
+    margin: 20px; }
+  #one #tutorialFooter, #two #tutorialFooter, #three #tutorialFooter, #four #tutorialFooter, #five #tutorialFooter {
+    padding: 0 10px;
+    margin: 20px;
+    background-color: darkred; }
+    #one #tutorialFooter h2, #two #tutorialFooter h2, #three #tutorialFooter h2, #four #tutorialFooter h2, #five #tutorialFooter h2 {
+      margin-top: none;
+      color: black;
+      display: inline-block; }
+    #one #tutorialFooter h2:first-child, #two #tutorialFooter h2:first-child, #three #tutorialFooter h2:first-child, #four #tutorialFooter h2:first-child, #five #tutorialFooter h2:first-child {
+      margin-top: 20px; }
+    #one #tutorialFooter .menu, #two #tutorialFooter .menu, #three #tutorialFooter .menu, #four #tutorialFooter .menu, #five #tutorialFooter .menu {
+      animation: blink 2s linear infinite; }
+    #one #tutorialFooter #slogansButton, #two #tutorialFooter #slogansButton, #three #tutorialFooter #slogansButton, #four #tutorialFooter #slogansButton, #five #tutorialFooter #slogansButton {
+      float: left; }
+    #one #tutorialFooter #calendarButton, #two #tutorialFooter #calendarButton, #three #tutorialFooter #calendarButton, #four #tutorialFooter #calendarButton, #five #tutorialFooter #calendarButton {
+      float: center; }
+    #one #tutorialFooter #profileButton, #two #tutorialFooter #profileButton, #three #tutorialFooter #profileButton, #four #tutorialFooter #profileButton, #five #tutorialFooter #profileButton {
+      float: right; }
+  #one .menuOne, #two .menuOne, #three .menuOne, #four .menuOne, #five .menuOne {
+    animation: blink 2s linear infinite;
+    background-color: darkred;
+    padding: 10px; }
+  #one .headerText, #two .headerText, #three .headerText, #four .headerText, #five .headerText {
+    font-size: 15px; }
+  #one span.sloganCircle, #two span.sloganCircle, #three span.sloganCircle, #four span.sloganCircle, #five span.sloganCircle {
+    padding: 0 4px !important; }
+  #one #slogansButton, #two #slogansButton, #three #slogansButton, #four #slogansButton, #five #slogansButton {
+    margin-top: 4px; }
+
 #home {
   animation: fadeInDown 0.25s ease-in both; }
   #home h1 {
@@ -144,23 +307,26 @@ h2.sloganCircle {
   #home textarea#small:focus {
     border: 1px solid #ccc;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+  #home #homeBody {
+    margin-bottom: 220px; }
   #home #options {
     width: 100%;
     position: fixed;
     bottom: 100px;
     transform: translateX(-40px);
-    margin: 0; }
+    margin: 0;
+    padding-bottom: 10px; }
     #home #options .move {
       animation: spin 0.5s ease-in both; }
     #home #options .slideLeft {
-      animation: fadeInLeft 0.25s ease-in both; }
+      animation: getBigLeft 0.5s ease-in both; }
     #home #options .slideRight {
-      animation: fadeInRight 0.25s ease-in both; }
+      animation: getBigRight 0.5s ease-in both; }
     #home #options .moveBack {
       animation: spin 0.5s ease-in both; }
 
 #profile {
-  animation: fadeInRight 0.25s ease-in both; }
+  animation: fadeInUp 0.25s ease-in both; }
 
 #SMS {
   display: none; }
@@ -194,7 +360,7 @@ h2.sloganCircle {
     text-decoration: none; }
 
 #slogans {
-  animation: fadeInLeft 0.25s ease-in both; }
+  animation: fadeInUp 0.25s ease-in both; }
   #slogans #largerSlogan {
     text-transform: uppercase;
     font-size: 20px; }

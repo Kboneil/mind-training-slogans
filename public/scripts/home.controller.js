@@ -30,6 +30,7 @@ ctrl.more = function(){
 ctrl.comments = {show:false}
 ctrl.expandCom = function () {
   this.comments.show =!this.comments.show
+  angular.element("#commentsList")[0].scrollTop=0
 }
 
 ctrl.questions = {show:false}

@@ -57,6 +57,33 @@ $main-border: 4px solid $gold;
     transform: none;
   }
 }
+@keyframes getBigLeft{
+  0% {
+    opacity: 0;
+    transform: translateX(-200%) scale(0.1);
+  }
+  50%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+}
+
+@keyframes getBigRight{
+  0% {
+    opacity: 0;
+    transform: translateX(200%) scale(0.1);
+  }
+  50%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+}
 
 @keyframes spin {
     0% {
@@ -64,9 +91,12 @@ $main-border: 4px solid $gold;
       // transform: scale(1.0);
     }
     100% {
-      transform:rotate(360deg) scale(1.2);
+      transform:rotate(360deg) scale(0.8);
       // transform: scale(1.2);
     }
+}
+@keyframes blink {
+  50% { color: $gold; }
 }
 
 
@@ -187,6 +217,210 @@ header {
     }
  }
 
+ #welcome{
+   text-align: center;
+
+   h2{
+     font-size: 400%;
+   }
+   h1{
+     font-size: 500%;
+     margin-bottom: 10%;
+   }
+   button{
+     position: fixed;
+     bottom: 5%;
+     font-size: 200%;
+     transform: translateX(-80px);
+   }
+    .sloganCircle {
+      height: 150px;
+      width: 150px;
+      @include makeCircle(150px, black, 2px, $gold);
+      color: white;
+      text-align: center;
+      padding-top:15px;
+      font-size: 100px;
+     }
+
+ }
+
+// #navHeader{
+//   background-color: white;
+//   border-bottom: 2px solid black;
+//   height: 32px;
+//   width: 100%;
+// }
+
+ #hideForm {
+   h2{
+     font-size: 400%;
+     text-align: center;
+   }
+
+   .navbar-default {
+     background-color: white !important;
+     border: none;
+     bottom: 10%;
+   }
+     #submit{
+
+       font-size: 200%;
+   }
+
+ }
+
+ #showButton{
+   .navbar-default {
+    width: 100% !important;
+    background-color: darkred !important;
+    border: none;
+    border-bottom: $main-border;
+    height:60px;
+   }
+   h2{
+     margin-top: 120px;
+     font-size: 400%;
+     text-align: center;
+   }
+   #buttons{
+     button{
+       margin: 10px;
+      font-size: 100%;
+     }
+     a, a:hover, a:active {
+       cursor: pointer;
+       color: black;
+       text-decoration: none;
+     }
+   }
+
+ #tutorial{
+  width: 100%;
+  margin-top: 100px;
+  button{
+    font-size: 200%;
+    margin:auto;
+    display:block;
+  }
+
+ }
+ }
+
+ #one, #two, #three, #four, #five {
+   width: 100%;
+   margin: auto;
+   text-align: center;
+   .navbar-default {
+    width: 100% !important;
+    background-color: darkred !important;
+    border: none;
+    border-bottom: $main-border;
+    height: 60px;
+    button{
+      font-size: 100% !important;
+      margin: 10px !important;
+    }
+   }
+
+   h1{
+     font-size: 400%;
+     margin-top: 100px;
+   }
+   #next{
+     float:right;
+     margin: 0;
+   }
+   #last{
+     float:left;
+     margin: 0;
+   }
+   img{
+     width:40%;
+   }
+#options{
+    .sloganCircle {
+      height: 100px;
+      width: 100px;
+      @include makeCircle(100px, black, 2px, $gold);
+      color: white;
+      padding-top:20px;
+      font-size: 50px;
+      margin: 15px auto;
+
+     }
+     #move{
+       animation: spin 2s linear infinite;
+     }
+     #slideLeft{
+       animation: getBigLeft 2s linear infinite;
+     }
+     #slideRight{
+       animation: getBigRight 2s linear infinite;
+     }
+}
+
+   #buttons{
+     text-align: center;
+     width: 100%;
+     a, a:hover, a:active {
+       cursor: pointer;
+       color: black;
+       text-decoration: none;
+     }
+   }
+
+   button{
+   font-size: 200%;
+   text-align: center;
+   margin: 20px;
+ }
+
+#tutorialFooter{
+  padding: 0 10px;
+  margin: 20px;
+  background-color: darkred;
+  h2{
+    margin-top: none;
+    color: black;
+    display: inline-block;
+  }
+  h2:first-child{
+    margin-top: 20px;
+  }
+  .menu{
+    animation: blink 2s linear infinite;
+   }
+
+  #slogansButton{
+    float: left;
+  }
+  #calendarButton{
+    float: center;
+  }
+  #profileButton {
+    float: right;
+  }
+}
+.menuOne{
+  animation: blink 2s linear infinite;
+  background-color: darkred;
+  padding: 10px;
+ }
+ .headerText {
+   font-size: 15px;
+ }
+ span.sloganCircle{
+   padding: 0 4px !important;
+ }
+ #slogansButton{
+   margin-top: 4px;
+ }
+
+
+ }
+
+
  //--------------home-----------------------
  #home{
    animation: fadeInDown 0.25s ease-in both;
@@ -194,6 +428,18 @@ header {
      top: 50%;
      font-size: 500%;
    }
+  //  h2{
+  //    font-size: 100px;
+  //  }
+   //
+  //  .sloganCircle {
+  //    height: 150px;
+  //    width: 150px;
+  //    @include makeCircle(150px, black, 2px, $gold);
+  //    color: white;
+  //    text-align: center;
+  //    padding-top:15px;
+  //   }
    #questionsList, #commentsList{
      text-align: left;
      padding: 15px;
@@ -225,9 +471,9 @@ header {
      border: 1px solid #ccc;
      box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
    }
-  //  #homeBody {
-  //    margin-bottom: 250px;
-  //  }
+   #homeBody {
+     margin-bottom: 220px;
+   }
 
    #options{
      width: 100%;
@@ -236,15 +482,15 @@ header {
      bottom: 100px;
      transform: translateX(-40px);
      margin: 0;
-
+     padding-bottom: 10px;
      .move{
        animation: spin 0.5s ease-in both;
      }
      .slideLeft{
-       animation: fadeInLeft 0.25s ease-in both;
+       animation: getBigLeft 0.5s ease-in both;
      }
      .slideRight{
-       animation: fadeInRight 0.25s ease-in both;
+       animation: getBigRight 0.5s ease-in both;
      }
      .moveBack{
         animation: spin 0.5s ease-in both;
@@ -254,7 +500,7 @@ header {
 
  //---------------profile----------------------
 #profile{
-  animation: fadeInRight 0.25s ease-in both;
+  animation: fadeInUp 0.25s ease-in both;
 }
 #SMS{
   display: none;
@@ -302,7 +548,7 @@ margin: 50px;
 
 
 #slogans{
-  animation: fadeInLeft 0.25s ease-in both;
+  animation: fadeInUp 0.25s ease-in both;
    #largerSlogan{
     text-transform: uppercase;
     font-size: 20px;

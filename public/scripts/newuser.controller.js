@@ -20,6 +20,10 @@ function NewUserController($http, $location, IndexService) {
       alert('Please enter a name that is fewer than 15 characters');
       return;
     }
+    if (name.length === 0){
+      alert('Please enter a name');
+      return;
+    }
     var data = {name:name, messages: messages, time: time, number: number, random: order};
     ctrl.name = '';
     ctrl.messages = '';
@@ -33,7 +37,10 @@ function NewUserController($http, $location, IndexService) {
     alert('Sorry! There was an error. Please try again.')
     console.log('error posting order answer', error);
   }).then(function(){
-    getUser($http, ctrl);
+    IndexService.getUser().then(function(response) {
+      console.log('response.data', response);
+      ctrl.user = response;
+    });
     document.getElementById('hideForm').style.display = 'none';
     document.getElementById('showButton').style.display = 'inherit';
   });

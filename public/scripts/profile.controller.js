@@ -20,6 +20,10 @@ ctrl.sendUserInfo = function (name, messages, time, number, order){
     alert('Please enter a name that is fewer than 15 characters');
     return;
   }
+  if (name.length === 0){
+    alert('Please enter a name');
+    return;
+  }
   var data = {name:name, messages: messages, time: time, number: number, random: order};
   ctrl.name = '';
   ctrl.messages = '';

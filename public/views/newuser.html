@@ -1,8 +1,13 @@
 <div id="newuser">
-<h3>Hello, {{new.user[0].name}}</h3>
-<h2>Welcome to Lojong slogans.</h2>
-<div id="hideForm">
-  <h3>Before we get started could you please enter some information</h3>
+  <div id="welcome" ng-hide="form">
+    <h2>Hello, {{new.user[0].name}}</h2>
+    <h1>Welcome to the 59 Lojong slogans.</h1>
+    <h2 class="sloganCircle">59</h2>
+    <button class="btn btn-default" ng-click="form = !form">Get Started</button>
+  </div>
+
+<div id="hideForm" ng-show="form">
+  <h2>Please select your preferences:</h2>
 <form class="form-group">
     <div class="form-group row">
       <label  for="name" class="col-xs-3 col-form-label">What is your name?</label>
@@ -40,13 +45,183 @@
           </select>
           </div>
     </div>
-    <button type="submit" class="btn btn-default" ng-click="new.sendUserInfo(new.name, new.messages, new.time, new.number, new.order)">submit</button>
+    <div class="navbar navbar-default navbar-fixed-bottom">
+    <button type="submit" id="submit" class="btn btn-default center-block" ng-click="new.sendUserInfo(new.name, new.messages, new.time, new.number, new.order)">submit</button>
+    </div>
   </form>
   </div>
-  <div id="showButton">
-
-    <p>Thank you! Your preferences have been saved.</p>
-    <button class="btn btn-default"><a href="/home">See your first Lojong Slogan</a></button>
-    <button type="submit" ng-click="new.logout()" class="btn btn-default">Logout</button>
+  <div id="showButton" ng-hide="one">
+    <div id="navHeader">
+    <div id="buttons" class="navbar navbar-default navbar-fixed-top">
+    <button class="btn btn-default navbar-left"><a href="/home">Skip</a></button>
+    <button type="submit" ng-click="new.logout()" class="btn btn-default navbar-right">Logout</button>
+    </div>
+      </div>
+    <div class="afterNav">
+    <h2>Thank you! Your preferences have been saved.</h2>
+      <div id="tutorial">
+        <button class="btn btn-default" ng-click="one = !one" >See how it works</button>
+      </div>
+      </div>
   </div>
+
+<div ng-hide="two">
+  <div id="one" ng-show="one">
+    <div id="next" ng-click="two = !two">
+      <button class="btn btn-default">Next</button>
+    </div>
+    <div id="last" ng-click="one = !one">
+      <button class="btn btn-default">Last</button>
+    </div>
+    <div id="navHeader">
+    <div id="buttons" class="navbar navbar-default navbar-fixed-top">
+    <button class="btn btn-default navbar-left"><a href="/home">Skip</a></button>
+    <button type="submit" ng-click="new.logout()" class="btn btn-default navbar-right">Logout</button>
+    </div>
+  </div>
+    <div class="afterNav">
+    <h1>Homepage</h1>
+          <h2>See your slogan of the day</h2>
+        <img src="images/home.jpg" alt="View of home screen" />
+        <div>
+          <h3>1. Add and view comments and questions: </h3>
+          <div id="options" class="row">
+            <div class="col-xs-3">
+            </div>
+            <div class="col-xs-2">
+              <h3 id="slideRight" class="sloganCircle">C</h3>
+            </div>
+            <div class="col-xs-2">
+              <h3 id="move" class="sloganCircle">+</h3>
+            </div>
+            <div class="col-xs-2">
+              <h3 id="slideLeft" class="sloganCircle">?</h3>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3>To come back home: </h3>
+          <h2 class="menuOne">Lojong</h2>
+        </div>
+        </div>
+  </div>
+  </div>
+
+<div ng-hide="three">
+  <div id="two" ng-show="two">
+    <div id="next" ng-click="three = !three">
+      <button class="btn btn-default">Next</button>
+    </div>
+    <div id="last" ng-click="two = !two">
+      <button class="btn btn-default">Last</button>
+    </div>
+    <div id="navHeader">
+    <div id="buttons" class="navbar navbar-default navbar-fixed-top">
+    <button class="btn btn-default navbar-left"><a href="/home">Skip</a></button>
+    <button type="submit" ng-click="new.logout()" class="btn btn-default navbar-right">Logout</button>
+    </div>
+  </div>
+    <div class="afterNav">
+    <h1>List of slogans</h1>
+
+        <h2>View all slogans, comments and questions</h2>
+        <img src="images/home.jpg" alt="View of home screen" />
+
+        <div>
+          <h3>1. Add and view comments and questions</h3>
+          <h3>2. Search all Slogans</h3>
+        </div>
+
+        <div>
+          <h3>To come back to slogans:</h3>
+          <div id="tutorialFooter">
+          <h2 class="menu" id="slogansButton"><span class="sloganCircle">59</span><br /><div class="headerText" id="slogansButton">Slogans</div></h2>
+          <h2  id="calendarButton"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">12/12/12</div></h2>
+          <h2  id="profileButton"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">newuser</div></a>
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+
+  <div ng-hide="four">
+    <div id="three" ng-show="three">
+      <div id="next" ng-click="four = !four">
+        <button class="btn btn-default">Next</button>
+      </div>
+      <div id="last" ng-click="three = !three">
+        <button class="btn btn-default">Last</button>
+      </div>
+      <div id="navHeader">
+      <div id="buttons" class="navbar navbar-default navbar-fixed-top">
+      <button class="btn btn-default navbar-left"><a href="/home">Skip</a></button>
+      <button type="submit" ng-click="new.logout()" class="btn btn-default navbar-right">Logout</button>
+      </div>
+    </div>
+      <div class="afterNav">
+      <h1>Calendar</h1>
+          <h2>Track your slogans</h2>
+          <img src="images/home.jpg" alt="View of home screen" />
+
+          <div>
+            <h3>1. View your daily slogan</h3>
+            <h3>2. Click to expand into comments and questions</h3>
+          </div>
+
+            <h3>To come back to calendar:</h3>
+            <div id="tutorialFooter">
+            <h2  id="slogansButton"><span class="sloganCircle">59</span><br /><div class="headerText" id="slogansButton">Slogans</div></h2>
+            <h2  class="menu" id="calendarButton"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">12/12/12</div></h2>
+            <h2  id="profileButton"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">newuser</div></a>
+            </div>
+      </div>
+    </div>
+    </div>
+
+    <div ng-hide="five">
+      <div id="four" ng-show="four">
+        <div id="next" ng-click="five = !five">
+          <button class="btn btn-default">Next</button>
+        </div>
+        <div id="last" ng-click="four = !four">
+          <button class="btn btn-default">Last</button>
+        </div>
+        <div id="navHeader">
+        <div id="buttons" class="navbar navbar-default navbar-fixed-top">
+        <button class="btn btn-default navbar-left"><a href="/home">Skip</a></button>
+        <button type="submit" ng-click="new.logout()" class="btn btn-default navbar-right">Logout</button>
+        </div>
+      </div>
+        <div class="afterNav">
+        <h1>Profile</h1>
+        <img src="images/home.jpg" alt="View of home screen" />
+
+            <div>
+              <h3>1. Change your settings</h3>
+              <h3>2. Learn more</h3>
+              <h3>3. Get help</h3>
+            </div>
+
+              <h3>To come back to profile:</h3>
+              <div id="tutorialFooter">
+              <h2   id="slogansButton"><span class="sloganCircle">59</span><br /><div class="headerText" id="slogansButton">Slogans</div></h2>
+              <h2  id="calendarButton"><span class="glyphicon glyphicon-calendar"></span><br /><div class="headerText">12/12/12</div></h2>
+              <h2  class="menu" id="profileButton"><span class="glyphicon glyphicon-user"></span><br /><div class="headerText">newuser</div></a>
+              </div>
+          </div>
+      </div>
+      </div>
+
+
+        <div id="five" ng-show="five">
+          <div id="navHeader">
+          <div id="buttons" class="navbar navbar-default navbar-fixed-top">
+          <button class="btn btn-default navbar-left"><a href="/home">See your first Lojong Slogan</a></button>
+          <button type="submit" ng-click="new.logout()" class="btn btn-default navbar-right">Logout</button>
+          </div>
+        </div>
+          <h1>You're ready to get started!</h1>
+        </div>
+
+
 </div>
