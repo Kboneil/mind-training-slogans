@@ -107,6 +107,8 @@ h2.sloganCircle {
 
 #home {
   text-align: center; }
+  #home .glyphicon.glyphicon-list {
+    font-size: 70%; }
 
 #home, #comments, #questions, #slogans, #calendar, #profile {
   margin: 90px 40px 140px 40px; }
@@ -314,7 +316,7 @@ h2.sloganCircle {
     width: 100%;
     position: fixed;
     bottom: 100px;
-    transform: translateX(-40px);
+    transform: translateX(-2.5%);
     margin: 0;
     padding-bottom: 10px; }
     #home #options .move {
@@ -520,7 +522,7 @@ footer {
     float: left; }
   footer a#calendarButton {
     float: center;
-    transform: translateX(-10px); }
+    transform: translateX(8%); }
   footer a#profileButton {
     float: right; }
 
