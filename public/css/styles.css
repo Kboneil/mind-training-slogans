@@ -51,7 +51,7 @@
     transform: rotate(360deg) scale(0.8); } }
 @keyframes blink {
   50% {
-    color: #D4AF37; } }
+    color: black; } }
 header {
   position: fixed;
   top: 0;
@@ -212,7 +212,7 @@ h2.sloganCircle {
       font-size: 100% !important;
       margin: 10px !important; }
   #one h1, #two h1, #three h1, #four h1, #five h1 {
-    font-size: 400%;
+    font-size: 400% !important;
     margin-top: 100px; }
   #one #next, #two #next, #three #next, #four #next, #five #next {
     float: right;
@@ -257,7 +257,7 @@ h2.sloganCircle {
     background-color: darkred; }
     #one #tutorialFooter h2, #two #tutorialFooter h2, #three #tutorialFooter h2, #four #tutorialFooter h2, #five #tutorialFooter h2 {
       margin-top: none;
-      color: black;
+      color: #D4AF37;
       display: inline-block; }
     #one #tutorialFooter h2:first-child, #two #tutorialFooter h2:first-child, #three #tutorialFooter h2:first-child, #four #tutorialFooter h2:first-child, #five #tutorialFooter h2:first-child {
       margin-top: 20px; }
@@ -272,7 +272,8 @@ h2.sloganCircle {
   #one .menuOne, #two .menuOne, #three .menuOne, #four .menuOne, #five .menuOne {
     animation: blink 2s linear infinite;
     background-color: darkred;
-    padding: 10px; }
+    padding: 10px;
+    color: #D4AF37; }
   #one .headerText, #two .headerText, #three .headerText, #four .headerText, #five .headerText {
     font-size: 15px; }
   #one span.sloganCircle, #two span.sloganCircle, #three span.sloganCircle, #four span.sloganCircle, #five span.sloganCircle {
@@ -326,7 +327,26 @@ h2.sloganCircle {
       animation: spin 0.5s ease-in both; }
 
 #profile {
-  animation: fadeInUp 0.25s ease-in both; }
+  animation: fadeInUp 0.25s ease-in both;
+  margin: 90px 0 140px 0; }
+  #profile #logout {
+    margin-right: 20px; }
+  #profile h1 {
+    font-size: 350%;
+    margin-left: 40px; }
+  #profile h2 {
+    font-size: 300%;
+    border-bottom: 1px solid gray;
+    padding: 0 20px 30px 20px; }
+    #profile h2 span.glyphicon {
+      font-size: 75%; }
+    #profile h2 button {
+      float: right;
+      margin-top: 10px; }
+  #profile form, #profile #info {
+    margin: 10px 40px 10px 40px; }
+  #profile #one h2, #profile #two h2, #profile #three h2, #profile #four h2, #profile #five h2 {
+    border: none; }
 
 #SMS {
   display: none; }

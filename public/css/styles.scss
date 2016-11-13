@@ -96,7 +96,7 @@ $main-border: 4px solid $gold;
     }
 }
 @keyframes blink {
-  50% { color: $gold; }
+  50% { color: black; }
 }
 
 
@@ -193,7 +193,6 @@ header {
      text-align: center;
      color: $gold;
    }
-
    #border{
      border: 2px solid $gold;
      height: 160px;
@@ -324,7 +323,7 @@ header {
    }
 
    h1{
-     font-size: 400%;
+     font-size: 400% !important;
      margin-top: 100px;
    }
    #next{
@@ -382,7 +381,7 @@ header {
   background-color: darkred;
   h2{
     margin-top: none;
-    color: black;
+    color: $gold;
     display: inline-block;
   }
   h2:first-child{
@@ -406,6 +405,7 @@ header {
   animation: blink 2s linear infinite;
   background-color: darkred;
   padding: 10px;
+  color: $gold;
  }
  .headerText {
    font-size: 15px;
@@ -501,6 +501,35 @@ header {
  //---------------profile----------------------
 #profile{
   animation: fadeInUp 0.25s ease-in both;
+  margin: 90px 0 140px 0;
+  #logout{
+    margin-right: 20px;
+  }
+  h1{
+    font-size: 350%;
+    margin-left: 40px;
+  }
+  h2{
+    font-size: 300%;
+    border-bottom: 1px solid gray;
+    padding: 0 20px 30px 20px;
+    span.glyphicon{
+      font-size: 75%
+    }
+    button{
+      float: right;
+      margin-top: 10px;
+    }
+  }
+
+  form, #info{
+      margin: 10px 40px 10px 40px;
+  }
+  #one, #two, #three, #four, #five{
+    h2{
+      border:none;
+    }
+  }
 }
 #SMS{
   display: none;
