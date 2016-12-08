@@ -430,7 +430,10 @@ header {
    animation: fadeInDown 0.25s ease-in both;
    h1{
      top: 50%;
+     font-size: 300%;
+     @media (max-width: 800px) {
      font-size: 500%;
+   }
    }
   //  h2{
   //    font-size: 100px;
@@ -484,7 +487,7 @@ header {
      position: fixed;
     //  background-color: white;
      bottom: 100px;
-     transform: translateX(-2.5%);
+     transform: translateX(-40px);
      margin: 0;
      padding-bottom: 10px;
      .move{
