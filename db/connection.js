@@ -7,7 +7,9 @@ const pg = require('pg');
 const url = require('url')
 
 const params = url.parse(process.env.DATABASE_URL);
+console.log('params', params);
 const auth = params.auth.split(':');
+console.log('auth', auth);
 
 var config = {
 
@@ -20,6 +22,7 @@ var config = {
 
 
 };
+console.log('config', config);
 
 var pool = new pg.Pool(config);
 
