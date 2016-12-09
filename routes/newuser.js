@@ -78,7 +78,16 @@ router.put('/', function (req, res) {
                           return;
                         }
 
-                        console.log('slogan of the day updated');
+                        var date = new Date();
+                        client.query('INSERT INTO slogan_date (date, slogan_id, user_id) values ($1, $2, $3) RETURNING *', [date, sloganOfTheDayId, currentlyLoggedInUser.id],
+                              function (err, result) {
+                                if (err) {
+                                  console.log('Error querying DB', err);
+                                  return;
+                                }
+
+                                console.log('new slogan information updated');
+                              });
                       });
 
 
@@ -108,11 +117,20 @@ router.put('/', function (req, res) {
                           res.sendStatus(500);
                           return;
                         }
-                        console.log('slogan of the day updated');
+                        var date = new Date();
+                        client.query('INSERT INTO slogan_date (date, slogan_id, user_id) values ($1, $2, $3) RETURNING *', [date, sloganOfTheDayId, currentlyLoggedInUser.id],
+                              function (err, result) {
+                                if (err) {
+                                  console.log('Error querying DB', err);
+                                  return;
+                                }
+
+                                console.log('new slogan information updated');
+                              });
                       });
               });//end update
 
-              //then I think the date of the slogan needs to get updated here???
+
             }
 
 
