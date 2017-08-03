@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "8.1.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kboneil/mind-training-slogans.git"
