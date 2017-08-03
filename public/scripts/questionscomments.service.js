@@ -8,7 +8,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
       var data = {question: question, date: date, slogan_id: slogan}
        return $http.post('/ques', data)
        .then(function (response) {
-         console.log('post question success');
        });
     }
 
@@ -17,7 +16,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
       var data = {comment: comment, date: date, slogan_id: slogan}
        return $http.post('/com', data)
        .then(function (response) {
-         console.log('post comment success');
        });
     }
 
@@ -26,7 +24,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
       var data = {question: question, id: id}
        return $http.put('/ques/' + id, data)
        .then(function (response) {
-         console.log('change question success');
        });
     }
 
@@ -35,21 +32,18 @@ angular.module('lojongApp') //you will need to declare your module with the depe
       var data = {comment: comment, id: id}
        return $http.put('/com/' + id, data)
        .then(function (response) {
-         console.log('change comment success');
        });
     }
 
     this.deleteQuestion = function (id){
       return $http.delete('/ques/' + id)
         .then(function (response) {
-          console.log('delete complete');
         });
     }
 
     this.deleteComment = function (id){
       return $http.delete('/com/' + id)
         .then(function (response) {
-          console.log('delete complete');
         });
     }
 

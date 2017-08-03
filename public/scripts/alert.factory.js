@@ -5,7 +5,6 @@ angular.module('lojongApp')
       return $uibModal.open({
         templateUrl: 'views/modalContent.html',
         controller: function() {
-          console.log('modal ctrl loaded');
           var vm = this;
           vm.action = action;
           vm.event = event;

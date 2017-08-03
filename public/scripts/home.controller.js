@@ -5,7 +5,6 @@ function HomeController($http, $location, IndexService, qcService) {
 
   var ctrl = this;
   IndexService.getUser().then(function(response) {
-    console.log('response.data', response);
     ctrl.user = response;
   });
   ctrl.point;
@@ -104,7 +103,6 @@ function getSlogansCommentsQuestions($http, ctrl) {
       console.log('error getting slogan comments', error);
     }).then(function(){
     $http.get('/com/' + id).then(function(response){
-      console.log('response', response.data);
       if (!response.data[0]) {
         ctrl.comment.push({comment: 'no comments yet'});;
       } else {

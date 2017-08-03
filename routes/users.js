@@ -17,7 +17,7 @@ router.get('/', function (req, res) {
         return;
       }
 
-      client.query('SELECT * FROM users WHERE id = $1;', [currentlyLoggedInUser.id],
+      client.query('SELECT daily, frequency, id, messages, name, number, random, slogans, time, username FROM users WHERE id = $1;', [currentlyLoggedInUser.id],
             function (err, result) {
               if (err) {
                 console.log('Error querying DB', err);

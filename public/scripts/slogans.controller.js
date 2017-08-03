@@ -7,7 +7,6 @@ function SlogansController($http, $location, IndexService, qcService) {
   ctrl.date = new Date();
 
   IndexService.getUser().then(function(response) {
-    console.log('response.data', response);
     ctrl.user = response;
   });
   ctrl.slogans = [];

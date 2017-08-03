@@ -6,7 +6,6 @@ function ProfileController($http, $location, IndexService) {
   ctrl.date = new Date();
 
   IndexService.getUser().then(function(response) {
-    console.log('response.data', response);
     ctrl.user = response;
   });
 ctrl.sendUserInfo = function (name, messages, time, number, order){
@@ -30,9 +29,7 @@ ctrl.sendUserInfo = function (name, messages, time, number, order){
   ctrl.order = '';
   ctrl.time = '';
   ctrl.number = '';
-    console.log(data);
   $http.put('/users/returning', data).then(function(response){
-    console.log('response post', response.data);
 }, function(error) {
   alert('Sorry! There was an error. Please try again.')
   console.log('error posting order answer', error);
@@ -41,7 +38,6 @@ ctrl.sendUserInfo = function (name, messages, time, number, order){
 
 
 IndexService.getUser().then(function(response) {
-  console.log('response.data', response);
   ctrl.user = response;
 });
 
@@ -57,7 +53,6 @@ ctrl.selectSMS = function (selection){
 
 ctrl.logout = function (){
   $http.get('/users/logout').then(function(response){
-    console.log('response', response.data);
   }, function(error) {
     console.log('error getting user to logout', error);
   }).then(function(){

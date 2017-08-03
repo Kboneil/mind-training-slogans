@@ -7,7 +7,6 @@ function QuestionsController($http, $location, IndexService, qcService) {
   ctrl.date = new Date();
 
   IndexService.getUser().then(function(response) {
-    console.log('response.data', response);
     ctrl.user = response;
   });
   getQuestions($http, ctrl);
@@ -30,7 +29,6 @@ function QuestionsController($http, $location, IndexService, qcService) {
 
 function getQuestions($http, ctrl) {
   $http.get('/ques').then(function(response){
-    console.log('response', response.data);
     ctrl.question = response.data
   }, function(error) {
     console.log('error getting questions', error);

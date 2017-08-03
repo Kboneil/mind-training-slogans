@@ -5,7 +5,6 @@ function NewUserController($http, $location, IndexService) {
   var ctrl = this;
 
   IndexService.getUser().then(function(response) {
-    console.log('response.data', response);
     ctrl.user = response;
   });
 
@@ -30,15 +29,12 @@ function NewUserController($http, $location, IndexService) {
     ctrl.order = '';
     ctrl.time = '';
     ctrl.number = '';
-      console.log(data);
     $http.put('/users', data).then(function(response){
-      console.log('response post', response.data);
   }, function(error) {
     alert('Sorry! There was an error. Please try again.')
     console.log('error posting order answer', error);
   }).then(function(){
     IndexService.getUser().then(function(response) {
-      console.log('response.data', response);
       ctrl.user = response;
     });
     document.getElementById('hideForm').style.display = 'none';
@@ -48,7 +44,6 @@ function NewUserController($http, $location, IndexService) {
 
   ctrl.logout = function (){
     $http.get('/users/logout').then(function(response){
-      console.log('response', response.data);
     }, function(error) {
       console.log('error getting user to logout', error);
     }).then(function(){

@@ -6,7 +6,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   vm.date = new Date();
 
   IndexService.getUser().then(function(response) {
-    console.log('response.data', response);
     vm.user = response;
   });
   vm.sloganArray = []
@@ -15,7 +14,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   vm.deleteComment = function (id){
     $http.delete('/com/' + id)
       .then(function (response) {
-        console.log('delete complete');
       }).then(function (response) {
         //this isn't refreshing
       getCalendarInfo ($http, moment, alert, calendarConfig, vm);
@@ -25,7 +23,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
   vm.deleteQuestion = function (id){
     $http.delete('/ques/' + id)
       .then(function (response) {
-        console.log('delete complete');
       }).then(function (response) {
         //this isn't refreshing
       getCalendarInfo ($http, moment, alert, calendarConfig, vm);
@@ -55,7 +52,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     var data = {comment: comment, date: date, slogan_id: slogan}
     $http.post('/com', data)
      .then(function (response) {
-       console.log('success');
         getCalendarInfo ($http, moment, alert, calendarConfig, vm);
         vm.newComment = '';
      });
@@ -66,7 +62,6 @@ angular.module('lojongApp') //you will need to declare your module with the depe
     var data = {question: question, date: date, slogan_id: slogan}
     $http.post('/ques', data)
      .then(function (response) {
-       console.log('success');
         getCalendarInfo ($http, moment, alert, calendarConfig, vm);
         vm.newQuestion = '';
      });
